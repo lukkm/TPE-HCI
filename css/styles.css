@@ -1,7 +1,9 @@
 body {
     color: white;
 	font-family: Tahoma, Verdana, Arial;
+	margin:0;
 }
+
 
 .header {
 	background-color: #3B627F;
@@ -11,12 +13,11 @@ body {
 }
 
 .container {
-    background-color: #C4C4C4;
+    background-color: #D2D1D1;
 	margin: 0 auto;
-	padding: 20px;
-	width: 900px;
-	border-radius: 20px;
-	height: 1000px; 
+	padding: 20px 15%;
+	width: 70%;
+	height: 420px; 
 }	
 
 .search {
