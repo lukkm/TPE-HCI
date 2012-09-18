@@ -1,3 +1,92 @@
 body {
-    color: red;
+    color: white;
+	font-family: Tahoma, Verdana, Arial;
 }
+
+.header {
+	background-color: #3B627F;
+	padding: 3px 0;
+	width: 100%;
+	text-align: center;
+}
+
+.container {
+    background-color: #C4C4C4;
+	margin: 0 auto;
+	padding: 20px;
+	width: 900px;
+	border-radius: 20px;
+	height: 1000px; 
+}	
+
+.search {
+	/*background-color: #FF7720;*/
+	background-color: #fe8131;
+	position: absolute;
+	width: 370px;
+	height: 305px;
+	margin: 10px 5px 10px 15px;
+	padding: 65px 15px 15px 15px;
+	border-radius: 20px;
+	-moz-box-shadow:    5px 5px 5px 0px #aaa;
+	-webkit-box-shadow: 5px 5px 5px 0px #aaa;
+}
+
+.search-header {
+	font: bold italic;
+	margin-top: 30px;
+	padding-top: 2px;
+	position: absolute;
+	width: 430px;
+	height: 33px;
+	text-align: center;
+	background-image: url('../img/search-header.png');
+}
+
+.deals {
+	margin: 10px 0px 0px 0px;
+	float:right;
+	width: 430px;
+	height: 390px;
+}
+
+.deal {
+	width: 207px;
+	height: 187px;
+	float:left;
+}
+
+.tl {
+	margin: 0 15px 15px 0;
+	background-color: #2BA6E8;
+}
+
+.tr {
+	margin: 0 0 15px 0;
+	background-color: #2BA6E8;
+}
+
+.bl {
+	margin: 0 15px 0 0;
+	background-color: #2BA6E8;
+}
+
+.br {
+	margin: 0;
+	background-color: #2BA6E8;
+}
+
+.deal-title {
+	margin-top:20px;
+	padding-top: 5px;
+	background-color: #51B3E8;
+	width:100%;
+	text-align: center;
+	height:25px;
+}
+
+.deal:hover {
+	background-color: #002A54 !important;
+}
+
+
