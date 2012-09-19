@@ -1,6 +1,6 @@
 body {
     color: black;
-	font-family: Tahoma, Verdana, Arial;
+	font-family: "Helvetica Neue", Helvetica, Tahoma, Verdana, Arial;
 	margin:0;
 }
 
@@ -16,7 +16,6 @@ h2 {
 }
 
 .container {
-   /* background-color: #D2D1D1;*/
 	margin: 0 auto;
 	padding: 20px 30px;
 	width: 896px;
@@ -47,29 +46,34 @@ h2 {
 .header-menu {
 	float:right;
 	padding: 0;
-	margin-top: 25px;
+	margin-top: 15px;
 	font-size: 13px;
+}
+
+.header-menu ul {
+	list-style: none;
+}
+
+.header-menu li {
+	float:left;
+	margin-left: 20px;
 }
 
 .search {
 	background-color: white;
 	width: 263px;
-	border-width: 8px;
-	border-color: #BEBEBE;
-	border-style: solid;
+	border: 8px #BEBEBE solid;
 	height: 230px;
-	margin: 10px 10px 10px 0px;
+	margin: 10px 10px 10px 0;
 	padding: 20px;
 	float:left;
 }
 
 .deals {
-	margin: 10px 0px 0px 329px;
+	margin: 10px 0 0 329px;
 	height: 282px;
 	width: 565px;
-	border-width: 1px;
-	border-color: black;
-	border-style: solid;
+	border: 1px black solid;
 	position:absolute;
 	background-color: white;
 	background-image: url('../img/panama.jpg');
@@ -82,7 +86,7 @@ h2 {
 	width: 300px;
 }
 
-.transparency {
+.deal-title-container{
 	background-color: black;
 	height: 100px;
 	width: 300px;
@@ -105,7 +109,7 @@ h2 {
 	width: 896px;
 	height: 250px;
 	float:left;
-	padding-right: -100px%;
+	margin-top: 5px;
 }
 
 .deal {
@@ -120,6 +124,6 @@ h2 {
 }
 
 #deal1 {
-	margin-left: 0%;
+	margin-left: 0;
 }
 
