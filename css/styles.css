@@ -19,7 +19,7 @@ h2 {
    /* background-color: #D2D1D1;*/
 	margin: 0 auto;
 	padding: 20px 30px;
-	width: 70%;
+	width: 896px;
 	height: 800px; 
 }	
 
@@ -102,7 +102,7 @@ h2 {
 }
 
 .secondary-deals {
-	width: 100%;
+	width: 896px;
 	height: 250px;
 	float:left;
 	padding-right: -100px%;
