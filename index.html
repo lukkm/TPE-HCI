@@ -12,27 +12,26 @@
 		<script type="text/javascript" src="js/jquery-ui-1.8.24.custom.min.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
 		<script id="template-flight" type="text/html">
-        <div class="search-result">
-            <div class="search-result-container">
-                <div class="search-result-info-titles">
-                    <div class="search-result-title">Origen</div>
-                    <div class="search-result-title">Destino</div>
-                    <div class="search-result-title">Fecha de partida</div>
-                    <div class="search-result-title">Fecha de llegada</div>
+            <div class="search-result">
+                <div class="search-result-container">
+                    <div class="search-result-info-titles">
+                        <div class="search-result-title">Origen</div>
+                        <div class="search-result-title">Destino</div>
+                        <div class="search-result-title">Fecha de partida</div>
+                        <div class="search-result-title">Fecha de llegada</div>
+                    </div>
+                </div>
+                <div class="search-result-price">
+                    Precio 
+                    <div class="price-text">
+                        <em>{{ price }}</em>
+                    </div>
+                    <a class="buy-button" href="#flight/{{ id }}">
+                        Comprar
+                    </a>
                 </div>
             </div>
-            <div class="search-result-price">
-                Precio 
-                <div class="price-text">
-                    <em>$999</em>
-                </div>
-                <a class="buy-button" href="flights/buy/{{ id }}">
-                    Comprar
-                </a>
-            </div>
-        </div>
-		</script>
-
+        </script>
 	</head>
 	<body>	
 		<div class="container"> 
