@@ -153,6 +153,11 @@ form label {
 
 .page {
 	margin-top: 10px;
+    display: none;
+}
+
+.page.current {
+    display: block;
 }
 
 .search-filters {
@@ -176,13 +181,3 @@ form label {
 	margin-bottom: 16px;
 }
 
-
-/* Page IDs */
-
-#page-home {
-	/* display: none; */
-}
-
-#page-search {
-	display: none;
-}
