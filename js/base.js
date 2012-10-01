@@ -1,15 +1,16 @@
 var App = function() {
-    this.router = new App.Router();
-    this.view = new App.AppView();
-    this.searchForm = new App.SearchFormView();
-    this.flights = new App.FlightList();
+
+    this.router = new App.Router;
+    this.view = new App.AppView;
+    this.searchForm = new App.SearchFormView;
+    this.flightList = new App.FlightList({
+        model: App.Flight
+    });
     this.searchResultsView = new App.SearchResultsView({
         el: $("#search-results"),
         template: $("#template-flight").html(),
-        model: App.Flight
+        collection: this.flightList
     });
-
-    this.flights.fetch();
 
     Backbone.history.start();
 };
@@ -17,16 +18,18 @@ var App = function() {
 App.Flight = Backbone.Model.extend();
 
 App.FlightList = Backbone.Collection.extend({
+
     model: App.Flight,
 
     fetch: function() {
         var list = [
-            new App.Flight({ name: "Flight #1" }),
-            new App.Flight({ name: "Flight #2" }),
-            new App.Flight({ name: "Flight #3" })
+            new App.Flight({ id: 1, price: "US$599" }),
+            new App.Flight({ id: 2, price: "US$599" }),
+            new App.Flight({ id: 3, price: "US$599" })
         ];
         return list;
     }
+
 });
 
 App.Router = Backbone.Router.extend({
@@ -130,15 +133,24 @@ App.SearchResultsView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html(Mustache.render(this.template, { id: 5, price: "US$599" }));
+        var flights = this.collection.fetch();
+
+        for (var i = 0; i < flights.length; i++) {
+            this.addFlight(flights[i]);
+        }
+        
         return this;
+    },
+
+    addFlight: function(flight) {
+        this.$el.append(Mustache.render(this.template, flight.toJSON()));
     }
 
 })
 
 $(function() {
 
-    window.app = new App();
+    window.app = new App;
 
     $("#search-form").on("click", "input[type=submit]", function() {
         app.router.navigate("search", { trigger: true });
