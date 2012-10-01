@@ -69,7 +69,7 @@ h2 {
 }
 
 .search-form-input-field { 
-	width: 189px;
+	width: 182px;
 }
 
 .search-input-container {
@@ -78,6 +78,7 @@ h2 {
 
 .form-button{
 	float: right;
+	margin-right: 6px;
 }
 
 form label {
