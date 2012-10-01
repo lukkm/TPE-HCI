@@ -65,9 +65,13 @@ App.AppView = Backbone.View.extend({
 
 });
 
-
 $(function() {
-    new App.Router();
+
+    App.routing = new App.Router();
+
     Backbone.history.start();
+
+    $("#departure-date").datepicker();
+    $("#return-date").datepicker();
 
 });

@@ -25,24 +25,13 @@ h2 {
 	height: 60px;
 }
 
-.header-logo {
-	margin-top: 10px;
-	width: 30px;
-	height: 30px;
-	background-color: black;
-	float: left;
-}
-
 .header-title {
-	margin: 0;
 	position: absolute;
-	padding: 0;
 	float: left;
 }
 
 .header-menu {
 	float: right;
-	padding: 0;
 	margin-top: 25px;
 }
 
@@ -70,7 +59,7 @@ h2 {
 	width: 263px;
 	border: 8px #BEBEBE solid;
 	height: 230px;
-	margin: 10px 10px 10px 0;
+	margin: 0 10px 10px 0;
 	padding: 20px;
 	float: left;
 }
@@ -80,11 +69,15 @@ h2 {
 }
 
 .search-form-input-field { 
-	width: 180px;
+	width: 189px;
 }
 
 .search-input-container {
 	margin-bottom: 16px;
+}
+
+.form-button{
+	float: right;
 }
 
 form label {
@@ -93,7 +86,7 @@ form label {
 }
 
 .deals {
-	margin: 10px 0 0 329px;
+	margin-left: 329px;
 	height: 282px;
 	width: 565px;
 	border: 1px black solid;
@@ -152,7 +145,7 @@ form label {
 }
 
 .page {
-	margin-top: 10px;
+	margin-top: 20px;
     display: none;
 }
 
@@ -176,8 +169,42 @@ form label {
 
 .search-result {
 	background-color: #E2E2E2;
-	padding: 16px;
-	height: 150px;
+	height: 180px;
 	margin-bottom: 16px;
 }
 
+.search-result-container {
+	width: 580px;
+	padding: 16px;
+	height: 148px;
+}
+
+.search-result-price {
+	float: right;
+	height: 148px;
+	width: 148px;
+	padding: 16px;
+	font-size: 20px;
+	text-align: center;
+	background-color: #FFC376;
+}
+
+.price-text {
+	margin-top:16px;
+}
+
+.search-result-price em {
+	font-size: 36px;
+	font-weight: bold;
+	font-style: normal;
+}
+
+.buy-button {
+	margin-top: 24px;
+	float: center;
+	background-color: #FFFF9E;
+}
+
+.buy-button:hover {
+	background-color: ##C2FFAE;
+}
