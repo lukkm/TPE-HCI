@@ -7,7 +7,13 @@
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/underscore.js"></script>
 		<script type="text/javascript" src="js/backbone.js"></script>
+		<script type="text/javascript" src="js/mustache.js"></script>
 		<script type="text/javascript" src="js/base.js"></script>
+		<script id="template-flight" type="text/html">
+			<div class="flight">
+				name: {{ name }}
+			</div>
+		</script>
 	</head>
 	<body>	
 		<div class="container"> 
@@ -18,9 +24,9 @@
 				</div>
 				<div class="header-menu">
 					<ul>
-                        <li><a href="/home">Inicio</a></li>
-                        <li><a href="/about">Acerca de</a></li>
-                    </ul>
+						<li><a href="#/home">Inicio</a></li>
+						<li><a href="#/about">Acerca de</a></li>
+					</ul>
 				</div>
 			</div>
 			
