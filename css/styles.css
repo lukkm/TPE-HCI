@@ -174,9 +174,22 @@ form label {
 }
 
 .search-result-container {
-	width: 580px;
+	float: left;
 	padding: 16px;
+	width: 400px;
 	height: 148px;
+}
+
+.search-result-info-titles {
+	width: 400px;
+	height: 40px;
+	font-size: 14px;
+}
+
+.search-result-title {
+	float:left;
+	text-align: left;
+	margin-left: 18px;
 }
 
 .search-result-price {
@@ -206,5 +219,5 @@ form label {
 }
 
 .buy-button:hover {
-	background-color: ##C2FFAE;
+	background-color: #C2FFAE;
 }
