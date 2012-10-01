@@ -3,6 +3,13 @@ var App = function() {
     this.view = new App.AppView();
     this.searchForm = new App.SearchFormView();
     this.flights = new App.FlightList();
+    this.searchResultsView = new App.SearchResultsView({
+        el: $("#search-results"),
+        template: $("#template-flight").html(),
+        model: App.Flight
+    });
+
+    this.flights.fetch();
 
     Backbone.history.start();
 };
@@ -14,9 +21,9 @@ App.FlightList = Backbone.Collection.extend({
 
     fetch: function() {
         var list = [
-            new Flight({ name: "Flight #1" }),
-            new Flight({ name: "Flight #2" }),
-            new Flight({ name: "Flight #3" })
+            new App.Flight({ name: "Flight #1" }),
+            new App.Flight({ name: "Flight #2" }),
+            new App.Flight({ name: "Flight #3" })
         ];
         return list;
     }
@@ -26,7 +33,9 @@ App.Router = Backbone.Router.extend({
     routes: {
         "" : "home",
         "about": "about",
-        "search": "search"
+        "search": "search",
+        "flight/:id": "flight",
+        "*actions" : "defaultRoute"
     },
 
     home: function() {
@@ -41,24 +50,32 @@ App.Router = Backbone.Router.extend({
         this.switchPage("search");
     },
 
+    flight: function(id) {
+        alert("Selected flight id = " + id);
+    },
+
     switchPage: function(pageName) {
         $(".page.current").removeClass("current");
         $("#page-" + pageName).addClass("current");
     },
 
     defaultRoute: function(actions) {
-        alert(actions);
+        alert("Invalid page");
+        this.navigate("home");
     }
 
 });
 
 App.FlightView = Backbone.View.extend({
+
     template: $("template-flight").html(),
 
     render: function() {
+        // this.$el.html(this.model.get("name"))
         this.$el.html(Mustache.render(this.template, { name: "Flight #1234" }));
         return this;
     }
+
 });
 
 App.AppView = Backbone.View.extend({
@@ -74,11 +91,50 @@ App.SearchFormView = Backbone.View.extend({
     },
 
     submitForm: function() {
-        app.navigate("search");
+        app.router.navigate("search", { trigger: true });
         return false;
     }
 
 });
+
+// App.Views = App.View || {};
+
+// App.Views.GenericView = Backbone.View.extend({
+
+    // getContext: function() {
+        // return {};
+    // },
+
+    // render: function() {
+        // var context = this.getContext() || {};
+        // _.extend(context, {model: this.model.toJSON()});
+        // this.$el.append(Mustache.render(this.template, context));
+    // }
+
+// })
+
+// App.SearchResultsView = App.Views.GenericView.extend({
+
+    // getContext: function() {
+        // return { name: "sarasa" }
+    // },
+
+    // template: "{{name}}"
+
+// });
+
+App.SearchResultsView = Backbone.View.extend({
+
+    initialize: function(options) {
+        this.template = options.template || "";
+    },
+
+    render: function() {
+        this.$el.html(Mustache.render(this.template, { id: 5, price: "US$599" }));
+        return this;
+    }
+
+})
 
 $(function() {
 
@@ -91,5 +147,7 @@ $(function() {
 
     $("#departure-date").datepicker();
     $("#return-date").datepicker();
+
+    app.searchResultsView.render();
 
 });
