@@ -1,4 +1,11 @@
-window.App = {}
+var App = function() {
+    this.router = new App.Router();
+    this.view = new App.AppView();
+    this.searchForm = new App.SearchFormView();
+    this.flights = new App.FlightList();
+
+    Backbone.history.start();
+};
 
 App.Flight = Backbone.Model.extend();
 
@@ -19,19 +26,19 @@ App.Router = Backbone.Router.extend({
     routes: {
         "" : "home",
         "about": "about",
-        "search/:query": "search"
+        "search": "search"
     },
 
     home: function() {
-        this.switchPage("home")
+        this.switchPage("home");
     },
 
     about: function() {
-        this.switchPage("about")
+        this.switchPage("about");
     },
 
     search: function(query) {
-        alert("query: " + query);
+        this.switchPage("search");
     },
 
     switchPage: function(pageName) {
@@ -52,24 +59,35 @@ App.FlightView = Backbone.View.extend({
         this.$el.html(Mustache.render(this.template, { name: "Flight #1234" }));
         return this;
     }
-
 });
 
 App.AppView = Backbone.View.extend({
-
     el: $("#app"),
+});
 
-    initialize: function() {
-        alert("initialized appview");
+App.SearchFormView = Backbone.View.extend({
+    
+    el: $("#search-form"),
+
+    events: {
+        "click input[type=button]": "submitForm"
+    },
+
+    submitForm: function() {
+        app.navigate("search");
+        return false;
     }
 
 });
 
 $(function() {
 
-    App.routing = new App.Router();
+    window.app = new App();
 
-    Backbone.history.start();
+    $("#search-form").on("click", "input[type=submit]", function() {
+        app.router.navigate("search", { trigger: true });
+        return false;
+    });
 
     $("#departure-date").datepicker();
     $("#return-date").datepicker();
