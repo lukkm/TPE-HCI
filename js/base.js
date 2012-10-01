@@ -1,47 +1,50 @@
 $(function() {
 
-var Workspace = Backbone.Router.extend({
-    routes: {
-        "about": "about",
-        "search/:query": "search"
-    },
+    var Workspace = Backbone.Router.extend({
+        routes: {
+            "/about": "about",
+            "/search/:query": "search"
+        },
 
-    help: function() {
-        $(".container").html("Hello");
-    }
+        about: function() {
+            alert("About!");
+            $(".container").html("Hello");
+        }
 
-});
+    });
 
-var Flight = Backbone.Model.extend({
+    var Flight = Backbone.Model.extend();
 
-});
+    var Flight = new Flight();
 
-var FlightList = Backbone.Collection.extend({
-    model = Flight
-});
+    var FlightList = Backbone.Collection.extend({
+        model: Flight
+    });
 
-var Flights = new FlightList;
+    var Flights = new FlightList;
 
-var FlightView = Backbone.View.extend({
-    template = _.template($("template-flight".html()),
+    var FlightView = Backbone.View.extend({
+        template: $("template-flight").html(),
 
-    render: function() {
-        this.$el.html("Flight #1234");
-        return this;
-    }
+        render: function() {
+            this.$el.html(Mustache.render(this.template, { name: "Flight #1234" }));
+            return this;
+        }
 
-});
+    });
 
-var AppView = Backbone.View.extend({
+    var AppView = Backbone.View.extend({
 
-    el: $("app"),
+        el: $("app"),
 
-    initialize: function() {
+        initialize: function() {
 
-    }
+        }
 
-});
+    });
 
-var App = new AppView;
+    var App = new AppView;
+
+    // Backbone.history.start();
 
 });
