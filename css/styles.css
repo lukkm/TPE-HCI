@@ -202,16 +202,16 @@ h2 {
 }
 
 .search-result {
-	background-color: #E2E2E2;
 	height: 180px;
 	margin-bottom: 16px;
 }
 
 .search-result-container {
+	background-color: #E2E2E2;
 	float: left;
-	padding: 16px;
-	width: 400px;
-	height: 148px;
+	padding: 10px;
+	width: 402px;
+	height: 160px;
 }
 
 .search-result-info-titles {
@@ -228,12 +228,14 @@ h2 {
 
 .search-result-price {
 	float: right;
-	height: 148px;
-	width: 148px;
+	margin-left: 10px;
+	height: 132px;
+	width: 132px;
 	padding: 16px;
 	font-size: 20px;
 	text-align: center;
-	background-color: #FFC376;
+	background-color: white;
+	border: #8E8E8E 8px solid;
 }
 
 .price-text {
@@ -247,11 +249,21 @@ h2 {
 }
 
 .buy-button {
-	margin-top: 24px;
+	display: block;
+	margin-top: 19px;
 	float: center;
-	background-color: #FFFF9E;
+	font-size: 14px;
+	height: 25px;
+	padding-top: 7px;
+	text-decoration: none;
+	border: 1px #8E8E8E outset;
+	border-radius: 5px;
+	font-weight: bold;
+	color: black;
+	background: -webkit-linear-gradient(top, #FFB800, #FFD886);
 }
 
-.buy-button:hover {
-	background-color: #C2FFAE;
+.buy-button:active {
+	border: 1px #8E8E8E inset;
+	background: -webkit-linear-gradient(top, #FFD886, #FFB800);
 }
