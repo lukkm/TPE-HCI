@@ -202,16 +202,16 @@ h2 {
 }
 
 .search-result {
-	background-color: #E2E2E2;
 	height: 180px;
 	margin-bottom: 16px;
 }
 
 .search-result-container {
+	background-color: #E2E2E2;
 	float: left;
-	padding: 16px;
-	width: 400px;
-	height: 148px;
+	padding: 10px;
+	width: 402px;
+	height: 160px;
 }
 
 .search-result-info-titles {
@@ -228,6 +228,7 @@ h2 {
 
 .search-result-price {
 	float: right;
+	margin-left: 10px;
 	height: 132px;
 	width: 132px;
 	padding: 16px;
@@ -249,17 +250,20 @@ h2 {
 
 .buy-button {
 	display: block;
-	margin-top: 24px;
+	margin-top: 19px;
 	float: center;
-	background: -webkit-linear-gradient(top, #3EC001, #A6FD83);
+	font-size: 14px;
+	height: 25px;
+	padding-top: 7px;
 	text-decoration: none;
-	border: 1px black solid;
+	border: 1px #8E8E8E outset;
 	border-radius: 5px;
+	font-weight: bold;
 	color: black;
-	-webkit-box-shadow: 1px 1px 0 #8E8E8E;
+	background: -webkit-linear-gradient(top, #FFB800, #FFD886);
 }
 
-.buy-button:hover {
-	background: -webkit-linear-gradient(top, #A6FD83, #3EC001);
-	-webkit-box-shadow: 0 -1px 0 #8E8E8E;
+.buy-button:active {
+	border: 1px #8E8E8E inset;
+	background: -webkit-linear-gradient(top, #FFD886, #FFB800);
 }
