@@ -1,10 +1,15 @@
+
+
 $(function() {
+
+    $("#departure-date").datepicker();
+    $("#return-date").datepicker();
 
     var Workspace = Backbone.Router.extend({
         routes: {
             "/about": "about",
             "/search/:query": "search"
-        },
+       },
 
         about: function() {
             alert("About!");
@@ -16,6 +21,7 @@ $(function() {
     var Flight = Backbone.Model.extend();
 
     var Flight = new Flight();
+
 
     var FlightList = Backbone.Collection.extend({
         model: Flight

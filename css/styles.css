@@ -83,6 +83,9 @@ h2 {
 	width: 180px;
 }
 
+.search-date-input-field { 
+	width:125px;
+}
 .search-input-container {
 	margin-bottom: 16px;
 }
@@ -90,6 +93,11 @@ h2 {
 form label {
 	float: left;
 	width: 70px;
+}
+
+.search-date-container label {
+	width: 125px;
+	margin-bottom: 16px;
 }
 
 .deals {
