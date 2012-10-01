@@ -81,9 +81,14 @@ h2 {
 	margin-right: 6px;
 }
 
-form label {
+.search-form label {
 	float: left;
 	width: 70px;
+}
+
+.filter-form label {
+	float: left;
+	width: 60px;
 }
 
 .deals {
@@ -160,6 +165,34 @@ form label {
 	border: 8px #BEBEBE solid;
 	padding: 16px;
 	float: left;
+}
+
+.search-filter {
+	margin-bottom: 10px;
+}
+
+.search-filters select {
+	margin-top: 8px;
+	width: 214px;
+}
+
+.filter-title {
+	margin-top: 30px;
+	margin-bottom: 15px;
+	font-weight: bold;
+	font-style: italic; 
+}
+
+.filter-option {
+	margin-top: 25px;
+}
+
+.filter-price-input {
+	width: 150px;
+}
+
+.filter-checkbox {
+	margin-left: 10px;
 }
 
 .search-results {

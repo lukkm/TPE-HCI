@@ -98,8 +98,35 @@
 			<div class="page" id="page-search">
 				<div class="search-filters">
 					<h2>Filtros de busqueda</h2>
-				</div>
-				<div class="search-results" id="search-results">
+					<form action="/filter" class="filter-form">
+						<div class="filter-title">
+							<label for="filter-airline">Aerolinea</label>
+						</div>
+						<div class="search-filter">
+							<select name="filter-airline">
+								<option>LAN</option>
+								<option>Aerolineas Argentinas</option>
+								<option>American Airlines</option>
+								<option>TAM</option>
+							</select>	
+						</div>
+						<div class="filter-title">Precio</div>
+						<div class="search-filter">
+							<label for="filter-price-from"> Desde </label>
+							<input type="text" name="filter-price-from" class="filter-price-input"/>
+						</div>
+						<div class="search-filter">
+							<label for="filter-price-to"> Hasta </label>
+							<input type="text" name="filter-price-to" class="filter-price-input"/>
+						</div>
+						<div class="filter-option filter-title">
+							Ver solo ofertas
+							<input type="checkbox" class="filter-checkbox" name="show-deals"/>
+						</div>
+						<div class="search-filter">
+							<input type="submit" name="submit-fiter" text="Filtrar" class="form-button">
+						</div>
+					</form>
 				</div>
 			</div>
 
