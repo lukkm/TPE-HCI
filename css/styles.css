@@ -228,12 +228,13 @@ h2 {
 
 .search-result-price {
 	float: right;
-	height: 148px;
-	width: 148px;
+	height: 132px;
+	width: 132px;
 	padding: 16px;
 	font-size: 20px;
 	text-align: center;
-	background-color: #FFC376;
+	background-color: white;
+	border: #8E8E8E 8px solid;
 }
 
 .price-text {
@@ -247,11 +248,18 @@ h2 {
 }
 
 .buy-button {
+	display: block;
 	margin-top: 24px;
 	float: center;
-	background-color: #FFFF9E;
+	background: -webkit-linear-gradient(top, #3EC001, #A6FD83);
+	text-decoration: none;
+	border: 1px black solid;
+	border-radius: 5px;
+	color: black;
+	-webkit-box-shadow: 1px 1px 0 #8E8E8E;
 }
 
 .buy-button:hover {
-	background-color: #C2FFAE;
+	background: -webkit-linear-gradient(top, #A6FD83, #3EC001);
+	-webkit-box-shadow: 0 -1px 0 #8E8E8E;
 }
