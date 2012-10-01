@@ -6,12 +6,11 @@ body {
 
 h1 {
 	padding: 0 5px;
-	margin: 0;
 }
 
 h2 {
-	display: inline;
 	font-size: 20px;
+	margin: 0;
 	font-weight: normal;
 }
 
@@ -23,7 +22,6 @@ h2 {
 }	
 
 .header {
-	width:100%;
 	height: 60px;
 }
 
@@ -36,8 +34,7 @@ h2 {
 }
 
 .header-title {
-	margin-top: 6px;
-	margin-left: 32px;
+	margin: 0;
 	position: absolute;
 	padding: 0;
 	float: left;
@@ -46,7 +43,7 @@ h2 {
 .header-menu {
 	float:right;
 	padding: 0;
-	margin-top: 15px;
+	margin-top: 25px;
 	font-size: 13px;
 }
 
@@ -59,7 +56,7 @@ h2 {
 	margin-left: 20px;
 }
 
-.search {
+.search-form {
 	background-color: white;
 	width: 263px;
 	border: 8px #BEBEBE solid;
@@ -67,6 +64,23 @@ h2 {
 	margin: 10px 10px 10px 0;
 	padding: 20px;
 	float:left;
+}
+
+.search-form-input {
+	margin-top: 20px;
+}
+
+.search-form-input-field { 
+	width:180px;
+}
+
+.search-input-container {
+	margin-bottom: 16px;
+}
+
+form label {
+	float: left;
+	width: 70px;
 }
 
 .deals {
@@ -102,6 +116,7 @@ h2 {
 }
 
 .deal-text h2 {
+	margin: 0;
 	font-size: 32px;
 }
 
@@ -127,3 +142,38 @@ h2 {
 	margin-left: 0;
 }
 
+.page {
+	margin-top: 10px;
+}
+
+.search-filters {
+	width: 220px;
+	height: 500px;
+	border: 8px #BEBEBE solid;
+	padding: 16px;
+	float: left;
+}
+
+.search-results {
+	width: 612px;
+	float: left;
+	margin-left: 16px;
+}
+
+.search-result {
+	background-color:#E2E2E2;
+	padding: 16px;
+	height: 150px;
+	margin-bottom: 16px;
+}
+
+
+/* Page IDs */
+
+#page-home {
+	/* display: none; */
+}
+
+#page-search {
+	display: none;
+}

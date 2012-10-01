@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>TPE - HCI</title>
+		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/styles.css" />
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/underscore.js"></script>
@@ -12,8 +13,6 @@
 		<div class="container"> 
 		
 			<div class="header">
-				<div class="header-logo">
-				</div>
 				<div class="header-title">
 					<h1>travel.ly</h1>
 				</div>
@@ -25,33 +24,55 @@
 				</div>
 			</div>
 			
-			<div class="search">
-				<h2>Buscar Vuelos</h2>
-			</div>
-			
-			<div class="deals">
-				<div class="deal-title">
-					<div class="deal-title-container">
+			<div class="page" id="page-home">
+				<div class="search-form">
+					<h2> Buscar Vuelos </h2>
+					<form class="search-form-input">
+						<div class="search-input-container">
+							<label for="origin">Origen:</label> <input type="text" name="origin" class="search-form-input-field"/>
+						</div>
+						<div class="search-input-container">
+							<label for="destiny">Destino:</label> <input type="text" name="destiny" class="search-form-input-field"/>
+						</div>
+					</form>
+				</div>
+				
+				<div class="deals">
+					<div class="deal-title">
+						<div class="deal-title-container">
+						</div>
+						<div class="deal-text">
+							<h2> Pasajes a Panamá </h2>
+							<p> Desde US$ 2.400 </p>
+						</div>
 					</div>
-					<div class="deal-text">
-						<h2> Pasajes a Panamá </h2>
-						<p> Desde US$ 2.400 </p>
+				</div>
+				
+				<div class="secondary-deals">
+					<div class="deal" id="deal1">
+						Oferta 1
+					</div>
+					<div class="deal" id="deal2"> 
+						Oferta 2
+					</div>
+					<div class="deal" id="deal3">
+						Oferta 3
 					</div>
 				</div>
 			</div>
-			
-			<div class="secondary-deals">
-				<div class="deal" id="deal1">
-					Oferta 1
+
+			<div class="page" id="page-search">
+				<div class="search-filters">
+					<h2>Filtros de busqueda</h2>
 				</div>
-				<div class="deal" id="deal2"> 
-					Oferta 2
-				</div>
-				<div class="deal" id="deal3">
-					Oferta 3
+				<div class="search-results">
+					<div class="search-result"></div>
+					<div class="search-result"></div>
+					<div class="search-result"></div>
 				</div>
 			</div>
-			
+
+
 		</div>
 	</body>
 </html>
