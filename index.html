@@ -59,10 +59,10 @@
 							<label for="destiny">Destino:</label> <input type="text" name="destiny" class="search-form-input-field"/>
 						</div>
 						<div class="search-input-container">
-							<label for="departure-date">Partida:</label><input type="text" name="departure-date" id="departure-date" class="search-form-input-field"/>
+							<label for="departure-date">Partida:</label><input type="text" name="departure-date" data-widget="datepicker" class="search-form-input-field"/>
 						</div>
 						<div class="search-input-container">
-							<label for="return-date">Regreso:</label><input type="text" name="return-date" id="return-date" class="search-form-input-field"/>
+							<label for="return-date">Regreso:</label><input type="text" name="return-date" data-widget="datepicker" class="search-form-input-field"/>
 						</div>
 						<div class="search-form-buttons"> 
 							<input type="submit" name="search-send" text="Buscar" class="form-button"/>
@@ -98,6 +98,18 @@
 				<div class="search-filters">
 					<h2>Filtros de busqueda</h2>
 					<form action="/filter" class="filter-form">
+						<div class="filter">
+							<label for="origin">Origen:</label> <input type="text" name="origin" class="search-form-input-field"/>
+						</div>
+						<div class="filter">
+							<label for="destiny">Destino:</label> <input type="text" name="destiny" class="search-form-input-field"/>
+						</div>
+						<div class="filter">
+							<label for="departure-date">Partida:</label><input type="text" name="departure-date" id="filter-departure-date" class="search-form-input-field" data-widget="datepicker" />
+						</div>
+						<div class="filter">
+							<label for="return-date">Regreso:</label><input type="text" name="return-date" id="filter-return-date" class="search-form-input-field" data-widget="datepicker" />
+						</div>
 						<div class="filter-title">
 							<label for="filter-airline">Aerolinea</label>
 						</div>

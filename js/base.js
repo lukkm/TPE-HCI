@@ -1,38 +1,32 @@
-var App = function() {
+var App = {
 
-    this.router = new App.Router;
-    this.view = new App.AppView;
-    this.searchForm = new App.SearchFormView;
-    this.flightList = new App.FlightList({
-        model: App.Flight
-    });
-    this.searchResultsView = new App.SearchResultsView({
-        el: $("#search-results"),
-        template: $("#template-flight").html(),
-        collection: this.flightList
-    });
+    Models: {},
 
-    Backbone.history.start();
+    Collections: {},
+
+    Views: {},
+
+    Routers: {},
+
 };
 
-App.Flight = Backbone.Model.extend();
+App.Models.Flight = Backbone.Model.extend();
 
-App.FlightList = Backbone.Collection.extend({
-
-    model: App.Flight,
+App.Collections.FlightList = Backbone.Collection.extend({
 
     fetch: function() {
         var list = [
-            new App.Flight({ id: 1, price: "US$599" }),
-            new App.Flight({ id: 2, price: "US$599" }),
-            new App.Flight({ id: 3, price: "US$599" })
+            new App.Models.Flight({ id: 1, price: "US$599" }),
+            new App.Models.Flight({ id: 2, price: "US$599" }),
+            new App.Models.Flight({ id: 3, price: "US$599" })
         ];
         return list;
     }
 
 });
 
-App.Router = Backbone.Router.extend({
+App.Routers.Router = Backbone.Router.extend({
+
     routes: {
         "" : "home",
         "about": "about",
@@ -69,23 +63,17 @@ App.Router = Backbone.Router.extend({
 
 });
 
-App.FlightView = Backbone.View.extend({
-
-    template: $("template-flight").html(),
+App.Views.FlightView = Backbone.View.extend({
 
     render: function() {
-        // this.$el.html(this.model.get("name"))
-        this.$el.html(Mustache.render(this.template, { name: "Flight #1234" }));
+        this.$el.html(this.model.get("name"))
+        // this.$el.html(Mustache.render(this.template, { name: "Flight #1234" }));
         return this;
     }
 
 });
 
-App.AppView = Backbone.View.extend({
-    el: $("#app"),
-});
-
-App.SearchFormView = Backbone.View.extend({
+App.Views.SearchFormView = Backbone.View.extend({
     
     el: $("#search-form"),
 
@@ -99,8 +87,6 @@ App.SearchFormView = Backbone.View.extend({
     }
 
 });
-
-// App.Views = App.View || {};
 
 // App.Views.GenericView = Backbone.View.extend({
 
@@ -126,7 +112,7 @@ App.SearchFormView = Backbone.View.extend({
 
 // });
 
-App.SearchResultsView = Backbone.View.extend({
+App.Views.SearchResultsView = Backbone.View.extend({
 
     initialize: function(options) {
         this.template = options.template || "";
@@ -143,6 +129,7 @@ App.SearchResultsView = Backbone.View.extend({
     },
 
     addFlight: function(flight) {
+        // var view = new App.Views.FlightView({ model: flight });
         this.$el.append(Mustache.render(this.template, flight.toJSON()));
     }
 
@@ -150,15 +137,14 @@ App.SearchResultsView = Backbone.View.extend({
 
 $(function() {
 
-    window.app = new App;
-
     $("#search-form").on("click", "input[type=submit]", function() {
         app.router.navigate("search", { trigger: true });
         return false;
     });
 
-    $("#departure-date").datepicker();
-    $("#return-date").datepicker();
+    $("input[data-widget=datepicker]").each(function() {
+        $(this).datepicker();
+    });
 
     $( "#slider-range-price" ).slider({
             range: true,
@@ -172,6 +158,20 @@ $(function() {
     $( "#filter-price"  ).val( "$" + $( "#slider-range-price" ).slider( "values", 0 ) +
         " - $" + $( "#slider-range-price" ).slider( "values", 1 ) );
 
+    window.app = window.app || {};
+
+    app.router     = new App.Routers.Router;
+    app.searchForm  = new App.Views.SearchFormView;
+    app.flightList = new App.Collections.FlightList({
+        model: App.Models.Flight
+    });
+    app.searchResultsView = new App.Views.SearchResultsView({
+        el: $("#search-results"),
+        template: $("#template-flight").html(),
+        collection: app.flightList
+    });
     app.searchResultsView.render();
+
+    Backbone.history.start();
 
 });
