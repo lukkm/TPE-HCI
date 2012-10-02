@@ -143,7 +143,7 @@ $(function() {
     });
 
     $("input[data-widget=datepicker]").each(function() {
-        $(this).datepicker();
+        $(this).datepicker({ minDate: 0 });
     });
 
     $( "#slider-range-price" ).slider({
