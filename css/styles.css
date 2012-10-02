@@ -91,6 +91,14 @@ h2 {
 	width: 60px;
 }
 
+.filter-form #filter-price {
+    color: #F6A828;
+    border: none;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
 .deals {
 	margin-left: 329px;
 	height: 282px;

@@ -160,6 +160,18 @@ $(function() {
     $("#departure-date").datepicker();
     $("#return-date").datepicker();
 
+    $( "#slider-range-price" ).slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [ 75, 300 ],
+            slide: function( event, ui ) {
+                $( "#filter-price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            }
+        });
+    $( "#filter-price"  ).val( "$" + $( "#slider-range-price" ).slider( "values", 0 ) +
+        " - $" + $( "#slider-range-price" ).slider( "values", 1 ) );
+
     app.searchResultsView.render();
 
 });
