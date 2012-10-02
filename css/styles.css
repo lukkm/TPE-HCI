@@ -64,9 +64,10 @@ h2 {
 }
 
 /* =Search Form */
+
 .search-form {
     background-color: white;
-    width: 263px;
+    width: 321px;
     border: 8px #BEBEBE solid;
     height: 230px;
     margin: 0 10px 10px 0;
@@ -79,7 +80,7 @@ h2 {
 }
 
 .search-form-input-field { 
-    width: 182px;
+    width: 240px;
 }
 
 .search-input-container {
@@ -97,6 +98,7 @@ h2 {
 }
 
 /* =Filter */
+
 .filter-form label {
     font-size: 13px;
     font-weight: bold;
@@ -119,13 +121,22 @@ h2 {
     font-size: 14px;
 }
 
+.filter-title {
+	margin-top: 20px;
+}
+
+.filter-form-input-field {
+    width: 205px;
+}
+
 .filter-form .check input {
     margin-right: 5px;
 }
 
 /* =Deals */
+
 .deals {
-    margin-left: 329px;
+    margin-left: 393px;
     height: 282px;
     width: 565px;
     border: 1px black solid;
@@ -162,7 +173,7 @@ h2 {
 }
 
 .secondary-deals {
-    width: 896px;
+    width: 960px;
     height: 250px;
     float:left;
     margin-top: 5px;
@@ -170,7 +181,7 @@ h2 {
 
 .deal {
     width: 22%;
-    height: 50px;
+    height: 60px;
     background-color: #E2E2E2;
     text-align: center;
     font-weight: bold;
@@ -195,7 +206,6 @@ h2 {
 
 .search-filters {
     width: 220px;
-    height: 500px;
     border: 8px #BEBEBE solid;
     padding: 16px;
     float: left;
@@ -311,9 +321,10 @@ h2 {
     color: #777;
     font-size: 12px;
     text-align: center;
+    margin-top: 40px;
 }
 
-.footer a {
+.	 a {
     color: #555;
 }
 
