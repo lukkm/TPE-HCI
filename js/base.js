@@ -16,9 +16,9 @@ App.Collections.FlightList = Backbone.Collection.extend({
 
     fetch: function() {
         var list = [
-            new App.Models.Flight({ id: 1, price: "US$599" }),
-            new App.Models.Flight({ id: 2, price: "US$599" }),
-            new App.Models.Flight({ id: 3, price: "US$599" })
+            new App.Models.Flight({ id: 1, currency: "US$", price: 599 }),
+            new App.Models.Flight({ id: 2, currency: "US$", price: 899 }),
+            new App.Models.Flight({ id: 3, currency: "US$", price: 1099 })
         ];
         return list;
     }
