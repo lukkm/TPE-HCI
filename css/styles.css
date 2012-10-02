@@ -95,6 +95,10 @@ h2 {
 .search-form label {
     float: left;
     width: 70px;
+	font-size: 13px;
+	font-weight: bold;
+	color: #999;
+	margin-top:3px;
 }
 
 /* =Filter */
