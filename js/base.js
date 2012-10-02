@@ -137,7 +137,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
 $(function() {
 
-    $("#search-form").on("click", "input[type=submit]", function() {
+    $("#search-form").on("click", "button", function() {
         app.router.navigate("search", { trigger: true });
         return false;
     });
