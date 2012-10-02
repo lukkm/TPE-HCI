@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>travel.ly</title>
-		<link rel="stylesheet" href="css/normalize.css">
-		<link rel="stylesheet" href="css/styles.css" />
-		<link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.24.custom.css" />
-		<script type="text/javascript" src="js/libs/jquery.js"></script>
-		<script type="text/javascript" src="js/libs/jquery-ui.js"></script>
-		<script type="text/javascript" src="js/libs/underscore.js"></script>
-		<script type="text/javascript" src="js/libs/backbone.js"></script>
-		<script type="text/javascript" src="js/libs/mustache.js"></script>
-		<script type="text/javascript" src="js/base.js"></script>
-		<script id="template-flight" type="text/html">
+    <head>
+        <title>travel.ly</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.24.custom.css" />
+        <script type="text/javascript" src="js/libs/jquery.js"></script>
+        <script type="text/javascript" src="js/libs/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/libs/underscore.js"></script>
+        <script type="text/javascript" src="js/libs/backbone.js"></script>
+        <script type="text/javascript" src="js/libs/mustache.js"></script>
+        <script type="text/javascript" src="js/base.js"></script>
+        <script id="template-flight" type="text/html">
             <div class="search-result">
                 <div class="search-result-container">
                     <div class="search-result-info-titles">
@@ -32,121 +32,130 @@
                 </div>
             </div>
         </script>
-	</head>
-	<body>	
-		<div class="container"> 
+    </head>
+    <body>	
+        <div class="container"> 
 
-			<div class="header">
-				<div class="header-title">
-					<h1><a href="#">travel.ly</a></h1>
-				</div>
-				<div class="header-menu">
-					<ul>
-						<li><a href="#">Inicio</a></li>
-						<li><a href="#about">Acerca de</a></li>
-					</ul>
-				</div>
-			</div>
+            <div class="header">
+                <div class="header-title">
+                    <h1><a href="#">travel.ly</a></h1>
+                </div>
+                <div class="header-menu">
+                    <ul>
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#about">Acerca de</a></li>
+                    </ul>
+                </div>
+            </div>
 
-			<div class="page" id="page-home">
-				<div class="search-form" id="search-form">
-					<h2> Buscar Vuelos </h2>
-					<form class="search-form-input" action="/search">
-						<div class="search-input-container">
-							<label for="origin">Origen:</label> <input type="text" name="origin" class="search-form-input-field"/>
-						</div>
-						<div class="search-input-container">
-							<label for="destiny">Destino:</label> <input type="text" name="destiny" class="search-form-input-field"/>
-						</div>
-						<div class="search-input-container">
-							<label for="departure-date">Partida:</label><input type="text" name="departure-date" data-widget="datepicker" class="search-form-input-field"/>
-						</div>
-						<div class="search-input-container">
-							<label for="return-date">Regreso:</label><input type="text" name="return-date" data-widget="datepicker" class="search-form-input-field"/>
-						</div>
-						<div class="search-form-buttons"> 
-							<input type="submit" name="search-send" text="Buscar" class="form-button"/>
-						</div>
-					</form>
-				</div>
-				
-				<div class="deals">
-					<div class="deal-title">
-						<div class="deal-title-container">
-						</div>
-						<div class="deal-text">
-							<h2> Pasajes a Panamá </h2>
-							<p> Desde US$ 2.400 </p>
-						</div>
-					</div>
-				</div>
+            <div class="page" id="page-home">
+                <div class="search-form" id="search-form">
+                    <h2> Buscar Vuelos </h2>
+                    <form class="search-form-input" action="/search">
+                        <div class="search-input-container">
+                            <label for="origin">Origen:</label> <input type="text" name="origin" class="search-form-input-field"/>
+                        </div>
+                        <div class="search-input-container">
+                            <label for="destiny">Destino:</label> <input type="text" name="destiny" class="search-form-input-field"/>
+                        </div>
+                        <div class="search-input-container">
+                            <label for="departure-date">Partida:</label><input type="text" name="departure-date" data-widget="datepicker" class="search-form-input-field"/>
+                        </div>
+                        <div class="search-input-container">
+                            <label for="return-date">Regreso:</label><input type="text" name="return-date" data-widget="datepicker" class="search-form-input-field"/>
+                        </div>
+                        <div class="search-form-buttons"> 
+                            <input type="submit" name="search-send" text="Buscar" class="form-button"/>
+                        </div>
+                    </form>
+                </div>
 
-				<div class="secondary-deals">
-					<div class="deal" id="deal1">
-						Oferta 1
-					</div>
-					<div class="deal" id="deal2"> 
-						Oferta 2
-					</div>
-					<div class="deal" id="deal3">
-						Oferta 3
-					</div>
-				</div>
-			</div>
+                <div class="deals">
+                    <div class="deal-title">
+                        <div class="deal-title-container">
+                        </div>
+                        <div class="deal-text">
+                            <h2> Pasajes a Panamá </h2>
+                            <p> Desde US$ 2.400 </p>
+                        </div>
+                    </div>
+                </div>
 
-			<div class="page" id="page-search">
-				<div class="search-filters">
-					<h2>Filtros de busqueda</h2>
-					<form action="/filter" class="filter-form">
-						<div class="filter">
-							<label for="origin">Origen:</label> <input type="text" name="origin" class="search-form-input-field"/>
-						</div>
-						<div class="filter">
-							<label for="destiny">Destino:</label> <input type="text" name="destiny" class="search-form-input-field"/>
-						</div>
-						<div class="filter">
-							<label for="departure-date">Partida:</label><input type="text" name="departure-date" id="filter-departure-date" class="search-form-input-field" data-widget="datepicker" />
-						</div>
-						<div class="filter">
-							<label for="return-date">Regreso:</label><input type="text" name="return-date" id="filter-return-date" class="search-form-input-field" data-widget="datepicker" />
-						</div>
-						<div class="filter-title">
-							<label for="filter-airline">Aerolinea</label>
-						</div>
-						<div class="search-filter">
-							<select name="filter-airline">
-								<option>LAN</option>
-								<option>Aerolineas Argentinas</option>
-								<option>American Airlines</option>
-								<option>TAM</option>
-							</select>	
-						</div>
-						<div class="filter-title">Precio</div>
-						<div class="search-filter">
-							<!-- <label for="filter-price">Precio</label> -->
-							<input type="text" name="filter-price" id="filter-price" />
+                <div class="secondary-deals">
+                    <div class="deal" id="deal1">
+                        Oferta 1
+                    </div>
+                    <div class="deal" id="deal2"> 
+                        Oferta 2
+                    </div>
+                    <div class="deal" id="deal3">
+                        Oferta 3
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page-search">
+                <div class="search-filters">
+                    <h2>Filtrar resultados</h2>
+                    <form action="/filter" class="filter-form">
+                        <div class="filter">
+                            <label for="origin">Origen</label> <input type="text" name="origin" class="search-form-input-field"/>
+                        </div>
+                        <div class="filter">
+                            <label for="destiny">Destino</label> <input type="text" name="destiny" class="search-form-input-field"/>
+                        </div>
+                        <div class="filter">
+                            <label for="departure-date">Partida</label><input type="text" name="departure-date" id="filter-departure-date" class="search-form-input-field" data-widget="datepicker" />
+                        </div>
+                        <div class="filter">
+                            <label for="return-date">Regreso</label><input type="text" name="return-date" id="filter-return-date" class="search-form-input-field" data-widget="datepicker" />
+                        </div>
+                        <div class="filter">
+                            <label for="filter-airline">Aerolinea</label>
+                        </div>
+                        <div class="filter">
+                            <div class="check">
+                                <input type="checkbox" name="filter-airline" value="LAN" />LAN
+                            </div>
+                            <div class="check">
+                                <input type="checkbox" name="filter-airline" value="Aerolineas Argentinas" />Aerolineas Argentinas
+                            </div>
+                            <div class="check">
+                                <input type="checkbox" name="filter-airline" value="TAM" />TAM
+                            </div>
+                        </div>
+                        <div class="filter-title">Precio</div>
+                        <div class="search-filter">
+                            <!-- <label for="filter-price">Precio</label> -->
+                            <input type="text" name="filter-price" id="filter-price" />
                             <div id="slider-range-price"></div>
-						</div>
-						<div class="filter-option filter-title">
-							Ver solo ofertas
-							<input type="checkbox" class="filter-checkbox" name="show-deals"/>
-						</div>
-						<div class="search-filter">
-							<input type="submit" name="submit-fiter" value="Filtrar" class="form-button">
-						</div>
-					</form>
-				</div>
+                        </div>
+                        <div class="filter-option filter-title">
+                            Ver solo ofertas
+                            <input type="checkbox" class="filter-checkbox" name="show-deals"/>
+                        </div>
+                        <div class="search-filter">
+                            <input type="submit" name="submit-fiter" value="Filtrar" class="form-button">
+                        </div>
+                    </form>
+                </div>
                 <div class="search-results" id="search-results"></div>
-			</div>
+            </div>
 
             <div class="page" id="page-about">
                 <h2>Acerca de</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
+                <p>travel.ly es el sitio líder en venta online de pasajes aéreos. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
                 <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
                 <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
                 <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
             </div>
 
-		</div>
-	</body>
+        </div>
+        <div class="footer">
+            <div class="wrap">
+                <p><a href="#about">About</a> | <a href="#privacy">Privacy</a> | <a href="#feedback">Feedback</a> | <a href="#help">Help</a></p>
+                <p>&copy; 2012 travel.ly</p>
+            </div>
+        </div>
+    </body>
 </html>

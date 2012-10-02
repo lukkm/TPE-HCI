@@ -28,11 +28,11 @@ App.Collections.FlightList = Backbone.Collection.extend({
 App.Routers.Router = Backbone.Router.extend({
 
     routes: {
-        "" : "home",
-        "about": "about",
-        "search": "search",
+        ""          : "home",
+        "about"     : "about",
+        "search"    : "search",
         "flight/:id": "flight",
-        "*actions" : "defaultRoute"
+        "*actions"  : "defaultRoute"
     },
 
     home: function() {
@@ -142,10 +142,6 @@ $(function() {
         return false;
     });
 
-    $("input[data-widget=datepicker]").each(function() {
-        $(this).datepicker({ minDate: 0 });
-    });
-
     $( "#slider-range-price" ).slider({
             range: true,
             min: 0,
@@ -157,6 +153,10 @@ $(function() {
         });
     $( "#filter-price"  ).val( "$" + $( "#slider-range-price" ).slider( "values", 0 ) +
         " - $" + $( "#slider-range-price" ).slider( "values", 1 ) );
+
+    $("input[data-widget=datepicker]").each(function() {
+        $(this).datepicker({ minDate: 0 });
+    });
 
     window.app = window.app || {};
 
