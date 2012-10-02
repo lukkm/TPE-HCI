@@ -27,6 +27,7 @@ h2 {
     padding: 20px 30px;
     overflow: auto;
     background: white;
+    padding-bottom: 40px;
 }
 
 /* =Header */
@@ -177,25 +178,19 @@ h2 {
 }
 
 .secondary-deals {
-    width: 960px;
-    height: 250px;
-    float:left;
+    float: left;
+    clear: both;
+    overflow: auto;
     margin-top: 5px;
 }
 
 .deal {
-    width: 22%;
-    height: 60px;
+    width: 320px;
+    height: 200px;
     background-color: #E2E2E2;
     text-align: center;
     font-weight: bold;
-    padding: 110px 5% 90px 5%;
     float: left;
-    margin-left: 2%;
-}
-
-#deal1 {
-    margin-left: 0;
 }
 
 /* =Page */
@@ -324,7 +319,6 @@ h2 {
     color: #777;
     font-size: 12px;
     text-align: center;
-    margin-top: 40px;
 }
 
 .	 a {
