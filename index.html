@@ -11,7 +11,7 @@
         <script type="text/javascript" src="js/libs/backbone.js"></script>
         <script type="text/javascript" src="js/libs/mustache.js"></script>
         <script type="text/javascript" src="js/base.js"></script>
-        <script id="template-flight" type="text/html">
+        <script type="text/template" id="template-flight">
             <div class="search-result">
                 <div class="search-result-container">
                     <div class="search-result-info-titles">
@@ -55,16 +55,20 @@
                         <h2> Buscar Vuelos </h2>
                         <form class="search-form-input" action="/search">
                             <div class="search-input-container">
-                                <label for="origin">Origen:</label> <input type="text" name="origin" class="search-form-input-field"/>
+                                <label for="origin">Origen:</label>
+                                <input type="text" name="origin" />
                             </div>
                             <div class="search-input-container">
-                                <label for="destiny">Destino:</label> <input type="text" name="destiny" class="search-form-input-field"/>
+                                <label for="destination">Destino:</label>
+                                <input type="text" name="destination" />
                             </div>
                             <div class="search-input-container">
-                                <label for="departure-date">Partida:</label><input type="text" name="departure-date" data-widget="datepicker" class="search-form-input-field"/>
+                                <label for="departure-date">Partida:</label>
+                                <input type="text" name="departure-date" data-widget="datepicker" />
                             </div>
                             <div class="search-input-container">
-                                <label for="return-date">Regreso:</label><input type="text" name="return-date" data-widget="datepicker" class="search-form-input-field"/>
+                                <label for="return-date">Regreso:</label>
+                                <input type="text" name="return-date" data-widget="datepicker" />
                             </div>
                             <div class="search-form-buttons"> 
                                 <button type="submit" name="search-send" class="form-button">Buscar</a>
