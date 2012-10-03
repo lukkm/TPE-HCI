@@ -56,11 +56,11 @@
                         <form class="search-form-input" action="/search">
                             <div class="search-input-container">
                                 <label for="origin">Origen:</label>
-                                <input type="text" name="origin" />
+                                <input type="text" name="origin" data-widget="autocomplete" data-source="places" />
                             </div>
                             <div class="search-input-container">
                                 <label for="destination">Destino:</label>
-                                <input type="text" name="destination" />
+                                <input type="text" name="destination" data-widget="autocomplete" data-source="places" />
                             </div>
                             <div class="search-input-container">
                                 <label for="departure-date">Partida:</label>
@@ -134,7 +134,7 @@
                             <div class="search-filter">
                                 <!-- <label for="filter-price">Precio</label> -->
                                 <input type="text" name="filter-price" id="filter-price" />
-                                <div id="slider-range-price"></div>
+                                <div id="slider-range-price" data-widget="slider" data-target="filter-price"></div>
                             </div>
                             <div class="filter-option filter-title">
                                 Ver solo ofertas

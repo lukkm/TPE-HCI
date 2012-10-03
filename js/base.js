@@ -135,6 +135,70 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
 })
 
+var initSliders = function() {
+
+    $("[data-widget=slider]").each(function() {
+        var $el = $(this),
+            $target = $("#" + $el.data("target"));
+
+        $el.slider({
+            range: true,
+            min: 0,
+            max: 500,
+            values: [ 75, 300 ],
+            slide: function(event, ui) {
+                $target.val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+            }
+        });
+
+        $target.val("$" + $el.slider("values", 0) +
+            " - $" + $el.slider("values", 1));
+    });
+
+};
+
+var initDatepickers = function() {
+
+    $("input[data-widget=datepicker]").each(function() {
+        $(this).datepicker({ minDate: 0 });
+    });
+
+};
+
+var initAutocompletes = function() {
+
+    // map strings to autocomplete datasources
+    var sourceMap = {
+        places: function(request, callback) {
+            var list = [ "Buenos Aires", "Miami", "New York", "Paris", "London" ],
+                term = request.term;
+
+            callback(_.filter(list, function(e) { return e.toLowerCase().lastIndexOf(term.toLowerCase(), 0) === 0 }));
+        }
+    }
+
+    // initialize autocompletes (use data-source attribute to assign
+    // source function)
+    $("input[data-widget=autocomplete]").each(function() {
+        var $el = $(this),
+            source = sourceMap[$el.data("source")];
+
+        $el.autocomplete({
+            source: source,
+            // minLength: 3
+        });
+    });
+
+};
+
+var initWidgets = function() {
+
+    initSliders();
+    initDatepickers();
+    initAutocompletes();
+
+};
+
 $(function() {
 
     $("#search-form").on("click", "button", function() {
@@ -142,26 +206,13 @@ $(function() {
         return false;
     });
 
-    $( "#slider-range-price" ).slider({
-            range: true,
-            min: 0,
-            max: 500,
-            values: [ 75, 300 ],
-            slide: function( event, ui ) {
-                $( "#filter-price" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-            }
-        });
-    $( "#filter-price"  ).val( "$" + $( "#slider-range-price" ).slider( "values", 0 ) +
-        " - $" + $( "#slider-range-price" ).slider( "values", 1 ) );
-
-    $("input[data-widget=datepicker]").each(function() {
-        $(this).datepicker({ minDate: 0 });
-    });
+    initWidgets();
 
     window.app = window.app || {};
 
+    app.view       = new App.Views.AppView;
     app.router     = new App.Routers.Router;
-    app.searchForm  = new App.Views.SearchFormView;
+    app.searchForm = new App.Views.SearchFormView;
     app.flightList = new App.Collections.FlightList({
         model: App.Models.Flight
     });
