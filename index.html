@@ -105,10 +105,10 @@
                         <h2>Filtrar resultados</h2>
                         <form action="/filter" class="filter-form">
                             <div class="filter">
-                                <label for="origin">Origen</label> <input type="text" name="origin" class="filter-form-input-field"/>
+                                <label for="origin">Origen</label> <input type="text" name="origin" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
                             </div>
                             <div class="filter">
-                                <label for="destiny">Destino</label> <input type="text" name="destiny" class="filter-form-input-field"/>
+                                <label for="destiny">Destino</label> <input type="text" name="destiny" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
                             </div>
                             <div class="filter">
                                 <label for="departure-date">Partida</label><input type="text" name="departure-date" id="filter-departure-date" class="filter-form-input-field" data-widget="datepicker" />
