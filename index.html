@@ -26,7 +26,7 @@
                     <div class="price-text">
                         <em>{{ currency }}{{ price }}</em>
                     </div>
-                    <a class="buy-button" href="#flight/{{ id }}">
+                    <a class="buy-button" href="#buy/{{ id }}">
                         Comprar
                     </a>
                 </div>
@@ -156,10 +156,55 @@
 
                 <div class="page" id="page-about">
                     <h2>Acerca de</h2>
-                    <p>travel.ly es el sitio líder en venta online de pasajes aéreos. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
+                    <p>travel.ly is the leading site in online flight sales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
                     <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
                     <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
                     <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
+                </div>
+
+                <div class="page" id="page-buy">
+                    <div class="nav-back">
+                        <a href="#search">&larr; Elegir otro vuelo</a>
+                    </div>
+                    <h2>Confirmar compra</h2>
+                    <form action="" method="post">
+
+                        <h3>Passengers</h3>
+                        <label for="first-name">First Name</label>
+                        <input type="text" name="first-name" value="" />
+                        <label for="last-name">Last Name</label>
+                        <input type="text" name="last-name" value="" />
+                        <label for="birth-date">Birth Date</label>
+                        <input type="text" name="birth-date" value="" data-widget="birth-date-picker" />
+
+                        <h3>Billing</h3>
+                        <label for="card">Card</label>
+                        <input type="text" name="card" value="" />
+                        <label for="card-number">Card Number</label>
+                        <input type="text" name="card-number" value="" />
+                        <label for="card-expire-date">Expire Date</label>
+                        <input type="text" name="card-expire-date" value="" />
+                        <label for="card-security-code">Security Code</label>
+                        <input type="text" name="card-security-code" value="" />
+                        <label for="card-holder">Holder</label>
+                        <input type="text" name="card-holder" value="" />
+                        <label for="card-document-number">Document Number</label>
+                        <input type="text" name="card-document-number" value="" />
+
+                        <h3>Contact Information</h3>
+                        <label for="email">Email</label>
+                        <input type="text" name="email" value="" />
+                        <label for="confirm-email">Confirm Email</label>
+                        <input type="text" name="confirm-email" value="" />
+                        <label for="phone-number">Phone number</label>
+                        <input type="text" name="phone-number" value="" />
+
+                        <input type="checkbox" name="terms" id="terms" value="1" />
+                        <label for="terms">I have read and accept the terms and conditions.</label>
+
+                        <button type="submit" class="button">Buy<button>
+
+                    </form>
                 </div>
             
             </div>

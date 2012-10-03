@@ -31,7 +31,7 @@ App.Routers.Router = Backbone.Router.extend({
         ""          : "home",
         "about"     : "about",
         "search"    : "search",
-        "flight/:id": "flight",
+        "buy/:id"   : "buy",
         "*actions"  : "defaultRoute"
     },
 
@@ -47,8 +47,8 @@ App.Routers.Router = Backbone.Router.extend({
         this.switchPage("search");
     },
 
-    flight: function(id) {
-        alert("Selected flight id = " + id);
+    buy: function(id) {
+        this.switchPage("buy");
     },
 
     switchPage: function(pageName) {
