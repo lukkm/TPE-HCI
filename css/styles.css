@@ -238,10 +238,33 @@ h2 {
 }
 
 /* =Search Results */
-.search-results {
+
+.search-wrap {
     width: 676px;
     float: left;
     margin-left: 16px;
+}
+
+.sorting-options {
+    height: 70px;
+    width: 676px;
+}
+
+.sorting-option {
+    margin-top: 20px;
+    width: 120px;
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    color: #999;
+}
+
+.sorting-option input {
+    margin-left: 5px;
+}
+
+.search-results {
+    margin-top: 16px;
 }
 
 .search-result {
