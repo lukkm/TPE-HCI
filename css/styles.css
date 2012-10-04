@@ -281,15 +281,34 @@ h2 {
 }
 
 .search-result-info-titles {
-    width: 400px;
-    height: 40px;
+    width: 446px;
+    height: 80px;
     font-size: 14px;
 }
 
+.search-result-info-titles img {
+	height: 40px;
+	width: 40px;
+}
+
 .search-result-title {
+    text-align: center;
+    margin: 2px auto 5px;
+}
+
+.search-result-info {
     float:left;
-    text-align: left;
-    margin-left: 18px;
+    width: 174px;
+    margin-top: 10px;
+    padding: 2px;
+    text-align: center;
+}
+
+.search-result-icon {
+    float:left;
+    width: 85px;
+    padding: 2px;
+    text-align: center;
 }
 
 .search-result-price {
