@@ -35,9 +35,14 @@ h2 {
     height: 60px;
 }
 
-.header-title {
+.header-title a {
     position: absolute;
     float: left;
+    text-indent: -9999px;
+    width: 200px;
+    height: 69px;
+    display: block;
+    background-image: url("../img/logo.png");
 }
 
 .header-menu {
@@ -287,8 +292,9 @@ h2 {
 }
 
 .search-result-info-titles img {
-	height: 40px;
-	width: 40px;
+    margin-top: 6px;
+	height: 24px;
+	width: 24px;
 }
 
 .search-result-title {
