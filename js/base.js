@@ -51,15 +51,29 @@ App.Routers.Router = Backbone.Router.extend({
         this.switchPage("buy");
     },
 
+    defaultRoute: function(actions) {
+        alert("Invalid page");
+        this.navigate("");
+    },
+
     switchPage: function(pageName) {
         $(".current").removeClass("current");
         $("#page-" + pageName).addClass("current");
         $("a[href=#" + pageName + "]").addClass("current");
+
+        this.updateTitle();
     },
 
-    defaultRoute: function(actions) {
-        alert("Invalid page");
-        this.navigate("");
+    updateTitle: function() {
+        var pageTitle = $(".page.current").data("title"),
+            baseTitle = $("body").data("title-base"),
+            separator = $("body").data("title-separator");
+
+        if (pageTitle !== undefined) {
+            document.title = pageTitle + separator + baseTitle;
+        } else {
+            document.title = baseTitle;
+        }
     }
 
 });
