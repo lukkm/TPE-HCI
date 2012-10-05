@@ -405,6 +405,34 @@ input {
     float: right;
 }
 
+/* =Pagination */
+.pagination {
+    
+}
+
+.pagination ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.pagination li {
+    float: left;
+}
+
+.pagination a {
+    color: #F2A500;
+    padding: 5px 10px;
+    border: 1px solid #F2A500;
+    margin-right: 5px;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+.pagination .current-page a {
+    background: #F8CA95;
+    color: white;
+}
+
 /* =jQuery UI */
 .ui-widget {
     font-size: 12px !important;
