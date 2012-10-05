@@ -6,7 +6,7 @@ var App = {
 
     Views: {},
 
-    Routers: {},
+    Routers: {}
 
 };
 
@@ -92,7 +92,7 @@ App.Views.AppView = Backbone.View.extend({
 App.Views.FlightView = Backbone.View.extend({
 
     render: function() {
-        this.$el.html(this.model.get("name"))
+        // this.$el.html(this.model.get("name"))
         // this.$el.html(Mustache.render(this.template, { name: "Flight #1234" }));
         return this;
     }
@@ -141,7 +141,7 @@ App.Views.SearchFormView = Backbone.View.extend({
 App.Views.SearchResultsView = Backbone.View.extend({
 
     initialize: function(options) {
-        this.template = options.template || "";
+        this.template = options.template;
     },
 
     render: function() {
@@ -156,10 +156,10 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     addFlight: function(flight) {
         // var view = new App.Views.FlightView({ model: flight });
-        this.$el.append(Mustache.render(this.template, flight.toJSON()));
+        this.$el.append(this.template(flight.toJSON()));
     }
 
-})
+});
 
 var initSliders = function() {
 
@@ -199,9 +199,9 @@ var initAutocompletes = function() {
             var list = [ "Buenos Aires", "Miami", "New York", "Paris", "London" ],
                 term = request.term;
 
-            callback(_.filter(list, function(e) { return e.toLowerCase().lastIndexOf(term.toLowerCase(), 0) === 0 }));
+            callback(_.filter(list, function(e) { return e.toLowerCase().lastIndexOf(term.toLowerCase(), 0) === 0; }));
         }
-    }
+    };
 
     // initialize autocompletes (use data-source attribute to assign
     // source function)
@@ -211,7 +211,7 @@ var initAutocompletes = function() {
 
         $el.autocomplete({
             source: source,
-            // minLength: 3
+            minLength: 3
         });
     });
 
@@ -245,7 +245,7 @@ $(function() {
     });
     app.searchResultsView = new App.Views.SearchResultsView({
         el: $("#search-results"),
-        template: $("#template-flight").html(),
+        template: Mustache.compile($("#template-flight").html()),
         collection: app.flightList
     });
     app.searchResultsView.render();
