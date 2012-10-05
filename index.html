@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.24.custom.css" />
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
         <script type="text/javascript" src="js/libs/jquery.js"></script>
         <script type="text/javascript" src="js/libs/jquery-ui.js"></script>
         <script type="text/javascript" src="js/libs/jquery.ui.datepicker-es.js"></script>
@@ -15,27 +16,20 @@
         <script type="text/template" id="template-flight">
             <div class="search-result">
                 <div class="search-result-container">
-                    <div class="search-result-info-titles">
-                        <div class="search-result-title">Salis el <em>21</em> de <em>Mayo</em> de <em>2012</em></div>
-                        <div class="search-result-info">Buenos Aires (EZE) 12:00</div>
-                        <div class="search-result-icon"><img src="img/green-plane.png"></div>
-                        <div class="search-result-info">Miami (MIA) 22:00</div>
-                    </div>
-                    <div class="search-result-info-titles">
-                        <div class="search-result-title">Volves el <em>29</em> de <em>Mayo</em> de <em>2012</em></div>
-                        <div class="search-result-info">Miami (MIA) 5:45</div>
-                        <div class="search-result-icon"><img src="img/blue-plane.png"></div>
-                        <div class="search-result-info">Buenos Aires (EZE) 15:45</div>
-                    </div>
+                    <div class="search-result-title"><strong>Depart</strong> <em>21</em> de <em>Mayo</em> de <em>2012</em></div>
+                    <div class="search-result-info">Buenos Aires (EZE) 12:00</div>
+                    <div class="search-result-icon"><img src="img/green-plane.png"></div>
+                    <div class="search-result-info">Miami (MIA) 22:00</div>
+                    <div class="search-result-title"><strong>Return</strong> <em>29</em> de <em>Mayo</em> de <em>2012</em></div>
+                    <div class="search-result-info">Miami (MIA) 5:45</div>
+                    <div class="search-result-icon"><img src="img/blue-plane.png"></div>
+                    <div class="search-result-info">Buenos Aires (EZE) 15:45</div>
                 </div>
                 <div class="search-result-price">
-                    Precio 
                     <div class="price-text">
-                        <em>{{ currency }}{{ price }}</em>
+                        <em>{{ currency }} {{ price }}</em>
                     </div>
-                    <a class="buy-button" href="#buy/{{ id }}">
-                        Comprar
-                    </a>
+                    <a class="button" href="#buy/{{ id }}">Select</a>
                 </div>
             </div>
         </script>
@@ -51,34 +45,36 @@
                     </div>
                     <div class="header-menu">
                         <ul>
-                            <li><a href="#">Inicio</a></li>
-                            <li><a href="#about">Acerca de</a></li>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#about">About</a></li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="page" id="page-home">
                     <div class="search-form" id="search-form">
-                        <h2> Buscar Vuelos </h2>
-                        <form class="search-form-input" action="/search">
+                        <h2>Search flights</h2>
+                        <form action=".">
                             <div class="search-input-container">
-                                <label for="origin">Origen:</label>
-                                <input type="text" name="origin" data-widget="autocomplete" data-source="places" />
+                                <label for="origin">From</label>
+                                <input type="text" name="from" data-widget="autocomplete" data-source="places" />
                             </div>
                             <div class="search-input-container">
-                                <label for="destination">Destino:</label>
-                                <input type="text" name="destination" data-widget="autocomplete" data-source="places" />
+                                <label for="destination">To</label>
+                                <input type="text" name="to" data-widget="autocomplete" data-source="places" />
                             </div>
-                            <div class="search-input-container">
-                                <label for="departure-date">Partida:</label>
-                                <input type="text" name="departure-date" data-widget="datepicker" />
+                            <div class="column-2">
+                                <div class="search-input-container">
+                                    <label for="departure-date">Depart</label>
+                                    <input type="text" name="departure-date" data-widget="datepicker" />
+                                </div>
+                                <div class="search-input-container">
+                                    <label for="return-date">Return</label>
+                                    <input type="text" name="return-date" data-widget="datepicker" />
+                                </div>
                             </div>
-                            <div class="search-input-container">
-                                <label for="return-date">Regreso:</label>
-                                <input type="text" name="return-date" data-widget="datepicker" />
-                            </div>
-                            <div class="search-form-buttons"> 
-                                <button type="submit" name="search-send" class="form-button">Buscar</button>
+                            <div class="submit"> 
+                                <button type="submit" name="search-send" class="button">Buscar</button>
                             </div>
                         </form>
                     </div>
@@ -150,19 +146,24 @@
                         </form>
                     </div>
                     <div class="search-wrap">
-                        <div class="sorting-options">
-                            <div class="sorting-title">Ordenar por:</div>
-                            <div class="sorting-option">Duración<input type="radio" name="sorting"/></div>
-                            <div class="sorting-option">Aerolínea<input type="radio" name="sorting"/></div>
-                            <div class="sorting-option">Precio<input type="radio" name="sorting"/></div>
-                            <div class="sorting-option">Escalas<input type="radio" name="sorting"/></div>
+                        <div class="search-results-header">
+                            <div class="count">6 of 567 flights</div>
+                            <div class="sorting">
+                                <span>Sort by:</span>
+                                <select>
+                                    <option value="">Duration</option>
+                                    <option value="">Airline</option>
+                                    <option value="">Price</option>
+                                    <option value="">Stops</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="search-results" id="search-results"></div>
                     </div>
                 </div>
 
                 <div class="page" id="page-about">
-                    <h2>Acerca de</h2>
+                    <h1>About travel.ly</h1>
                     <p>travel.ly is the leading site in online flight sales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
                     <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
                     <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>

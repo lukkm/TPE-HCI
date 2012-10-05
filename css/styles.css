@@ -7,26 +7,31 @@
 
 /* =Global */
 body {
-    color: black;
+    color: #333;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
-    background: #EEE;
+    background: #444;
 }
 
 h1 {
     padding: 0 5px;
+    font-weight: normal;
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 21px;
     margin: 0 0 10px;
     font-weight: normal;
 }
 
+p {
+    line-height: 1.5em;
+    text-shadow: 0 1px 0 white;
+}
+
 .container {
-    padding: 20px 30px;
     overflow: auto;
-    background: white;
+    background: white url("../img/background.png") repeat-x;
     padding-bottom: 40px;
 }
 
@@ -39,29 +44,40 @@ h2 {
     position: absolute;
     float: left;
     text-indent: -9999px;
-    width: 200px;
-    height: 69px;
+    width: 250px;
+    height: 64px;
     display: block;
     background-image: url("../img/logo.png");
 }
 
 .header-menu {
     float: right;
-    margin-top: 25px;
 }
 
 .header-menu ul {
     list-style: none;
+    border: 1px solid #F8CA95;
+    overflow: auto;
+    padding: 0;
+    border-radius: 3px;
 }
 
 .header-menu li {
     float: left;
-    margin-left: 20px;
+    border-left: 1px solid #F8CA95;
+}
+
+.header-menu li:first-child {
+    border-left: none;
 }
 
 .header-menu a {
-    color: #666;
+    color: #F5A300;
+    background: white;
+    display: block;
+    text-shadow: 0 1px 0 white; 
     text-decoration: none;  
+    padding: 10px 20px;
 }
 
 .header-menu a:hover {
@@ -69,45 +85,56 @@ h2 {
     color: #444;
 }
 
-/* =Search Form */
+/* =Forms */
+input {
+    border: 1px solid #CCC;
+    padding: 3px;
+}
 
 .search-form {
     background-color: white;
-    width: 321px;
-    border: 8px #BEBEBE solid;
-    height: 230px;
+    width: 335px;
+    border: 1px #F5A300 solid;
+    height: 242px;
     margin: 0 10px 10px 0;
     padding: 20px;
     float: left;
 }
 
-.search-form-input {
-    margin-top: 20px;
-}
-
 .search-form input { 
-    width: 240px;
+    width: 328px;
 }
 
 .search-input-container {
-    margin-bottom: 16px;
-}
-
-.form-button{
-    float: right;
-    margin-right: 6px;
+    margin-bottom: 10px;
 }
 
 .search-form label {
-    float: left;
     width: 70px;
+    display: block;
 	font-size: 13px;
 	font-weight: bold;
 	color: #999;
-	margin-top:3px;
+    margin: 3px 0;
+}
+
+.column-2 div:first-child {
+    margin-right: 25px;
+}
+
+.column-2 div {
+    width: 148px;
+    float: left;
+}
+
+.column-2 input {
+    width: 154px;
 }
 
 /* =Filter */
+.search-filters {
+    background: white;
+}
 
 .filter-form label {
     font-size: 13px;
@@ -147,9 +174,8 @@ h2 {
 
 .deals {
     margin-left: 393px;
-    height: 282px;
-    width: 565px;
-    border: 1px black solid;
+    height: 284px;
+    width: 567px;
     position:absolute;
     background-color: white;
     background-image: url('../img/panama.jpg');
@@ -206,7 +232,7 @@ h2 {
 
 /* =Page */
 .page {
-    margin-top: 20px;
+    margin-top: 40px;
     display: none;
 }
 
@@ -216,7 +242,7 @@ h2 {
 
 .search-filters {
     width: 220px;
-    border: 8px #BEBEBE solid;
+    border: 8px solid #F8CA95;
     padding: 16px;
     float: left;
 }
@@ -275,31 +301,28 @@ h2 {
 .search-result {
     overflow: auto;
     margin-bottom: 16px;
-}
-
-.search-result-container {
-    background-color: #E2E2E2;
-    float: left;
-    padding: 10px;
-    width: 466px;
-    height: 160px;
-}
-
-.search-result-info-titles {
-    width: 446px;
-    height: 80px;
     font-size: 14px;
 }
 
-.search-result-info-titles img {
-    margin-top: 6px;
-	height: 24px;
-	width: 24px;
+.search-result-container {
+    background-color: white;
+    border: 1px solid #F8CA95;
+    float: left;
+    padding: 10px;
+    width: 474px;
+    height: 158px;
 }
 
 .search-result-title {
     text-align: center;
-    margin: 2px auto 5px;
+    clear: both;
+    padding: 10px 0;
+}
+
+.search-result-icon img {
+    margin-top: 6px;
+	height: 24px;
+	width: 24px;
 }
 
 .search-result-info {
@@ -319,18 +342,18 @@ h2 {
 
 .search-result-price {
     float: right;
-    margin-left: 10px;
     height: 132px;
     width: 132px;
     padding: 16px;
     font-size: 16px;
     text-align: center;
     background-color: white;
-    border: #8E8E8E 8px solid;
+    border: 8px solid #F8CA95;
 }
 
 .price-text {
     margin-top: 16px;
+    margin-bottom: 20px;
 }
 
 .search-result-price em {
@@ -339,24 +362,47 @@ h2 {
     font-style: normal;
 }
 
-.buy-button {
-    display: block;
-    margin-top: 19px;
-    float: center;
-    font-size: 14px;
-    height: 25px;
-    padding-top: 7px;
-    text-decoration: none;
-    border: 1px #8E8E8E outset;
-    border-radius: 5px;
-    font-weight: bold;
-    color: black;
-    background: -webkit-linear-gradient(top, #FFB800, #FFD886);
+.submit {
+    clear: both;
+    float: right;
 }
 
-.buy-button:active {
-    border: 1px #8E8E8E inset;
-    background: -webkit-linear-gradient(top, #FFD886, #FFB800);
+.button {
+    background: -webkit-linear-gradient(top, #F6B900, #F17400);
+    border-radius: 5px;
+    border: 1px solid #F17400;
+    color: white;
+    text-shadow: 0 1px 0 #F1742A;
+    box-shadow: 0 1px 1px #CCC;
+    display: block;
+    float: center;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 16px;
+}
+
+.button:active {
+    background: -webkit-linear-gradient(top, #F17400, #F6B900);
+}
+
+/* =Sorting */
+.search-results-header {
+    background: white;
+    border: 1px solid #F8CA95;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 13px;
+    overflow: auto;
+}
+
+.search-results-header .count {
+    font-weight: bold;
+    float: left;
+}
+
+.search-results-header .sorting {
+    float: right;
 }
 
 /* =jQuery UI */
@@ -370,13 +416,17 @@ h2 {
 
 /* =Footer */
 .footer {
-    color: #777;
+    color: #BBB;
     font-size: 12px;
     text-align: center;
 }
 
+.footer p {
+    text-shadow: 0 1px 0 #333;
+}
+
 .footer a {
-    color: #555;
+    color: #BBB;
 }
 
 .wrap {

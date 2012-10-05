@@ -52,13 +52,25 @@ App.Routers.Router = Backbone.Router.extend({
     },
 
     switchPage: function(pageName) {
-        $(".page.current").removeClass("current");
+        $(".current").removeClass("current");
         $("#page-" + pageName).addClass("current");
+        $("a[href=#" + pageName + "]").addClass("current");
     },
 
     defaultRoute: function(actions) {
         alert("Invalid page");
-        this.navigate("home");
+        this.navigate("");
+    }
+
+});
+
+App.Views.AppView = Backbone.View.extend({
+
+    el: '.container',
+
+    initialize: function() {
+        this.page = this.$(".page.current")[0];
+        this.menu = this.$(".header-menu")[0];
     }
 
 });
@@ -78,7 +90,7 @@ App.Views.SearchFormView = Backbone.View.extend({
     el: $("#search-form"),
 
     events: {
-        "click input[type=button]": "submitForm"
+        "click button": "submitForm"
     },
 
     submitForm: function() {
@@ -202,6 +214,7 @@ var initWidgets = function() {
 $(function() {
 
     $("#search-form").on("click", "button", function() {
+        var data = $(this).parents("form").serializeArray();
         app.router.navigate("search", { trigger: true });
         return false;
     });
