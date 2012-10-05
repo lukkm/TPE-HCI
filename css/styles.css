@@ -131,6 +131,30 @@ input {
     width: 154px;
 }
 
+.form-section {
+    background: white;
+    border: 1px solid #F8CA95;
+    border-radius: 3px;
+    padding: 20px;
+}
+
+.form-section label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #666;
+    margin: 10px 0 5px 0;
+}
+
+.form-terms {
+    padding: 20px;
+}
+
+.nav-back a {
+    text-decoration: none;
+    color: #F17400;
+}
+
 /* =Filter */
 .search-filters {
     background: white;

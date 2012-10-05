@@ -187,41 +187,49 @@
                     <div class="nav-back">
                         <a href="#search">&larr; Choose other flight</a>
                     </div>
-                    <h2>Confirm purcharse</h2>
+                    <h1>Confirm purcharse</h1>
                     <form action="" method="post">
 
                         <h3>Passengers</h3>
-                        <label for="first-name">First Name</label>
-                        <input type="text" name="first-name" value="" />
-                        <label for="last-name">Last Name</label>
-                        <input type="text" name="last-name" value="" />
-                        <label for="birth-date">Birth Date</label>
-                        <input type="text" name="birth-date" value="" data-widget="birth-date-picker" />
+                        <div class="form-section">
+                            <label for="first-name">First Name</label>
+                            <input type="text" name="first-name" value="" />
+                            <label for="last-name">Last Name</label>
+                            <input type="text" name="last-name" value="" />
+                            <label for="birth-date">Birth Date</label>
+                            <input type="text" name="birth-date" value="" data-widget="birth-date-picker" />
+                        </div>
 
                         <h3>Billing</h3>
-                        <label for="card">Card</label>
-                        <input type="text" name="card" value="" />
-                        <label for="card-number">Card Number</label>
-                        <input type="text" name="card-number" value="" />
-                        <label for="card-expire-date">Expire Date</label>
-                        <input type="text" name="card-expire-date" value="" />
-                        <label for="card-security-code">Security Code</label>
-                        <input type="text" name="card-security-code" value="" />
-                        <label for="card-holder">Holder</label>
-                        <input type="text" name="card-holder" value="" />
-                        <label for="card-document-number">Document Number</label>
-                        <input type="text" name="card-document-number" value="" />
+                        <div class="form-section">
+                            <label for="card">Card</label>
+                            <input type="text" name="card" value="" />
+                            <label for="card-number">Card Number</label>
+                            <input type="text" name="card-number" value="" />
+                            <label for="card-expire-date">Expire Date</label>
+                            <input type="text" name="card-expire-date" value="" />
+                            <label for="card-security-code">Security Code</label>
+                            <input type="text" name="card-security-code" value="" />
+                            <label for="card-holder">Holder</label>
+                            <input type="text" name="card-holder" value="" />
+                            <label for="card-document-number">Document Number</label>
+                            <input type="text" name="card-document-number" value="" />
+                        </div>
 
                         <h3>Contact Information</h3>
-                        <label for="email">Email</label>
-                        <input type="text" name="email" value="" />
-                        <label for="confirm-email">Confirm Email</label>
-                        <input type="text" name="confirm-email" value="" />
-                        <label for="phone-number">Phone number</label>
-                        <input type="text" name="phone-number" value="" />
+                        <div class="form-section">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" value="" />
+                            <label for="confirm-email">Confirm Email</label>
+                            <input type="text" name="confirm-email" value="" />
+                            <label for="phone-number">Phone number</label>
+                            <input type="text" name="phone-number" value="" />
+                        </div>
 
-                        <input type="checkbox" name="terms" id="terms" value="1" />
-                        <label for="terms">I have read and accept the terms and conditions.</label>
+                        <div class="form-terms">
+                            <input type="checkbox" name="terms" id="terms" value="1" />
+                            <label for="terms">I have read and accept the terms and conditions.</label>
+                        </div>
 
                         <button type="submit" class="button">Buy</button>
 
