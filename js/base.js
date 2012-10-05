@@ -14,13 +14,19 @@ App.Models.Flight = Backbone.Model.extend();
 
 App.Collections.FlightList = Backbone.Collection.extend({
 
-    fetch: function() {
+    fetch: function(options) {
         var list = [
             new App.Models.Flight({ id: 1, currency: "US$", price: 599 }),
             new App.Models.Flight({ id: 2, currency: "US$", price: 899 }),
             new App.Models.Flight({ id: 3, currency: "US$", price: 1099 })
         ];
-        return list;
+        var that = this;
+        this.reset();
+        $.each(list, function(key, value) {
+            that.add(value, {silent: true});
+        });
+        this.trigger("change");
+        options && options.success && options.success(this, list);
     }
 
 });
@@ -142,21 +148,24 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     initialize: function(options) {
         this.template = options.template;
+        var that = this;
+        this.collection.on("change", function() {
+            that.render();
+        });
     },
 
     render: function() {
-        var flights = this.collection.fetch();
 
-        for (var i = 0; i < flights.length; i++) {
-            this.addFlight(flights[i]);
-        }
+        var that = this;
+
+        this.$el.html(null);
+
+        this.collection.forEach(function(flight) {
+            console.log(flight);
+            that.$el.append(that.template(flight.toJSON()));
+        });
         
         return this;
-    },
-
-    addFlight: function(flight) {
-        // var view = new App.Views.FlightView({ model: flight });
-        this.$el.append(this.template(flight.toJSON()));
     }
 
 });
@@ -248,8 +257,9 @@ $(function() {
         template: Mustache.compile($("#template-flight").html()),
         collection: app.flightList
     });
-    app.searchResultsView.render();
-
     Backbone.history.start();
+    app.flightList.fetch();
+
+    app.searchResultsView.render();
 
 });
