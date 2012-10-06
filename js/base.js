@@ -38,6 +38,7 @@ App.Routers.Router = Backbone.Router.extend({
         "about"     : "about",
         "search"    : "search",
         "buy/:id"   : "buy",
+		"confirm"   : "confirm",
         "*actions"  : "defaultRoute"
     },
 
@@ -56,6 +57,10 @@ App.Routers.Router = Backbone.Router.extend({
     buy: function(id) {
         this.switchPage("buy");
     },
+	
+	confirm: function(id) {
+		this.switchPage("confirm");
+	},
 
     defaultRoute: function(actions) {
         alert("Invalid page");
@@ -118,6 +123,21 @@ App.Views.SearchFormView = Backbone.View.extend({
         return false;
     }
 
+});
+
+App.Views.BuyFormView = Backbone.View.extend({
+	
+	el: $("#buy-form"),
+	
+	events: {
+		"click button": "submitForm"
+	},
+	
+	submitForm: function() {
+		app.router.navigate("confirm", { trigger: true });
+		return false;
+	}
+	
 });
 
 // App.Views.GenericView = Backbone.View.extend({
@@ -241,6 +261,12 @@ $(function() {
         app.router.navigate("search", { trigger: true });
         return false;
     });
+	
+	$("#buy-form").on("click", "button", function() {
+        var data = $(this).parents("form").serializeArray();
+        app.router.navigate("confirm", { trigger: true });
+        return false;
+    });
 
     initWidgets();
 
@@ -249,6 +275,7 @@ $(function() {
     app.view       = new App.Views.AppView;
     app.router     = new App.Routers.Router;
     app.searchForm = new App.Views.SearchFormView;
+	app.buyForm    = new App.Views.BuyFormView;
     app.flightList = new App.Collections.FlightList({
         model: App.Models.Flight
     });
