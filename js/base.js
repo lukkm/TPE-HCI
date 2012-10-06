@@ -161,7 +161,6 @@ App.Views.SearchResultsView = Backbone.View.extend({
         this.$el.html(null);
 
         this.collection.forEach(function(flight) {
-            console.log(flight);
             that.$el.append(that.template(flight.toJSON()));
         });
         
@@ -205,10 +204,11 @@ var initAutocompletes = function() {
     // map strings to autocomplete datasources
     var sourceMap = {
         places: function(request, callback) {
-            var list = [ "Buenos Aires", "Miami", "New York", "Paris", "London" ],
-                term = request.term;
+            FlightsAPI.getAirportsByName(request.term, function(data) {
+                var list = _.pluck(data.airports, "description");
+                callback(list);
+            });
 
-            callback(_.filter(list, function(e) { return e.toLowerCase().lastIndexOf(term.toLowerCase(), 0) === 0; }));
         }
     };
 
@@ -257,9 +257,9 @@ $(function() {
         template: Mustache.compile($("#template-flight").html()),
         collection: app.flightList
     });
-    Backbone.history.start();
-    app.flightList.fetch();
 
-    app.searchResultsView.render();
+    Backbone.history.start();
+
+    app.flightList.fetch();
 
 });

@@ -102,9 +102,6 @@ var FlightsAPI = {
             data: data,
             dataType: "jsonp",
             success: function(result) {
-                console.log("Called method " + service + "." + data.method);
-                console.log(result.meta);
-                delete result.meta;
                 callback(result);
             }
         });
