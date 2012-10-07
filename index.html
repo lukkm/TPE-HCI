@@ -57,12 +57,12 @@
                         <h2>Search flights</h2>
                         <form action=".">
                             <div class="search-input-container">
-                                <label for="origin">From</label>
-                                <input type="text" name="from" data-widget="autocomplete" data-source="places" />
+                                <label for="from">From</label>
+                                <input type="text" name="from" id="from" data-widget="autocomplete" data-source="places" />
                             </div>
                             <div class="search-input-container">
-                                <label for="destination">To</label>
-                                <input type="text" name="to" data-widget="autocomplete" data-source="places" />
+                                <label for="to">To</label>
+                                <input type="text" name="to" id="to" data-widget="autocomplete" data-source="places" />
                             </div>
                             <div class="column-2">
                                 <div class="search-input-container">
@@ -107,7 +107,7 @@
                 <div class="page" id="page-search" data-title="Search Results">
                     <div class="search-filters">
                         <h2>Filter results</h2>
-                        <form action="/filter" class="filter-form">
+                        <form action="." class="filter-form">
                             <div class="filter">
                                 <label for="from">From</label> <input type="text" name="origin" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
                             </div>
@@ -189,7 +189,7 @@
                         <a href="#search">&larr; Choose other flight</a>
                     </div>
                     <h1>Confirm purchase</h1>
-                    <form action="" method="post">
+                    <form action="." method="post">
 
                         <h3>Passengers</h3>
                         <div class="form-section">

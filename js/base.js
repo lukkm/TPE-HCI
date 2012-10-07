@@ -15,17 +15,22 @@ App.Models.Flight = Backbone.Model.extend();
 App.Collections.FlightList = Backbone.Collection.extend({
 
     fetch: function(options) {
+
         var list = [
             new App.Models.Flight({ id: 1, currency: "US$", price: 599 }),
             new App.Models.Flight({ id: 2, currency: "US$", price: 899 }),
             new App.Models.Flight({ id: 3, currency: "US$", price: 1099 })
         ];
-        var that = this;
+
         this.reset();
+
+        var collection = this;
         $.each(list, function(key, value) {
-            that.add(value, {silent: true});
+            collection.add(value, { silent: true });
         });
+
         this.trigger("change");
+
         options && options.success && options.success(this, list);
     }
 
@@ -84,17 +89,6 @@ App.Routers.Router = Backbone.Router.extend({
 
 });
 
-App.Views.AppView = Backbone.View.extend({
-
-    el: '.container',
-
-    initialize: function() {
-        this.page = this.$(".page.current")[0];
-        this.menu = this.$(".header-menu")[0];
-    }
-
-});
-
 App.Views.FlightView = Backbone.View.extend({
 
     render: function() {
@@ -119,30 +113,6 @@ App.Views.SearchFormView = Backbone.View.extend({
     }
 
 });
-
-// App.Views.GenericView = Backbone.View.extend({
-
-    // getContext: function() {
-        // return {};
-    // },
-
-    // render: function() {
-        // var context = this.getContext() || {};
-        // _.extend(context, {model: this.model.toJSON()});
-        // this.$el.append(Mustache.render(this.template, context));
-    // }
-
-// })
-
-// App.SearchResultsView = App.Views.GenericView.extend({
-
-    // getContext: function() {
-        // return { name: "sarasa" }
-    // },
-
-    // template: "{{name}}"
-
-// });
 
 App.Views.SearchResultsView = Backbone.View.extend({
 
@@ -246,7 +216,6 @@ $(function() {
 
     window.app = window.app || {};
 
-    app.view       = new App.Views.AppView;
     app.router     = new App.Routers.Router;
     app.searchForm = new App.Views.SearchFormView;
     app.flightList = new App.Collections.FlightList({
