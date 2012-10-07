@@ -152,7 +152,7 @@ input {
 
 .nav-back a {
     text-decoration: none;
-    color: #F17400;
+    /* color: #F17400; */
 }
 
 /* =Filter */
@@ -408,6 +408,10 @@ input {
 
 .button:active {
     background: -webkit-linear-gradient(top, #F17400, #F6B900);
+}
+
+.nav-back .button {
+	width: 160px;
 }
 
 /* =Sorting */
