@@ -194,6 +194,20 @@ input {
     margin-right: 5px;
 }
 
+.form-section dt {
+	text-decoration: none;
+	font-size: 13px;
+    font-weight: bold;
+    color: #666;
+    margin: 10px 0 5px 0;
+}
+
+.form-section dd {
+	text-decoration: none;
+	font-size: 13px;
+    margin: 10px 0 5px 0;
+}
+
 /* =Deals */
 
 .deals {
