@@ -63,7 +63,6 @@ App.Routers.Router = Backbone.Router.extend({
     buy: function(id) {
         this.switchPage("buy");
         app.information.set("flightId", id);
-
         var button = $("#back-purchase");
         button.attr("href", Mustache.render(button.data("href-template"), { flightId: app.information.get("flightId") }));
     },
@@ -85,6 +84,8 @@ App.Routers.Router = Backbone.Router.extend({
         $(".current").removeClass("current");
         $("#page-" + pageName).addClass("current");
         $("a[href=#" + pageName + "]").addClass("current");
+
+        window.scrollTo(0,0);
 
         this.updateTitle();
     },
