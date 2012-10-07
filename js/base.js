@@ -7,7 +7,12 @@ $(function() {
     });
 	
 	$("#buy-form").on("click", "button", function() {
+        
+        $(this).parents("form").
+
         var data = $(this).parents("form").serializeArray();
+
+
 
         _.forEach(data, function(input) {
             $("#confirm-" + input.name).html(input.value);

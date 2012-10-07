@@ -225,6 +225,21 @@ input {
 	overflow: auto;
 }
 
+.form-section .select-label {
+	margin-right: 5px;
+	display: inline;
+}
+
+.form-section select {
+	margin-right: 20px;
+	font-size: 14px;
+}
+
+.form-section input {
+	font-size: 14px;
+	width: 200px;
+}
+
 /* =Deals */
 
 .deals {
