@@ -8,6 +8,11 @@ $(function() {
 	
 	$("#buy-form").on("click", "button", function() {
         var data = $(this).parents("form").serializeArray();
+
+        _.forEach(data, function(input) {
+            $("#confirm-" + input.name).html(input.value);
+        });
+
         app.router.navigate("confirm", { trigger: true });
         return false;
     });
