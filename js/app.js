@@ -62,6 +62,10 @@ App.Routers.Router = Backbone.Router.extend({
 
     buy: function(id) {
         this.switchPage("buy");
+        app.information.set("flightId", id);
+
+        var button = $("#back-purchase");
+        button.attr("href", Mustache.render(button.data("href-template"), { flightId: app.information.get("flightId") }));
     },
 	
 	confirm: function(id) {
@@ -164,6 +168,20 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
 });
 
+App.Info = function() {
+
+    this.dictionary = {};
+
+    this.get = function(key) {
+        return this.dictionary[key];
+    };
+
+    this.set = function(key, value) {
+        this.dictionary[key] = value;
+    };
+
+};
+
 App.init = function() {
 
     window.app = {};
@@ -179,6 +197,8 @@ App.init = function() {
         template: Mustache.compile($("#template-flight").html()),
         collection: app.flightList
     });
+
+    app.information = new App.Info;
 
     Backbone.history.start();
 
