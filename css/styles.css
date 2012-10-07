@@ -150,9 +150,9 @@ input {
     padding: 20px;
 }
 
-.nav-back a {
-    text-decoration: none;
-    /* color: #F17400; */
+.nav {
+    overflow: auto;
+    margin-bottom: 20px;
 }
 
 /* =Filter */
@@ -400,6 +400,10 @@ input {
     font-style: normal;
 }
 
+.search-result-price .button {
+    float: none;
+}
+
 .submit {
     clear: both;
     float: right;
@@ -413,7 +417,7 @@ input {
     text-shadow: 0 1px 0 #F1742A;
     box-shadow: 0 1px 1px #CCC;
     display: block;
-    float: center;
+    float: left;
     font-size: 14px;
     font-weight: bold;
     text-decoration: none;
@@ -422,10 +426,6 @@ input {
 
 .button:active {
     background: -webkit-linear-gradient(top, #F17400, #F6B900);
-}
-
-.nav-back .button {
-	width: 160px;
 }
 
 /* =Sorting */
