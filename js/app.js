@@ -44,6 +44,7 @@ App.Routers.Router = Backbone.Router.extend({
         "search"    : "search",
         "buy/:id"   : "buy",
 		"confirm"   : "confirm",
+        "thanks"    : "thanks",
         "*actions"  : "defaultRoute"
     },
 
@@ -66,6 +67,10 @@ App.Routers.Router = Backbone.Router.extend({
 	confirm: function(id) {
 		this.switchPage("confirm");
 	},
+
+    thanks: function(id){
+        this.switchPage("thanks");
+    },
 
     defaultRoute: function(actions) {
         alert("Invalid page");

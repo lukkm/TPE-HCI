@@ -16,7 +16,7 @@ $(function() {
         app.router.navigate("confirm", { trigger: true });
         return false;
     });
-
+    
     Widgets.init();
 
     App.init();

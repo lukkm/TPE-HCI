@@ -154,6 +154,7 @@ input {
 .nav {
     overflow: auto;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 /* =Filter */
@@ -211,6 +212,17 @@ input {
 	font-size: 13px;
 	float: left;
 	margin: 0px 0 5px 15px;
+}
+
+.form-section h1 {
+	text-align: center;
+	color: #555;
+}
+
+.nav-home {
+	margin: 30px auto 0;
+	width: 130px;
+	overflow: auto;
 }
 
 /* =Deals */
