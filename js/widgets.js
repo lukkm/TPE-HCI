@@ -36,7 +36,7 @@ var Widgets = function() {
         var sourceMap = {
             places: function(request, callback) {
                 FlightsAPI.getAirportsByName(request.term, function(data) {
-                    var list = _.pluck(data.airports, "description");
+                    var list = _.first(_.pluck(data.airports, "description"), 10);
                     callback(list);
                 });
 
@@ -57,11 +57,20 @@ var Widgets = function() {
 
     };
 
+    var initButtonSets = function() {
+
+        $("[data-widget=buttonset]").each(function() {
+            $(this).buttonset();
+        });
+        
+    };
+
     var initWidgets = function() {
 
         initSliders();
         initDatepickers();
         initAutocompletes();
+        initButtonSets();
 
     };
 

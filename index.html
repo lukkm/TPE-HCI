@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <title>travel.ly</title>
+        <meta charset="utf-8" />
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.24.custom.css" />
@@ -20,13 +21,13 @@
             <div class="search-result">
                 <div class="search-result-container">
                     <div class="search-result-title"><strong>Depart</strong> <em>May</em> <em>21</em> <em>2012</em></div>
-                    <div class="search-result-info">Buenos Aires (EZE) 12:00</div>
+                    <div class="search-result-info">{{ fromCityName }} 12:00</div>
                     <div class="search-result-icon"><img src="img/green-plane.png"></div>
-                    <div class="search-result-info">Miami (MIA) 22:00</div>
+                    <div class="search-result-info">{{ toCityName }} 22:00</div>
                     <div class="search-result-title"><strong>Return</strong> <em>May</em> <em>29</em> <em>2012</em></div>
-                    <div class="search-result-info">Miami (MIA) 5:45</div>
+                    <div class="search-result-info">{{ toCityName }} 5:45</div>
                     <div class="search-result-icon"><img src="img/blue-plane.png"></div>
-                    <div class="search-result-info">Buenos Aires (EZE) 15:45</div>
+                    <div class="search-result-info">{{ fromCityName }} 15:45</div>
                 </div>
                 <div class="search-result-price">
                     <div class="price-text">
@@ -55,41 +56,96 @@
                 </div>
 
                 <div class="page" id="page-home">
-                    <div class="search-form" id="search-form">
-                        <h2>Search flights</h2>
-                        <form action=".">
-                            <div class="search-input-container">
-                                <label for="from">From</label>
-                                <input type="text" name="from" id="from" data-widget="autocomplete" data-source="places" />
-                            </div>
-                            <div class="search-input-container">
-                                <label for="to">To</label>
-                                <input type="text" name="to" id="to" data-widget="autocomplete" data-source="places" />
-                            </div>
-                            <div class="column-2">
+                    <div class="content-primary">
+                        <div class="search-form" id="search-form">
+                            <form action=".">
+                                <h2>Search flights</h2>
+                                <span id="flight-type" data-widget="buttonset">
+                                    <input type="radio" id="one-way" name="repeat" /><label for="one-way">One Way</label>
+                                    <input type="radio" id="round-trip" name="repeat" checked="checked" /><label for="round-trip">Round Trip</label>
+                                </span>
+                                <div class="clearfix"></div>
                                 <div class="search-input-container">
-                                    <label for="departure-date">Depart</label>
-                                    <input type="text" name="departure-date" data-widget="datepicker" />
+                                    <label for="from">From</label>
+                                    <input type="text" name="from" id="from" data-widget="autocomplete" data-source="places" />
                                 </div>
                                 <div class="search-input-container">
-                                    <label for="return-date">Return</label>
-                                    <input type="text" name="return-date" data-widget="datepicker" />
+                                    <label for="to">To</label>
+                                    <input type="text" name="to" id="to" data-widget="autocomplete" data-source="places" />
+                                </div>
+                                <div class="column-2">
+                                    <div class="search-input-container">
+                                        <label for="departure-date">Depart</label>
+                                        <input type="text" name="departure-date" data-widget="datepicker" />
+                                    </div>
+                                    <div class="search-input-container">
+                                        <label for="return-date">Return</label>
+                                        <input type="text" name="return-date" id="return-date" data-widget="datepicker" />
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="search-input-container">
+                                    <label for="number-adults">Number of adults</label>
+                                    <select name="number-adults" id="number-adults">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                </div>
+                                <div class="search-input-container">
+                                    <label for="number-kids">Number of kids</label>
+                                    <select name="number-kids" id="number-kids">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                </div>
+                                <div class="search-input-container">
+                                    <label for="number-infants">Number of infants</label>
+                                    <select name="number-infants" id="number-infants">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                    </select>
+                                </div>
+                                <div class="submit"> 
+                                    <button type="submit" name="search-send" class="button">Search</button>
+                                </div>
+                            </form>
+                        </div>
+    
+                        <div class="deals">
+                            <div class="deal-title">
+                                <div class="deal-title-container">
+                                </div>
+                                <div class="deal-text">
+                                    <h2>Tickets to Panama</h2>
+                                    <p>From US$ 2,400</p>
                                 </div>
                             </div>
-                            <div class="submit"> 
-                                <button type="submit" name="search-send" class="button">Search</button>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
 
-                    <div class="deals">
-                        <div class="deal-title">
-                            <div class="deal-title-container">
-                            </div>
-                            <div class="deal-text">
-                                <h2>Tickets to Panama</h2>
-                                <p>From US$ 2,400</p>
-                            </div>
+                        <div class="newsletter-subscribe">
+                             <p>Subscribe to our newsletter:</p>
+                             <form action="." method="post">
+                                 <input type="text" name="email" value="" />
+                                 <button class="button button-small">Subscribe</button>
+                             </form>
                         </div>
                     </div>
 
