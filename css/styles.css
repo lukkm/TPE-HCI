@@ -39,22 +39,29 @@ p {
     padding-bottom: 40px;
 }
 
+/* =Newsletter */
+
 .newsletter-subscribe {
     border: 1px solid #BBB;
     margin-top: 15px;
     width: 525px;
     float: left;
     font-size: 14px;
-    padding: 20px;
+    padding: 20px 20px 11px 20px;
 }
 
 .newsletter-subscribe p {
-    margin: 0;
+    margin-top: 5px;
     float: left;
 }
 
 .newsletter-subscribe input {
     margin-left: 10px;
+    width: 220px;
+}
+
+.newsletter-subscribe button {
+	margin-left: 15px;
 }
 
 /* =Header */
@@ -143,6 +150,7 @@ input[data-widget=datepicker] {
 
 .search-input-container {
     margin-bottom: 10px;
+    display: inline-block;
 }
 
 .search-form label {
@@ -150,6 +158,10 @@ input[data-widget=datepicker] {
 	font-weight: bold;
 	color: #999;
     margin: 3px 0;
+}
+
+.search-form button {
+	margin-top: -5px;
 }
 
 .search-form label[for|=number] {
@@ -192,6 +204,11 @@ input[data-widget=datepicker] {
     font-weight: bold;
     color: #666;
     margin: 10px 0 5px 0;
+}
+
+.form-section h4 {
+	clear: both;
+	margin: 10px 0 0 0;
 }
 
 .form-terms {

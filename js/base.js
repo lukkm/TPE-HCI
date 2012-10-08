@@ -8,6 +8,10 @@ $(function() {
 	
 	$("#buy-form").on("click", "button", function() {
 
+        var flight = app.flightList.get(app.information.get("flightId"));
+
+        /* $("#confirm-flight-from-airport").html(flight.parameters.fromAirportName);*/
+
         var data = $(this).parents("form").serializeArray();
 
         _.forEach(data, function(input) {
