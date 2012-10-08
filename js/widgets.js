@@ -57,11 +57,49 @@ var Widgets = function() {
 
     };
 
+    var initSelectDatepickers = function () {
+
+        $("input[data-widget=datepicker-select]").each(function() {
+            
+            var $el = $(this);
+            
+            var content = '<label for="birth-day" class="select-label">Day</label> <select name="birth-day">';
+            for (var i = 1; i <= 31; i++) { 
+                content += '<option value=' + i + '>' + i + '</option>'; 
+            }; 
+            content += '</select>';
+
+            content += '<label for="birth-month" class="select-label">Month</label> <select name="birth-month">';
+            for (var i = 1; i <= 12; i++) { 
+                content += '<option value=' + i + '>' + i + '</option>'; 
+            }; 
+            content += '</select>';
+
+            content += '<label for="birth-year" class="select-label">Year</label> <select name="birth-year">';
+            for (var i = new Date().getFullYear(); i >= 1900; i--) { 
+                content += '<option value=' + i + '>' + i + '</option>'; 
+            }; 
+            content += '</select>';
+
+            $el.after(content).hide();
+
+            $("select[name|=birth]").each(function(select) {
+                $(this).change(function() {
+                    var inputContent =  $("select[name=birth-day]").val() + "/" + $("select[name=birth-month]").val() + "/" + $("select[name=birth-year]").val();
+                    $("input[name=birth-date]").val(inputContent);
+                });
+            }).first().trigger("change");
+
+
+        });
+    }
+
     var initWidgets = function() {
 
         initSliders();
         initDatepickers();
         initAutocompletes();
+        initSelectDatepickers();
 
     };
 
