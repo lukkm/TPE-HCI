@@ -1,237 +1,236 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>travel.ly</title>
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/styles.css" />
-        <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.24.custom.css" />
-        <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
-        <script type="text/javascript" src="js/libs/jquery.js"></script>
-        <script type="text/javascript" src="js/libs/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/libs/jquery.ui.datepicker-es.js"></script>
-        <script type="text/javascript" src="js/libs/underscore.js"></script>
-        <script type="text/javascript" src="js/libs/backbone.js"></script>
-        <script type="text/javascript" src="js/libs/mustache.js"></script>
-        <script type="text/javascript" src="js/api.js"></script>
-        <script type="text/javascript" src="js/widgets.js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
-        <script type="text/javascript" src="js/base.js"></script>
-        <script type="text/template" id="template-flight">
-            <div class="search-result">
-                <div class="search-result-container">
-                    <div class="search-result-title"><strong>Depart</strong> <em>May</em> <em>21</em> <em>2012</em></div>
-                    <div class="search-result-info">Buenos Aires (EZE) 12:00</div>
-                    <div class="search-result-icon"><img src="img/green-plane.png"></div>
-                    <div class="search-result-info">Miami (MIA) 22:00</div>
-                    <div class="search-result-title"><strong>Return</strong> <em>May</em> <em>29</em> <em>2012</em></div>
-                    <div class="search-result-info">Miami (MIA) 5:45</div>
-                    <div class="search-result-icon"><img src="img/blue-plane.png"></div>
-                    <div class="search-result-info">Buenos Aires (EZE) 15:45</div>
-                </div>
-                <div class="search-result-price">
-                    <div class="price-text">
-                        <em>{{ currency }} {{ price }}</em>
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>travel.ly</title>
+            <link rel="stylesheet" href="css/normalize.css">
+            <link rel="stylesheet" href="css/styles.css" />
+            <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.24.custom.css" />
+            <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+            <script type="text/javascript" src="js/libs/jquery.js"></script>
+            <script type="text/javascript" src="js/libs/jquery-ui.js"></script>
+            <script type="text/javascript" src="js/libs/jquery.ui.datepicker-es.js"></script>
+            <script type="text/javascript" src="js/libs/jquery.qtip.js"></script>
+            <script type="text/javascript" src="js/libs/underscore.js"></script>
+            <script type="text/javascript" src="js/libs/backbone.js"></script>
+            <script type="text/javascript" src="js/libs/mustache.js"></script>
+            <script type="text/javascript" src="js/api.js"></script>
+            <script type="text/javascript" src="js/widgets.js"></script>
+            <script type="text/javascript" src="js/app.js"></script>
+            <script type="text/javascript" src="js/base.js"></script>
+            <script type="text/template" id="template-flight">
+                <div class="search-result">
+                    <div class="search-result-container">
+                        <div class="search-result-title"><strong>Depart</strong> <em>May</em> <em>21</em> <em>2012</em></div>
+                        <div class="search-result-info">Buenos Aires (EZE) 12:00</div>
+                        <div class="search-result-icon"><img src="img/green-plane.png"></div>
+                        <div class="search-result-info">Miami (MIA) 22:00</div>
+                        <div class="search-result-title"><strong>Return</strong> <em>May</em> <em>29</em> <em>2012</em></div>
+                        <div class="search-result-info">Miami (MIA) 5:45</div>
+                        <div class="search-result-icon"><img src="img/blue-plane.png"></div>
+                        <div class="search-result-info">Buenos Aires (EZE) 15:45</div>
                     </div>
-                    <a class="button" href="#buy/{{ id }}">Select</a>
-                </div>
-            </div>
-        </script>
-    </head>
-    <body data-title-base="Travel.ly" data-title-separator=" | ">
-        <div class="container"> 
-
-            <div class="wrap">
-
-                <div class="header">
-                    <div class="header-title">
-                        <h1><a href="#">travel.ly</a></h1>
-                    </div>
-                    <div class="header-menu">
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#about">About</a></li>
-                        </ul>
+                    <div class="search-result-price">
+                        <div class="price-text">
+                            <em>{{ currency }} {{ price }}</em>
+                        </div>
+                        <a class="button" href="#buy/{{ id }}">Select</a>
                     </div>
                 </div>
+            </script>
+        </head>
+        <body data-title-base="Travel.ly" data-title-separator=" | ">
+            <div class="container"> 
 
-                <div class="page" id="page-home">
-                    <div class="search-form" id="search-form">
-                        <h2>Search flights</h2>
-                        <form action=".">
-                            <div class="search-input-container">
-                                <label for="from">From</label>
-                                <input type="text" name="from" id="from" data-widget="autocomplete" data-source="places" />
-                            </div>
-                            <div class="search-input-container">
-                                <label for="to">To</label>
-                                <input type="text" name="to" id="to" data-widget="autocomplete" data-source="places" />
-                            </div>
-                            <div class="column-2">
-                                <div class="search-input-container">
-                                    <label for="departure-date">Depart</label>
-                                    <input type="text" name="departure-date" data-widget="datepicker" />
-                                </div>
-                                <div class="search-input-container">
-                                    <label for="return-date">Return</label>
-                                    <input type="text" name="return-date" data-widget="datepicker" />
-                                </div>
-                            </div>
-                            <div class="submit"> 
-                                <button type="submit" name="search-send" class="button">Search</button>
-                            </div>
-                        </form>
-                    </div>
+                <div class="wrap">
 
-                    <div class="deals">
-                        <div class="deal-title">
-                            <div class="deal-title-container">
-                            </div>
-                            <div class="deal-text">
-                                <h2>Tickets to Panama</h2>
-                                <p>From US$ 2,400</p>
-                            </div>
+                    <div class="header">
+                        <div class="header-title">
+                            <h1><a href="#">travel.ly</a></h1>
                         </div>
-                    </div>
-
-                    <div class="secondary-deals">
-                        <div class="deal" id="deal1">
-                            Deal 1
-                        </div>
-                        <div class="deal" id="deal2"> 
-                            Deal 2
-                        </div>
-                        <div class="deal" id="deal3">
-                            Deal 3
-                        </div>
-                    </div>
-                </div>
-
-                <div class="page" id="page-search" data-title="Search Results">
-                    <div class="search-filters">
-                        <h2>Filter results</h2>
-                        <form action="." class="filter-form">
-                            <div class="filter">
-                                <label for="from">From</label> <input type="text" name="origin" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
-                            </div>
-                            <div class="filter">
-                                <label for="to">To</label> <input type="text" name="destiny" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
-                            </div>
-                            <div class="filter">
-                                <label for="departure-date">Depart</label><input type="text" name="departure-date" id="filter-departure-date" class="filter-form-input-field" data-widget="datepicker" />
-                            </div>
-                            <div class="filter">
-                                <label for="return-date">Return</label><input type="text" name="return-date" id="filter-return-date" class="filter-form-input-field" data-widget="datepicker" />
-                            </div>
-                            <div class="filter">
-                                <label for="filter-airline">Airline</label>
-                            </div>
-                            <div class="filter">
-                                <div class="check">
-                                    <input type="checkbox" name="filter-airline" value="LAN" />LAN
-                                </div>
-                                <div class="check">
-                                    <input type="checkbox" name="filter-airline" value="Aerolineas Argentinas" />Aerolineas Argentinas
-                                </div>
-                                <div class="check">
-                                    <input type="checkbox" name="filter-airline" value="TAM" />TAM
-                                </div>
-                            </div>
-                            <div class="filter-title">Price</div>
-                            <div class="search-filter">
-                                <!-- <label for="filter-price">Precio</label> -->
-                                <input type="text" name="filter-price" id="filter-price" />
-                                <div id="slider-range-price" data-widget="slider" data-target="filter-price"></div>
-                            </div>
-                            <div class="filter-option filter-title">
-                                Show only deals
-                                <input type="checkbox" class="filter-checkbox" name="show-deals"/>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="search-wrap">
-                        <div class="search-results-header">
-                            <div class="count">6 of 567 flights</div>
-                            <div class="sorting">
-                                <span>Sort by:</span>
-                                <select>
-                                    <option value="">Duration</option>
-                                    <option value="">Airline</option>
-                                    <option value="">Price</option>
-                                    <option value="">Stops</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="search-results" id="search-results"></div>
-                        <div class="pagination">
+                        <div class="header-menu">
                             <ul>
-                                <li class="current-page">
-                                    <a href="#search/page:1">1</a>
-                                </li>
-                                <li>
-                                    <a href="#search/page:2">2</a>
-                                </li>
-                                <li>
-                                    <a href="#search/page:3">3</a>
-                                </li>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#about">About</a></li>
                             </ul>
                         </div>
                     </div>
-                </div>
 
-                <div class="page" id="page-about" data-title="About">
-                    <h1>About travel.ly</h1>
-                    <p>travel.ly is the leading site in online flight sales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
-                    <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
-                    <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
-                    <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
-                </div>
+                    <div class="page" id="page-home">
+                        <div class="search-form" id="search-form">
+                            <h2>Search flights</h2>
+                            <form action=".">
+                                <div class="search-input-container">
+                                    <label for="from">From</label>
+                                    <input type="text" name="from" id="from" data-validate="required" data-widget="autocomplete" data-source="places" />
+                                </div>
+                                <div class="search-input-container">
+                                    <label for="to">To</label>
+                                    <input type="text" name="to" id="to" data-validate="required" data-widget="autocomplete" data-source="places" />
+                                </div>
+                                <div class="column-2">
+                                    <div class="search-input-container">
+                                        <label for="departure-date">Depart</label>
+                                        <input type="text" name="departure-date" data-widget="datepicker" />
+                                    </div>
+                                    <div class="search-input-container">
+                                        <label for="return-date">Return</label>
+                                        <input type="text" name="return-date" data-widget="datepicker" />
+                                    </div>
+                                </div>
+                                <div class="submit"> 
+                                    <button type="submit" name="search-send" class="button">Search</button>
+                                </div>
+                            </form>
+                        </div>
 
-                <div class="page" id="page-buy" data-title="Confirm Purchase">
-                    <div class="nav">
-                        <a href="#search" class="button">&larr; Choose other flight</a>
+                        <div class="deals">
+                            <div class="deal-title">
+                                <div class="deal-title-container">
+                                </div>
+                                <div class="deal-text">
+                                    <h2>Tickets to Panama</h2>
+                                    <p>From US$ 2,400</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="secondary-deals">
+                            <div class="deal" id="deal1">
+                                Deal 1
+                            </div>
+                            <div class="deal" id="deal2"> 
+                                Deal 2
+                            </div>
+                            <div class="deal" id="deal3">
+                                Deal 3
+                            </div>
+                        </div>
                     </div>
-                    <h1>Confirm purchase</h1>
-                    <form action="." method="post" id="buy-form">
 
-                        <h3>Passengers</h3>
-                        <div class="form-section">
-                            <label for="first-name">First Name</label>
-                            <input type="text" name="first-name" value="" />
-                            <label for="last-name">Last Name</label>
-                            <input type="text" name="last-name" value="" />
-                            <label for="birth-date">Birth Date</label>
-                            <input type="text" name="birth-date" value="" data-widget="birth-date-picker" />
+                    <div class="page" id="page-search" data-title="Search Results">
+                        <div class="search-filters">
+                            <h2>Filter results</h2>
+                            <form action="." class="filter-form">
+                                <div class="filter">
+                                    <label for="from">From</label> <input type="text" name="origin" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
+                                </div>
+                                <div class="filter">
+                                    <label for="to">To</label> <input type="text" name="destiny" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
+                                </div>
+                                <div class="filter">
+                                    <label for="departure-date">Depart</label><input type="text" name="departure-date" id="filter-departure-date" class="filter-form-input-field" data-widget="datepicker" />
+                                </div>
+                                <div class="filter">
+                                    <label for="return-date">Return</label><input type="text" name="return-date" id="filter-return-date" class="filter-form-input-field" data-widget="datepicker" />
+                                </div>
+                                <div class="filter">
+                                    <label for="filter-airline">Airline</label>
+                                </div>
+                                <div class="filter">
+                                    <div class="check">
+                                        <input type="checkbox" name="filter-airline" value="LAN" />LAN
+                                    </div>
+                                    <div class="check">
+                                        <input type="checkbox" name="filter-airline" value="Aerolineas Argentinas" />Aerolineas Argentinas
+                                    </div>
+                                    <div class="check">
+                                        <input type="checkbox" name="filter-airline" value="TAM" />TAM
+                                    </div>
+                                </div>
+                                <div class="filter-title">Price</div>
+                                <div class="search-filter">
+                                    <!-- <label for="filter-price">Precio</label> -->
+                                    <input type="text" name="filter-price" id="filter-price" />
+                                    <div id="slider-range-price" data-widget="slider" data-target="filter-price"></div>
+                                </div>
+                                <div class="filter-option filter-title">
+                                    Show only deals
+                                    <input type="checkbox" class="filter-checkbox" name="show-deals"/>
+                                </div>
+                            </form>
                         </div>
-
-                        <h3>Billing</h3>
-                        <div class="form-section">
-                            <label for="card">Card</label>
-                            <input type="text" name="card" value="" />
-                            <label for="card-number">Card Number</label>
-                            <input type="text" name="card-number" value="" />
-                            <label for="card-expire-date">Expire Date</label>
-                            <input type="text" name="card-expire-date" value="" />
-                            <label for="card-security-code">Security Code</label>
-                            <input type="text" name="card-security-code" value="" />
-                            <label for="card-holder">Holder</label>
-                            <input type="text" name="card-holder" value="" />
-                            <label for="card-document-number">Document Number</label>
-                            <input type="text" name="card-document-number" value="" />
+                        <div class="search-wrap">
+                            <div class="search-results-header">
+                                <div class="count">6 of 567 flights</div>
+                                <div class="sorting">
+                                    <span>Sort by:</span>
+                                    <select>
+                                        <option value="">Duration</option>
+                                        <option value="">Airline</option>
+                                        <option value="">Price</option>
+                                        <option value="">Stops</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="search-results" id="search-results"></div>
+                            <div class="pagination">
+                                <ul>
+                                    <li class="current-page">
+                                        <a href="#search/page:1">1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#search/page:2">2</a>
+                                    </li>
+                                    <li>
+                                        <a href="#search/page:3">3</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
+                    </div>
 
-                        <h3>Contact Information</h3>
-                        <div class="form-section">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" value="" />
-                            <label for="confirm-email">Confirm Email</label>
-                            <input type="text" name="confirm-email" value="" />
-                            <label for="phone-number">Phone number</label>
-                            <input type="text" name="phone-number" value="" />
+                    <div class="page" id="page-about" data-title="About">
+                        <h1>About travel.ly</h1>
+                        <p>travel.ly is the leading site in online flight sales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
+                        <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
+                        <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
+                        <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
+                    </div>
+
+                    <div class="page" id="page-buy" data-title="Confirm Purchase">
+                        <div class="nav">
+                            <a href="#search" class="button">&larr; Choose other flight</a>
                         </div>
+                        <h1>Confirm purchase</h1>
+                        <form action="." method="post" id="buy-form">
 
-                        <div class="form-terms">
-                            <input type="checkbox" name="terms" id="terms" value="1" />
-                            <label for="terms">I have read and accept the terms and conditions.</label>
+                            <h3>Passengers</h3>
+                            <div class="form-section">
+                                <label for="first-name">First Name</label>
+                                <input type="text" data-validate="required" name="first-name" value="" />
+                                <label for="last-name">Last Name</label>
+                                <input type="text" data-validate="required" name="last-name" value="" />
+                                <label for="birth-date">Birth Date</label>
+                                <input type="text" name="birth-date" value="" data-widget="birth-date-picker" />
+                            </div>
+
+                            <h3>Billing</h3>
+                            <div class="form-section">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" data-validate="card-number" name="card-number" value="" />
+                                <label for="card-expire-date">Expire Date</label>
+                                <input type="text" data-validate="card-expire-date" name="card-expire-date" value="" />
+                                <label for="card-security-code">Security Code</label>
+                                <input type="text" data-validate="required" name="card-security-code" value="" />
+                                <label for="card-holder">Holder</label>
+                                <input type="text" data-validate="required" name="card-holder" value="" />
+                                <label for="card-document-number">Document Number</label>
+                                <input type="text" data-validate="required" name="card-document-number" value="" />
+                            </div>
+
+                            <h3>Contact Information</h3>
+                            <div class="form-section">
+                                <label for="email">Email</label>
+                                <input type="text" name="email" value="" />
+                                <label for="confirm-email">Confirm Email</label>
+                                <input type="text" name="confirm-email" value="" />
+                                <label for="phone-number">Phone number</label>
+                                <input type="text" name="phone-number" value="" />
+                            </div>
+
+                            <div class="form-terms">
+                                <input type="checkbox" name="terms" id="terms" value="1" />
+                                <label for="terms">I have read and accept the terms and conditions.</label>
                         </div>
 
                         <button type="submit" class="button">Buy</button>
