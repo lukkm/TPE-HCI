@@ -14,18 +14,47 @@ App.Models.Flight = Backbone.Model.extend();
 
 App.Collections.FlightList = Backbone.Collection.extend({
 
+    initialize: function() {
+        this.parameters = {};
+    },
+
+    setParameters: function(parameters) {
+        var collection = this;
+        _.each(parameters, function(input) {
+            collection.parameters[input.name] = input.value;
+        });
+
+        var from = this.parameters.from.split(", ");
+        this.parameters.fromAirportName = from[0];
+        this.parameters.fromCityName = from[1];
+        this.parameters.fromCountryName = from[2];
+
+        var to = this.parameters.to.split(", ");
+        this.parameters.toAirportName = to[0];
+        this.parameters.toCityName = to[1];
+        this.parameters.toCountryName = to[2];
+
+        return this;
+    },
+
     fetch: function(options) {
 
-        var list = [
-            new App.Models.Flight({ id: 1, currency: "US$", price: 599 }),
-            new App.Models.Flight({ id: 2, currency: "US$", price: 899 }),
-            new App.Models.Flight({ id: 3, currency: "US$", price: 1099 })
-        ];
+        var list = [];
+        var prices = [599, 899, 1099, 2599];
+        for (i = 1; i <= 10; i++) {
+            var model = new App.Models.Flight({
+                id: i,
+                currency: "US$",
+                price: prices[Math.floor(Math.random() * prices.length)]
+            });
+            _.extend(model.attributes, this.parameters);
+            list.push(model);
+        }
 
         this.reset();
 
         var collection = this;
-        $.each(list, function(key, value) {
+        _.each(list, function(value) {
             collection.add(value, { silent: true });
         });
 
@@ -44,6 +73,7 @@ App.Routers.Router = Backbone.Router.extend({
         "search"    : "search",
         "buy/:id"   : "buy",
 		"confirm"   : "confirm",
+        "thanks"    : "thanks",
         "*actions"  : "defaultRoute"
     },
 
@@ -61,11 +91,18 @@ App.Routers.Router = Backbone.Router.extend({
 
     buy: function(id) {
         this.switchPage("buy");
+        app.information.set("flightId", id);
+        var button = $("#back-purchase");
+        button.attr("href", Mustache.render(button.data("href-template"), { flightId: app.information.get("flightId") }));
     },
 	
 	confirm: function(id) {
 		this.switchPage("confirm");
 	},
+
+    thanks: function(id){
+        this.switchPage("thanks");
+    },
 
     defaultRoute: function(actions) {
         alert("Invalid page");
@@ -76,6 +113,8 @@ App.Routers.Router = Backbone.Router.extend({
         $(".current").removeClass("current");
         $("#page-" + pageName).addClass("current");
         $("a[href=#" + pageName + "]").addClass("current");
+
+        window.scrollTo(0,0);
 
         this.updateTitle();
     },
@@ -113,6 +152,8 @@ App.Views.SearchFormView = Backbone.View.extend({
     },
 
     submitForm: function() {
+        var parameters = this.$el.find("form").serializeArray();
+        app.flightList.setParameters(parameters).fetch();
         app.router.navigate("search", { trigger: true });
         return false;
     }
@@ -120,8 +161,6 @@ App.Views.SearchFormView = Backbone.View.extend({
 });
 
 App.Views.BuyFormView = Backbone.View.extend({
-	
-	el: $("#buy-form"),
 	
 	events: {
 		"click button": "submitForm"
@@ -159,13 +198,31 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
 });
 
+App.Info = function() {
+
+    this.dictionary = {};
+
+    this.get = function(key) {
+        return this.dictionary[key];
+    };
+
+    this.set = function(key, value) {
+        this.dictionary[key] = value;
+    };
+
+};
+
 App.init = function() {
 
     window.app = {};
 
     app.router     = new App.Routers.Router;
-    app.searchForm = new App.Views.SearchFormView;
-	app.buyForm    = new App.Views.BuyFormView;
+    app.searchForm = new App.Views.SearchFormView({
+        el: $(".search-form")
+    });
+	app.buyForm    = new App.Views.BuyFormView({
+        el: $(".buy-form")
+    });
     app.flightList = new App.Collections.FlightList({
         model: App.Models.Flight
     });
@@ -175,8 +232,8 @@ App.init = function() {
         collection: app.flightList
     });
 
-    Backbone.history.start();
+    app.information = new App.Info;
 
-    app.flightList.fetch();
+    Backbone.history.start();
     
 };

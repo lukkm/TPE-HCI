@@ -7,6 +7,11 @@ $(function() {
     });
 
 	$("#buy-form").on("click", "button", function() {
+
+        var flight = app.flightList.get(app.information.get("flightId"));
+
+        /* $("#confirm-flight-from-airport").html(flight.parameters.fromAirportName);*/
+
         var data = $(this).parents("form").serializeArray();
 
         _.forEach(data, function(input) {
@@ -67,5 +72,17 @@ $(function() {
     Widgets.init();
 
     App.init();
+
+    $("#flight-type").on("click", "input", function(e) {
+
+        var returnInput = $("#return-date").parent("div");
+
+        if (this.id === "round-trip") {
+            returnInput.show();
+        } else if (this.id === "one-way") {
+            returnInput.hide();
+        }
+
+    });
 
 });

@@ -29,10 +29,39 @@ p {
     text-shadow: 0 1px 0 white;
 }
 
+.clearfix {
+    clear: both;
+}
+
 .container {
     overflow: auto;
     background: white url("../img/background.png") repeat-x;
     padding-bottom: 40px;
+}
+
+/* =Newsletter */
+
+.newsletter-subscribe {
+    border: 1px solid #BBB;
+    margin-top: 15px;
+    width: 525px;
+    float: left;
+    font-size: 14px;
+    padding: 20px 20px 11px 20px;
+}
+
+.newsletter-subscribe p {
+    margin-top: 5px;
+    float: left;
+}
+
+.newsletter-subscribe input {
+    margin-left: 10px;
+    width: 220px;
+}
+
+.newsletter-subscribe button {
+	margin-left: 15px;
 }
 
 /* =Header */
@@ -91,14 +120,28 @@ input {
     padding: 3px;
 }
 
+input:focus {
+    outline: none;
+    border-color: #999;
+}
+
+input[data-widget=datepicker] {
+    background: url("../img/icon-calendar.png") 140px 4px no-repeat;
+}
+
 .search-form {
     background-color: white;
     width: 335px;
     border: 1px #F5A300 solid;
-    height: 242px;
+    height: 330px;
     margin: 0 10px 10px 0;
     padding: 20px;
     float: left;
+}
+
+.search-form h2 {
+    float: left;
+    width: 168px;
 }
 
 .search-form input { 
@@ -107,15 +150,31 @@ input {
 
 .search-input-container {
     margin-bottom: 10px;
+    display: inline-block;
 }
 
 .search-form label {
-    width: 70px;
-    display: block;
 	font-size: 13px;
 	font-weight: bold;
 	color: #999;
     margin: 3px 0;
+}
+
+.search-form button {
+	margin-top: -5px;
+}
+
+.search-form label[for|=number] {
+    width: 175px;
+    float: left;
+    display: block;
+}
+
+#flight-type {
+    float: left;
+    position: relative;
+    top: -5px;
+    left: 10px;
 }
 
 .column-2 div:first-child {
@@ -147,6 +206,11 @@ input {
     margin: 10px 0 5px 0;
 }
 
+.form-section h4 {
+	clear: both;
+	margin: 10px 0 0 0;
+}
+
 .form-terms {
     padding: 20px;
 }
@@ -154,6 +218,7 @@ input {
 .nav {
     overflow: auto;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 /* =Filter */
@@ -213,14 +278,38 @@ input {
 	margin: 0px 0 5px 15px;
 }
 
+.form-section h1 {
+	text-align: center;
+	color: #555;
+}
+
+.nav-home {
+	margin: 30px auto 0;
+	width: 130px;
+	overflow: auto;
+}
+
+.form-section .select-label {
+	margin-right: 5px;
+	display: inline;
+}
+
+.form-section select {
+	margin-right: 20px;
+	font-size: 14px;
+}
+
+.form-section input {
+	font-size: 14px;
+	width: 200px;
+}
+
 /* =Deals */
 
 .deals {
-    margin-left: 393px;
+    float: left;
     height: 284px;
     width: 567px;
-    position:absolute;
-    background-color: white;
     background-image: url('../img/panama.jpg');
 }
 
@@ -405,10 +494,6 @@ input {
     font-style: normal;
 }
 
-.search-result-price .button {
-    float: none;
-}
-
 .submit {
     clear: both;
     float: right;
@@ -420,9 +505,7 @@ input {
     border: 1px solid #F17400;
     color: white;
     text-shadow: 0 1px 0 #F1742A;
-    box-shadow: 0 1px 1px #CCC;
-    display: block;
-    float: left;
+    display: inline-block;
     font-size: 14px;
     font-weight: bold;
     text-decoration: none;
@@ -431,6 +514,11 @@ input {
 
 .button:active {
     background: -webkit-linear-gradient(top, #F17400, #F6B900);
+}
+
+.button-small {
+    padding: 5px 10px;
+    font-size: 13px;
 }
 
 /* =Sorting */
