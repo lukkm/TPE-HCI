@@ -35,7 +35,7 @@ var Widgets = function() {
         // map strings to autocomplete datasources
         var sourceMap = {
             places: function(request, callback) {
-                FlightsAPI.getAirportsByName(request.term, function(data) {
+                API.Geo.getAirportsByName(request.term, function(data) {
                     var list = _.first(_.pluck(data.airports, "description"), 10);
                     callback(list);
                 });
