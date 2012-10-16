@@ -3,15 +3,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>travel.ly</title>
-        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/normalize.css"/>
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.24.custom.css" />
+        <link rel="stylesheet" type="text/css" src="js/libs/fancybox/jquery.fancybox.css" media="screen"/>
+        <link rel="stylesheet" href="js/libs/fancybox/helpers/jquery.fancybox-buttons.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="js/libs/fancybox/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
         <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
         <script type="text/javascript" src="js/libs/jquery.js"></script>
         <script type="text/javascript" src="js/libs/jquery-ui.js"></script>
         <script type="text/javascript" src="js/libs/jquery.ui.datepicker-es.js"></script>
         <script type="text/javascript" src="js/libs/jquery.qtip.js"></script>
-        <script type="text/javascript" src="js/libs/underscore.js"></script>
+        <script type="text/javascript" src="js/libs/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="js/libs/fancybox/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-buttons.js"></script>
+        <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-media.js"></script>
+        <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-thumbs.js"></script>
+        <script type="text/javascript" src="js/libs/moment.js"></script>
+        <script type="text/javascript" src="js/libs/underscore.js"></script> 
         <script type="text/javascript" src="js/libs/backbone.js"></script>
         <script type="text/javascript" src="js/libs/backbone-validation.js"></script>
         <script type="text/javascript" src="js/libs/handlebars.js"></script>
@@ -23,24 +32,44 @@
             <div class="search-result">
                 <div class="search-result-container">
                     {{#if outboundRoutes}}
-                        <div class="search-result-title"><strong>Depart</strong> <em>May</em> <em>21</em> <em>2012</em></div>
-                        {{#outboundRoutes}}
-                            {{#segments}}
+                        <div class = "search-result-header">
                             <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
-                                <div class="search-result-icon"><img src="img/green-plane.png"></div>
-                                <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
-                            {{/segments}}
+                            <div class="search-result-icon"><img src="img/green-plane.png"></div>
+                            <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
+                        </div>
+                        <div class="search-result-title">{{outboundDate}}</div>
+                        <table>
+                        {{#outboundRoutes}}
+                                <tr>
+                                    <td class="radio-col"><input type="radio" name="outbound-{{flightId}}"/></td>
+                                    <td class="text-col">Depart</td>
+                                    <td class="datetime-col"><strong>{{departure.time}}</strong></td>
+                                    <td class="text-col">Arrives</td>
+                                    <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
+                                    <td class="scales-col"><a href="#stopovers" class="fancybox">{{stopovers}}</a></td>
+                                </tr>
                         {{/outboundRoutes}}
+                        </table>
                     {{/if}}
                     {{#if inboundRoutes}}
-                        <div class="search-result-title"><strong>Return</strong> <em>May</em> <em>29</em> <em>2012</em></div>
+                        <div class = "search-result-header">
+                            <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
+                            <div class="search-result-icon"><img src="img/blue-plane.png"></div>
+                            <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
+                        </div>
+                        <div class="search-result-title">{{inboundDate}}</div>
+                         <table>
                         {{#inboundRoutes}}
-                            {{#segments}}
-                                <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
-                                <div class="search-result-icon"><img src="img/blue-plane.png"></div>
-                                <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
-                            {{/segments}}
+                                <tr>
+                                    <td class="radio-col"><input type="radio" name="inbound-{{flightId}}"/></td>
+                                    <td class="text-col">Depart</td> 
+                                    <td class="datetime-col"><strong>{{departure.time}}</strong></td>
+                                    <td class="text-col">Arrives</td> 
+                                    <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
+                                    <td class="scales-col">{{stopovers}}</td>
+                                </tr>
                         {{/inboundRoutes}}
+                        </table>
                     {{/if}}
                 </div>
                 <div class="search-result-price">
@@ -84,7 +113,7 @@
                         <span class="total">$ {{{currency total.total}}}</span>
                         {{/with}}
                     </div>
-                    <a href="#buy/{{id}}" class="button button-small">Select</a>
+                    <a href="#buy/{{flightId}}" class="button button-small">Select</a>
                 </div>
             </div>
         </script>
@@ -157,7 +186,7 @@
                                 <div class="column-2">
                                     <div class="search-input-container">
                                         <label for="departure-date">Depart</label>
-                                        <input type="text" name="departure-date-user" data-widget="datepicker" data-bind="dep_date" />
+                                        <input type="text" id="departure-date-user" name="departure-date-user" data-widget="datepicker" data-bind="dep_date" />
                                         <input type="hidden" name="dep_date" id="dep_date" value="" />
                                     </div>
                                     <div class="search-input-container">
@@ -221,18 +250,18 @@
                 <div class="page" id="page-search" data-title="Search Results">
                     <div class="search-filters">
                         <h2>Filter results</h2>
-                        <form action="." class="filter-form">
+                        <form action="." class="filter-form" id="filter-form">
                             <div class="filter">
-                                <label for="from">From</label> <input type="text" name="origin" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
+                                <label for="from">From</label> <input type="text" name="origin" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="from-user" />
                             </div>
                             <div class="filter">
-                                <label for="to">To</label> <input type="text" name="destiny" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
+                                <label for="to">To</label> <input type="text" name="destiny" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="to-user" />
                             </div>
                             <div class="filter">
-                                <label for="departure-date">Depart</label><input type="text" name="departure-date" id="filter-departure-date" class="filter-form-input-field" data-widget="datepicker" />
+                                <label for="departure-date">Depart</label><input type="text" name="departure-date" id="filter-departure-date" class="filter-form-input-field" data-widget="datepicker" data-from="departure-date-user" />
                             </div>
                             <div class="filter">
-                                <label for="return-date">Return</label><input type="text" name="return-date" id="filter-return-date" class="filter-form-input-field" data-widget="datepicker" />
+                                <label for="return-date">Return</label><input type="text" name="return-date" id="filter-return-date" class="filter-form-input-field" data-widget="datepicker" data-from="return-date"/>
                             </div>
                             <div class="filter">
                                 <label for="filter-airline">Airline</label>
@@ -261,6 +290,9 @@
                         </form>
                     </div>
                     <div class="search-wrap">
+                    </div>
+                    <div id="stopovers">
+                        <p>Stopovers</p>
                     </div>
                 </div>
 

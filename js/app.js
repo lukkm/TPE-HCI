@@ -92,6 +92,41 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             pages: Math.ceil(response.total / response.pageSize),
             hasPages: Math.ceil(response.total / response.pageSize) > 1
         };
+        
+        var setRoutes = function(route) {
+            route.departure = route.segments[0].departure;
+            route.arrival = route.segments[route.segments.length - 1].arrival;
+
+            var flightLength = route.segments.length;
+
+            route.stopovers = (flightLength == 1) ? "Direct" : (flightLength-1) + ((flightLength > 2) ? " stopovers" : " stopover");
+        };
+
+        var setOneWayRoutes = function(flight, routes) { 
+            _.forEach(routes, setRoutes);
+            flight.departure = routes[0].departure;
+            flight.arrival = routes[0].arrival;
+            flight.departure.time = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss").format("h:mm a");
+            flight.arrival.time = moment(flight.arrival.date, "YYYY-MM-DD hh:mm:ss").format("h:mm a");
+        };
+
+        _.forEach(response.flights, function(flight) {
+            if (flight.outboundRoutes !== undefined) {
+                setOneWayRoutes(flight, flight.outboundRoutes);
+                flight.outboundDate = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss").format("MMMM Do YYYY");
+            }
+            if (flight.inboundRoutes !== undefined) {
+                setOneWayRoutes(flight, flight.boundRoutes);
+                flight.inboundDate = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss").format("MMMM Do YYYY");
+            }
+
+           
+
+            /* Ver que hacer con los flightId porque pertenecen a los segmentos */
+
+            flight.flightId = 1;
+        });
+
         return response.flights;
     },
 
@@ -283,6 +318,12 @@ App.Views.SearchFormView = Backbone.View.extend({
             app.searchResults.setQuery(query).fetch({ success: function() {
                 app.appView.subviews.searchResultsView.render();
             }});
+
+            _.forEach($("input[data-from]"), function(input) {
+                var $input = $(input),
+                    value = $("#" + $input.data("from")).val();
+                $input.val(value);
+             });
 
             app.router.navigate("search", { trigger: true });
 

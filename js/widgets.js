@@ -139,6 +139,16 @@ var Widgets = function() {
 
     };
 
+    var initFancyBox = function() {
+        $(".fancybox").fancybox({
+            openEffect  : 'none',
+            closeEffect : 'none',
+            afterLoad   : function() {
+                this.inner.prepend('<h1>Stopovers</h1>');
+            }
+        })
+    };
+
     var initWidgets = function() {
 
         initSliders();
@@ -147,6 +157,7 @@ var Widgets = function() {
         initSelectDatepickers();
         initButtonSets();
         initSelects();
+        initFancyBox();
 
     };
 
