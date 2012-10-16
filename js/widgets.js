@@ -142,10 +142,7 @@ var Widgets = function() {
     var initFancyBox = function() {
         $(".fancybox").fancybox({
             openEffect  : 'none',
-            closeEffect : 'none',
-            afterLoad   : function() {
-                this.inner.prepend('<h1>Stopovers</h1>');
-            }
+            closeEffect : 'none'
         })
     };
 

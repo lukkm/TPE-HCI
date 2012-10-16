@@ -506,8 +506,8 @@ input[data-widget=datepicker] {
 
 #stopovers {
     display: none;
-    width: 500px;
-    height: 200px;
+    width: 700px;
+    padding: 10px;
 }
 
 .price-text {
