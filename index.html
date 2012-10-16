@@ -27,7 +27,7 @@
         <script type="text/javascript" src="js/widgets.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/base.js"></script>
-        <script type="text/x-handlebars-template" id="template-flight">
+        <script type="text/x-handlebars-template" class="partial" id="flight">
             <div class="search-result">
                 <div class="search-result-container">
                     {{#if outboundRoutes}}
@@ -38,12 +38,12 @@
                         </div>
                         <div class="search-result-title">{{outboundDate}}</div>
                         <table>
-                        {{#outboundRoutes}}    
+                        {{#outboundRoutes}}
                                 <tr>
                                     <td class="radio-col"><input type="radio" name="outbound-{{flightId}}"/></td>
-                                    <td class="text-col">Depart</td> 
+                                    <td class="text-col">Depart</td>
                                     <td class="datetime-col"><strong>{{departure.time}}</strong></td>
-                                    <td class="text-col">Arrives</td> 
+                                    <td class="text-col">Arrives</td>
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="scales-col"><a href="#stopovers" class="fancybox">{{stopovers}}</a></td>
                                 </tr>
@@ -58,7 +58,7 @@
                         </div>
                         <div class="search-result-title">{{inboundDate}}</div>
                          <table>
-                        {{#inboundRoutes}}    
+                        {{#inboundRoutes}}
                                 <tr>
                                     <td class="radio-col"><input type="radio" name="inbound-{{flightId}}"/></td>
                                     <td class="text-col">Depart</td> 
@@ -78,19 +78,19 @@
                             {{#if adults}}
                             <li>
                                 <span class="label">Adults:</span>
-                                <span class="value">{{adults.quantity}} x $ {{{adults.baseFare}}}</span>
+                                <span class="value">{{adults.quantity}} x $ {{{currency adults.baseFare}}}</span>
                             </li>
                             {{/if}}
                             {{#if children}}
                             <li>
                                 <span class="label">Children:</span>
-                                <span class="value">{{children.quantity}} x $ {{children.baseFare}}</span>
+                                <span class="value">{{children.quantity}} x $ {{{currency children.baseFare}}}</span>
                             </li>
                             {{/if}}
                             {{#if infants}}
                             <li>
                                 <span class="label">Infants:</span>
-                                <span class="value">{{children.quantity}} x $ {{infants.baseFare}}</span>
+                                <span class="value">{{children.quantity}} x $ {{{currency infants.baseFare}}}</span>
                             </li>
                             {{/if}}
                         </ul>
@@ -98,18 +98,18 @@
                         <ul>
                             <li>
                                 <span class="label">Charges:</span>
-                                <span class="value">$ {{total.charges}}</span>
+                                <span class="value">$ {{{currency total.charges}}</span>
                             </li>
                             <li>
                                 <span class="label">Fare:</span>
-                                <span class="value">$ {{total.fare}}</span>
+                                <span class="value">$ {{{currency total.fare}}}</span>
                             </li>
                             <li>
                                 <span class="label">Taxes:</span>
-                                <span class="value">$ {{total.taxes}}</span>
+                                <span class="value">$ {{{currency total.taxes}}}</span>
                             </li>
                         </ul>
-                        <span class="total">$ {{total.total}}</span>
+                        <span class="total">$ {{{currency total.total}}}</span>
                         {{/with}}
                     </div>
                     <a href="#buy/{{flightId}}" class="button button-small">Select</a>
@@ -117,6 +117,34 @@
             </div>
             <div id="stopovers">
                 <p>Stopovers</p>
+            </div>
+        </script>
+        <script type="text/x-handlebars-template" id="search-results">
+            <div class="search-results-header">
+                <div class="count">{{pagination.total}} flights found</div>
+                <div class="sorting">
+                    <span>Sort by:</span>
+                    <select name="sort" id="sort">
+                        <option value="total asc">Total - Low to High</option>
+                        <option value="total desc">Total - Hight to Low</option>
+                        <option value="airline asc">Airline - A to Z</option>
+                        <option value="airline desc">Airline - Z to A</option>
+                        <option value="duration asc">Duration - Shorter</option>
+                        <option value="duration desc">Duration - Longer</option>
+                        <option value="fare asc">Fare - Low to High</option>
+                        <option value="fare desc">Fare - High to Low</option>
+                        <option value="stopovers asc">Stops - Less</option>
+                        <option value="stopovers desc">Stops - More</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-results" id="search-results">
+            {{#each flights}}
+                {{> flight}}
+            {{/each}}
+            </div>
+            <div class="pagination">
+                {{{pagination pagination}}}
             </div>
         </script>
     </head>
@@ -264,38 +292,6 @@
                         </form>
                     </div>
                     <div class="search-wrap">
-                        <div class="search-results-header">
-                            <div class="count" data-template="{{total}} flights found"></div>
-                            <div class="sorting">
-                                <span>Sort by:</span>
-                                <select name="sort" id="sort">
-                                    <option value="total asc">Total - Low to High</option>
-                                    <option value="total desc">Total - Hight to Low</option>
-                                    <option value="airline asc">Airline - A to Z</option>
-                                    <option value="airline desc">Airline - Z to A</option>
-                                    <option value="duration asc">Duration - Shorter</option>
-                                    <option value="duration desc">Duration - Longer</option>
-                                    <option value="fare asc">Fare - Low to High</option>
-                                    <option value="fare desc">Fare - High to Low</option>
-                                    <option value="stopovers asc">Stops - Less</option>
-                                    <option value="stopovers desc">Stops - More</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="search-results" id="search-results"></div>
-                        <div class="pagination">
-                            <ul>
-                                <li class="current-page">
-                                <a href="#search/page:1">1</a>
-                                </li>
-                                <li>
-                                <a href="#search/page:2">2</a>
-                                </li>
-                                <li>
-                                <a href="#search/page:3">3</a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
 

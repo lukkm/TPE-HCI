@@ -1,10 +1,3 @@
-// @TODO: register helpers for date and currency display
-
-// Handlebars.registerHelper('fare', function(baseFare, quantity) {
-    // baseFare = parseInt(baseFare, 10);
-    // quantity = parseInt(quantity, 10);
-    // return baseFare * quantity;
-// });
 
 // add validation support to all models
 _.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
@@ -88,7 +81,17 @@ App.Collections.SearchResults = Backbone.Collection.extend({
     },
 
     parse: function(response) {
+        this.metadata = {
+            currencyId: response.currencyId
+        };
         this.filters = response.filters;
+        this.pagination = {
+            page: response.page,
+            pageSize: response.pageSize,
+            total: response.total,
+            pages: Math.ceil(response.total / response.pageSize),
+            hasPages: Math.ceil(response.total / response.pageSize) > 1
+        };
         
         var setRoutes = function(route) {
             route.departure = route.segments[0].departure;
@@ -105,7 +108,7 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             flight.arrival = routes[0].arrival;
             flight.departure.time = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss").format("h:mm a");
             flight.arrival.time = moment(flight.arrival.date, "YYYY-MM-DD hh:mm:ss").format("h:mm a");
-        }
+        };
 
         _.forEach(response.flights, function(flight) {
             if (flight.outboundRoutes !== undefined) {
@@ -124,7 +127,6 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             flight.flightId = 1;
         });
 
-        
         return response.flights;
     },
 
@@ -228,6 +230,8 @@ App.Views.AppView = Backbone.View.extend({
 
     initialize: function() {
 
+        this.setupTemplates();
+
         this.subviews = {};
     
         this.subviews.searchForm = new App.Views.SearchFormView({
@@ -240,12 +244,42 @@ App.Views.AppView = Backbone.View.extend({
 
         this.subviews.searchResultsView = new App.Views.SearchResultsView({
             el: $("#page-search"),
-            template: Handlebars.compile($("#template-flight").html()),
+            template: Handlebars.compile($("#search-results").html()),
             collection: app.searchResults
         });
 
         this.subviews.newsletterView = new App.Views.NewsletterView({
             el: $(".newsletter-subscribe")
+        });
+
+    },
+
+    setupTemplates: function() {
+
+        Handlebars.registerHelper('currency', function(amount) {
+            return (amount % 1 === 0) ? amount : amount.toFixed(2);
+        });
+
+        Handlebars.registerHelper('date', function (date, options) {
+            var format = options && options.date || "mm/dd - h:mm";
+            // @TODO: actually format date
+            return date;
+        });
+
+        Handlebars.registerHelper('pagination', function(data) {
+            var i, out = "<ul>";
+
+            if (data.hasPages) {
+                for (i = 1; i <= data.pages; i++) {
+                    out += '<li><a href="#search/"' + i + '">' + i + '</a></li>';
+                }
+            }
+
+            return out + "</ul>";
+        });
+
+        $("script.partial").each(function() {
+            Handlebars.registerPartial(this.id, this.innerHTML);
         });
 
     },
@@ -371,34 +405,27 @@ App.Views.BuyFormView = Backbone.View.extend({
 App.Views.SearchResultsView = Backbone.View.extend({
 
     events: {
-        "change #sort": "changeSort"
+        "change #sort": "changeSort",
+        "click .page": "changePage"
     },
 
     initialize: function(options) {
         this.template = options.template;
     },
 
-    render: function() {
-        var $results = this.$el.find(".search-results");
-        $results.html(null);
-
-        this.updateCount();
-
-        var view = this;
-        this.collection.forEach(function(flight) {
-            $results.append(view.template(flight.toJSON()));
-        });
-        
-        return this;
+    getContext: function() {
+        return {
+            flights: this.collection.toJSON(),
+            pagination: this.collection.pagination,
+            filters: this.collection.filters,
+            metadata: this.collection.metadata
+        };
     },
 
-    updateCount: function() {
-        var $header = this.$el.find(".search-results-header"),
-            $count = $header.find(".count");
-
-        var count = { total: this.collection.length };
-
-        $count.html(Handlebars.compile($count.data("template"))(count));
+    render: function() {
+        var $wrap = this.$el.find(".search-wrap");
+        $wrap.html(this.template(this.getContext()));
+        return this;
     },
 
     changeSort: function(e) {
@@ -408,6 +435,12 @@ App.Views.SearchResultsView = Backbone.View.extend({
             sort_order = value[1];
 
         this.collection.sort(sort_key, sort_order);
+    },
+
+    changePage: function(e) {
+        var page = $(this).data("page");
+        this.collection.query.set("page", page);
+        this.collection.fetch();
     }
 
 });
