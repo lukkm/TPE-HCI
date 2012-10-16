@@ -99,7 +99,7 @@ App.Collections.SearchResults = Backbone.Collection.extend({
 
             var flightLength = route.segments.length;
 
-            route.stopovers = (flightLength == 1) ? "Direct" : (flightLength-1) : " stopover");
+            route.stopovers = (flightLength == 1) ? "Direct" : (flightLength-1) + " stopover";
             if (flightLength > 2)
                     route.stopovers += "s";
         };
