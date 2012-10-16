@@ -453,29 +453,46 @@ input[data-widget=datepicker] {
 }
 
 .search-result-title {
-    text-align: center;
     clear: both;
     padding: 10px 0;
+    margin-top: 70px;
+    margin-bottom: 10px;
+    background-color: #DDD; 
+    text-align: center;
+}
+
+.search-result-container table {
+    clear: both;
+    border: 0;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+.search-result-container tr {
+    border-bottom: 1px solid #EEE;
+}
+
+.search-result-container td {
+    padding: 0 5px;
 }
 
 .search-result-icon img {
-    margin-top: 6px;
+    margin-top: 20px;
 	height: 24px;
 	width: 24px;
 }
 
 .search-result-info {
     float:left;
-    width: 174px;
+    width: 190px;
     margin-top: 10px;
-    padding: 2px;
     text-align: center;
 }
 
 .search-result-icon {
     float:left;
     width: 85px;
-    padding: 2px;
+    padding: 2px 0;
     text-align: center;
 }
 
@@ -485,6 +502,10 @@ input[data-widget=datepicker] {
     padding: 10px;
     font-size: 14px;
     text-align: center;
+}
+
+.stopovers {
+    display: none;
 }
 
 .price-text {

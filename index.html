@@ -6,12 +6,16 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.24.custom.css" />
+        <link rel="stylesheet" type="text/css" src="js/libs/fancybox/jquery.fancybox.css?v=2.1.2" media="screen"></script>
         <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
         <script type="text/javascript" src="js/libs/jquery.js"></script>
         <script type="text/javascript" src="js/libs/jquery-ui.js"></script>
         <script type="text/javascript" src="js/libs/jquery.ui.datepicker-es.js"></script>
         <script type="text/javascript" src="js/libs/jquery.qtip.js"></script>
-        <script type="text/javascript" src="js/libs/underscore.js"></script>
+        <script type="text/javascript" src="js/libs/moment.js"></script>
+        <script type="text/javascript" src="js/libs/underscore.js"></script> 
+        <script type="text/javascript" src="js/libs/fancybox/jquery.fancybox.js"></script>
+        <script type="text/javascript" src="js/libs/fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="js/libs/backbone.js"></script>
         <script type="text/javascript" src="js/libs/backbone-validation.js"></script>
         <script type="text/javascript" src="js/libs/handlebars.js"></script>
@@ -23,24 +27,44 @@
             <div class="search-result">
                 <div class="search-result-container">
                     {{#if outboundRoutes}}
-                        {{#outboundRoutes}}
-                            <div class="search-result-title"><strong>Depart</strong> <em>{{departure.date}}</em> <em>21</em> <em>2012</em></div>
+                        <div class = "search-result-header">
                             <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
                             <div class="search-result-icon"><img src="img/green-plane.png"></div>
                             <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
-                            {{#segments}}
-                            {{/segments}}
+                        </div>
+                        <div class="search-result-title">{{outboundDate}}</div>
+                        <table>
+                        {{#outboundRoutes}}    
+                                <tr>
+                                    <td class="radio-col"><input type="radio" name="outbound-{{flightId}}"/></td>
+                                    <td class="text-col">Depart</td> 
+                                    <td class="datetime-col"><strong>{{departure.time}}</strong></td>
+                                    <td class="text-col">Arrives</td> 
+                                    <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
+                                    <td class="scales-col"><a href="#stopovers" class="fancybox">{{stopovers}}</a></td>
+                                </tr>
                         {{/outboundRoutes}}
+                        </table>
                     {{/if}}
                     {{#if inboundRoutes}}
-                        {{#inboundRoutes}}
-                            <div class="search-result-title"><strong>Return</strong> <em>May</em> <em>29</em> <em>2012</em></div>
+                        <div class = "search-result-header">
                             <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
                             <div class="search-result-icon"><img src="img/blue-plane.png"></div>
                             <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
-                            {{#segments}}
-                            {{/segments}}
+                        </div>
+                        <div class="search-result-title">{{inboundDate}}</div>
+                         <table>
+                        {{#inboundRoutes}}    
+                                <tr>
+                                    <td class="radio-col"><input type="radio" name="inbound-{{flightId}}"/></td>
+                                    <td class="text-col">Depart</td> 
+                                    <td class="datetime-col"><strong>{{departure.time}}</strong></td>
+                                    <td class="text-col">Arrives</td> 
+                                    <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
+                                    <td class="scales-col">{{stopovers}}</td>
+                                </tr>
                         {{/inboundRoutes}}
+                        </table>
                     {{/if}}
                 </div>
                 <div class="search-result-price">
@@ -84,8 +108,11 @@
                         <span class="total">$ {{total.total}}</span>
                         {{/with}}
                     </div>
-                    <a href="#buy/{{id}}" class="button button-small">Select</a>
+                    <a href="#buy/{{flightId}}" class="button button-small">Select</a>
                 </div>
+            </div>
+            <div class="stopovers">
+                <p>Stopovers</p>
             </div>
         </script>
     </head>
