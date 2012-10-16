@@ -164,7 +164,9 @@ input[data-widget=datepicker] {
 	margin-top: -5px;
 }
 
-.search-form label[for|=number] {
+.search-form label[for=adults],
+.search-form label[for=children],
+.search-form label[for=infants] {
     width: 175px;
     float: left;
     display: block;
@@ -365,11 +367,6 @@ input[data-widget=datepicker] {
 /* =Page */
 .page {
     margin-top: 40px;
-    display: none;
-}
-
-.page.current {
-    display: block;
 }
 
 .search-filters {
@@ -500,20 +497,22 @@ input[data-widget=datepicker] {
 }
 
 .button {
-    background: -webkit-linear-gradient(top, #F6B900, #F17400);
-    border-radius: 5px;
-    border: 1px solid #F17400;
+    -webkit-box-shadow: 0 1px rgba(255, 255, 255, 0.5) inset;
+    -webkit-transition: background 1s linear;
+    background: -webkit-linear-gradient(top, #FAA454, #F17400);
+    border-radius: 3px;
+    border: 1px solid #DD6B01;
     color: white;
-    text-shadow: 0 1px 0 #F1742A;
     display: inline-block;
     font-size: 14px;
     font-weight: bold;
-    text-decoration: none;
     padding: 8px 16px;
+    text-decoration: none;
+    text-shadow: 0 1px 0 #B85D08;
 }
 
 .button:active {
-    background: -webkit-linear-gradient(top, #F17400, #F6B900);
+    background: -webkit-linear-gradient(top, #F17400, #F38B2B);
 }
 
 .button-small {
