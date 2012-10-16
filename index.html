@@ -13,6 +13,7 @@
         <script type="text/javascript" src="js/libs/jquery.qtip.js"></script>
         <script type="text/javascript" src="js/libs/underscore.js"></script>
         <script type="text/javascript" src="js/libs/backbone.js"></script>
+        <script type="text/javascript" src="js/libs/backbone-validation.js"></script>
         <script type="text/javascript" src="js/libs/handlebars.js"></script>
         <script type="text/javascript" src="js/api.js"></script>
         <script type="text/javascript" src="js/widgets.js"></script>
@@ -21,32 +22,69 @@
         <script type="text/x-handlebars-template" id="template-flight">
             <div class="search-result">
                 <div class="search-result-container">
-                    <div class="search-result-title"><strong>Depart</strong> <em>May</em> <em>21</em> <em>2012</em></div>
-                    {{#outboundRoutes}}
-                        {{#segments}}
-                            <div class="search-result-info">{{departure.airportDescription}} 5:45</div>
-                            <div class="search-result-icon"><img src="img/blue-plane.png"></div>
-                            <div class="search-result-info">{{arrival.airportDescription}} 15:45</div>
-                        {{/segments}}
-                    {{/outboundRoutes}}
-                    <div class="search-result-title"><strong>Return</strong> <em>May</em> <em>29</em> <em>2012</em></div>
-                    {{#inboundRoutes}}
-                        {{#segments}}
-                            <div class="search-result-info">{{departure.airportDescription}} 12:00</div>
-                            <div class="search-result-icon"><img src="img/green-plane.png"></div>
-                            <div class="search-result-info">{{arrival.airportDescription}} 22:00</div>
-                        {{/segments}}
-                    {{/inboundRoutes}}
+                    {{#if outboundRoutes}}
+                        <div class="search-result-title"><strong>Depart</strong> <em>May</em> <em>21</em> <em>2012</em></div>
+                        {{#outboundRoutes}}
+                            {{#segments}}
+                            <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
+                                <div class="search-result-icon"><img src="img/green-plane.png"></div>
+                                <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
+                            {{/segments}}
+                        {{/outboundRoutes}}
+                    {{/if}}
+                    {{#if inboundRoutes}}
+                        <div class="search-result-title"><strong>Return</strong> <em>May</em> <em>29</em> <em>2012</em></div>
+                        {{#inboundRoutes}}
+                            {{#segments}}
+                                <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
+                                <div class="search-result-icon"><img src="img/blue-plane.png"></div>
+                                <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
+                            {{/segments}}
+                        {{/inboundRoutes}}
+                    {{/if}}
                 </div>
                 <div class="search-result-price">
                     <div class="price-text">
-                        {{with price}}
+                        {{#with price}}
                         <ul>
-                        
+                            {{#if adults}}
+                            <li>
+                                <span class="label">Adults:</span>
+                                <span class="value">{{adults.quantity}} x $ {{{adults.baseFare}}}</span>
+                            </li>
+                            {{/if}}
+                            {{#if children}}
+                            <li>
+                                <span class="label">Children:</span>
+                                <span class="value">{{children.quantity}} x $ {{children.baseFare}}</span>
+                            </li>
+                            {{/if}}
+                            {{#if infants}}
+                            <li>
+                                <span class="label">Infants:</span>
+                                <span class="value">{{children.quantity}} x $ {{infants.baseFare}}</span>
+                            </li>
+                            {{/if}}
                         </ul>
-                        <em>$ {{total.total}}</em>
+                        <h6 class="title">Total</h6>
+                        <ul>
+                            <li>
+                                <span class="label">Charges:</span>
+                                <span class="value">$ {{total.charges}}</span>
+                            </li>
+                            <li>
+                                <span class="label">Fare:</span>
+                                <span class="value">$ {{total.fare}}</span>
+                            </li>
+                            <li>
+                                <span class="label">Taxes:</span>
+                                <span class="value">$ {{total.taxes}}</span>
+                            </li>
+                        </ul>
+                        <span class="total">$ {{total.total}}</span>
+                        {{/with}}
                     </div>
-                    <a href="#buy/{{id}}" class="button">Select</a>
+                    <a href="#buy/{{id}}" class="button button-small">Select</a>
                 </div>
             </div>
         </script>
@@ -74,8 +112,8 @@
                             <form action=".">
                                 <h2>Search flights</h2>
                                 <span id="flight-type" data-widget="buttonset">
-                                    <input type="radio" id="one-way" name="repeat" /><label for="one-way">One Way</label>
-                                    <input type="radio" id="round-trip" name="repeat" checked="checked" /><label for="round-trip">Round Trip</label>
+                                    <input type="radio" id="one-way" name="repeat" value="one-way" /><label for="one-way">One Way</label>
+                                    <input type="radio" id="round-trip" name="repeat" value="round-trip" checked="checked" /><label for="round-trip">Round Trip</label>
                                 </span>
                                 <div class="clearfix"></div>
                                 <div class="search-input-container">
@@ -96,7 +134,8 @@
                                     </div>
                                     <div class="search-input-container">
                                         <label for="return-date">Return</label>
-                                        <input type="text" name="return-date" id="return-date" data-widget="datepicker" />
+                                        <input type="text" name="return-date" id="return-date" data-widget="datepicker" data-bind="ret_date" />
+                                        <input type="hidden" name="ret_date" id="ret_date" value="" />
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
@@ -198,11 +237,17 @@
                             <div class="count" data-template="{{total}} flights found"></div>
                             <div class="sorting">
                                 <span>Sort by:</span>
-                                <select>
-                                    <option value="">Duration</option>
-                                    <option value="">Airline</option>
-                                    <option value="">Price</option>
-                                    <option value="">Stops</option>
+                                <select name="sort" id="sort">
+                                    <option value="total asc">Total - Low to High</option>
+                                    <option value="total desc">Total - Hight to Low</option>
+                                    <option value="airline asc">Airline - A to Z</option>
+                                    <option value="airline desc">Airline - Z to A</option>
+                                    <option value="duration asc">Duration - Shorter</option>
+                                    <option value="duration desc">Duration - Longer</option>
+                                    <option value="fare asc">Fare - Low to High</option>
+                                    <option value="fare desc">Fare - High to Low</option>
+                                    <option value="stopovers asc">Stops - Less</option>
+                                    <option value="stopovers desc">Stops - More</option>
                                 </select>
                             </div>
                         </div>

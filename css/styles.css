@@ -126,7 +126,9 @@ input:focus {
 }
 
 input[data-widget=datepicker] {
-    background: url("../img/icon-calendar.png") 140px 4px no-repeat;
+    background-image: url("../img/icon-calendar.png");
+    background-position: 140px 4px;
+    background-repeat: no-repeat;
 }
 
 .search-form {
@@ -428,18 +430,19 @@ input[data-widget=datepicker] {
 }
 
 .search-result {
-    overflow: auto;
-    margin-bottom: 16px;
+    background-color: white;
+    border: 1px solid #F8CA95;
     font-size: 14px;
+    margin-bottom: 16px;
+    overflow: auto;
 }
 
 .search-result-container {
-    background-color: white;
-    border: 1px solid #F8CA95;
     float: left;
     padding: 10px;
     width: 474px;
-    height: 158px;
+    min-height: 200px;
+    border-right: 1px solid #F8CA95;
 }
 
 .search-result-title {
@@ -471,24 +474,48 @@ input[data-widget=datepicker] {
 
 .search-result-price {
     float: right;
-    height: 132px;
-    width: 132px;
-    padding: 16px;
-    font-size: 16px;
+    width: 150px;
+    padding: 10px;
+    font-size: 14px;
     text-align: center;
-    background-color: white;
-    border: 8px solid #F8CA95;
 }
 
 .price-text {
-    margin-top: 16px;
-    margin-bottom: 20px;
+    font-size: 12px;
 }
 
-.search-result-price em {
-    font-size: 26px;
+.price-text ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin: 0 0 10px; 0;
+}
+
+.price-text li {
+    padding: 3px;
+    border-bottom: 1px solid #EEE;
+    overflow: auto;
+}
+
+.price-text .title {
+    padding: 3px 0;
+    font-size: 12px;
+    margin: 0;
+}
+
+.price-text .label {
+    float: left;
+}
+
+.price-text .value {
+    float: right;
+}
+
+.search-result-price .total {
+    font-size: 20px;
     font-weight: bold;
-    font-style: normal;
+    margin-bottom: 5px;
+    display: block;
 }
 
 .submit {
@@ -598,7 +625,12 @@ input[data-widget=datepicker] {
 }
 
 .invalid {
-    border: 2px solid red;
+    border: 1px solid red;
+    background-color: #FFEEEE;
+}
+
+.invalid:focus {
+    border: 1px solid red;
 }
 
 .tooltip {
@@ -612,5 +644,4 @@ input[data-widget=datepicker] {
     text-decoration: none;
     padding: 8px 10px;
     border: 2px solid red;
-    tip: 'rightMiddle';
 }

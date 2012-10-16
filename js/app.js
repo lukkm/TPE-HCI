@@ -1,3 +1,14 @@
+// @TODO: register helpers for date and currency display
+
+// Handlebars.registerHelper('fare', function(baseFare, quantity) {
+    // baseFare = parseInt(baseFare, 10);
+    // quantity = parseInt(quantity, 10);
+    // return baseFare * quantity;
+// });
+
+// add validation support to all models
+_.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
+
 var App = {
 
     Models: {},
@@ -12,15 +23,27 @@ var App = {
 
 App.Models.Flight = Backbone.Model.extend();
 
-App.Models.Query = Backbone.Model.extend();
+App.Models.Query = Backbone.Model.extend({
+
+    validation: {
+        from: { required: true },
+        to: { required: true },
+        repeat: { oneOf: ["one-way", "round-trip"] },
+        dep_date: { pattern: /\d{4}-\d{2}-\d{2}/ },
+        ret_date: { pattern: /\d{4}-\d{2}-\d{2}/ }
+    }
+
+});
 
 App.Models.Query.fromSerializedArray = function(serializedArray) {
+
     var attributes = {};
     _.each(serializedArray, function(input) {
         attributes[input.name] = input.value;
     });
+
     attributes = _.omit(attributes, ["from-user", "to-user",
-            "departure-date-user", "return-date", "repeat" ]);
+            "departure-date-user", "return-date" ]);
 
     return new App.Models.Query(attributes, { parse: true });
 };
@@ -32,15 +55,36 @@ App.Collections.SearchResults = Backbone.Collection.extend({
     },
 
     hasQuery: function() {
-        return this.query === null;
+        return this.query !== null;
     },
 
     sync: function(method, collection, options) {
+        var data, jqxhr;
+
         if (method !== "read") {
             throw "Attempt to modify read only collection";
         }
-        var data = collection.query.toJSON();
-        return API.Booking.getOneWayFlights(data, options);
+
+        data = collection.query.toJSON();
+
+        if (data.repeat === "one-way") {
+            jqxhr = API.Booking.getOneWayFlights(data, options);
+        } else if (data.repeat === "round-trip") {
+            jqxhr = API.Booking.getRoundTripFlights(data, options);
+        } else {
+            throw "Invalid repeat value";
+        }
+        return jqxhr;
+    },
+
+    sort: function(sort_key, sort_order) {
+        sort_order = sort_order || 'asc';
+
+        this.query.set("sort_key", sort_key);
+        this.query.set("sort_order", sort_order);
+
+        // @TODO: validate query model
+        this.fetch();
     },
 
     parse: function(response) {
@@ -179,20 +223,27 @@ App.Views.AppView = Backbone.View.extend({
 });
 
 App.Views.SearchFormView = Backbone.View.extend({
+
+    initialize: function(options) {
+        _.extend(this, Backbone.events);
+        this.on('error', function(e) {
+            this.showErrors(e);
+        });
+    },
     
     events: {
         "click button": "submitForm",
-        "change input": "validateInput"
+        "change input": "resetValidation",
+        "error": "showErrors"
     },
 
     submitForm: function(e) {
-        var inputs = this.$el.find("input[type=text]"),
-            isBlank = function(input) { return input.value === ""; };
 
-        if (!_.any(inputs, isBlank)) {
-            
-            var parameters = this.$el.find("form").serializeArray(),
-                query = App.Models.Query.fromSerializedArray(parameters);
+        var $form = this.$el.find("form"),
+            parameters = $form.serializeArray(),
+            query = App.Models.Query.fromSerializedArray(parameters);
+
+        if (query.isValid(true)) {
 
             app.searchResults.setQuery(query).fetch({ success: function() {
                 app.appView.subviews.searchResultsView.render();
@@ -200,12 +251,40 @@ App.Views.SearchFormView = Backbone.View.extend({
 
             app.router.navigate("search", { trigger: true });
 
+        } else {
+
+            $form.data("errors", query.validate());
+            this.trigger("error");
+        
         }
 
         e.preventDefault();
+
     },
 
-    validateInput: function(e) {
+    resetValidation: function(e) {
+
+        var $input = $(e.target);
+        $input.removeClass("invalid");
+
+    },
+
+    showErrors: function(e) {
+
+        var $form = this.$el.find("form"),
+            errors = $form.data("errors");
+
+        $form.find("input").each(function() {
+            var name = $(this).attr("name");
+
+            if (errors[name]) {
+                $(this).add($("[data-bind=" + name + "]"))
+                    .addClass("invalid");
+            } else {
+                $(this).removeClass("invalid");
+            }
+        });
+
     }
 
 });
@@ -249,6 +328,10 @@ App.Views.BuyFormView = Backbone.View.extend({
 
 App.Views.SearchResultsView = Backbone.View.extend({
 
+    events: {
+        "change #sort": "changeSort"
+    },
+
     initialize: function(options) {
         this.template = options.template;
     },
@@ -274,8 +357,16 @@ App.Views.SearchResultsView = Backbone.View.extend({
         var count = { total: this.collection.length };
 
         $count.html(Handlebars.compile($count.data("template"))(count));
-    }
+    },
 
+    changeSort: function(e) {
+        var $select = $(e.target),
+            value = $select.val().split(" "),
+            sort_key = value[0],
+            sort_order = value[1];
+
+        this.collection.sort(sort_key, sort_order);
+    }
 
 });
 
