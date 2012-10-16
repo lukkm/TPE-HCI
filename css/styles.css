@@ -504,8 +504,10 @@ input[data-widget=datepicker] {
     text-align: center;
 }
 
-.stopovers {
+#stopovers {
     display: none;
+    width: 500px;
+    height: 200px;
 }
 
 .price-text {

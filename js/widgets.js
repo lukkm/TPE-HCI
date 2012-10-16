@@ -140,13 +140,13 @@ var Widgets = function() {
     };
 
     var initFancyBox = function() {
-        /*$(".fancybox").fancybox({
+        $(".fancybox").fancybox({
             openEffect  : 'none',
             closeEffect : 'none',
             afterLoad   : function() {
-                this.inner.prepend( '<h1>Stopovers</h1>' );
+                this.inner.prepend('<h1>Stopovers</h1>');
             }
-        });​*/
+        })
     };
 
     var initWidgets = function() {

@@ -3,19 +3,24 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>travel.ly</title>
-        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/normalize.css"/>
         <link rel="stylesheet" href="css/styles.css" />
         <link rel="stylesheet" type="text/css" href="css/ui-lightness/jquery-ui-1.8.24.custom.css" />
-        <link rel="stylesheet" type="text/css" src="js/libs/fancybox/jquery.fancybox.css?v=2.1.2" media="screen"></script>
+        <link rel="stylesheet" type="text/css" src="js/libs/fancybox/jquery.fancybox.css" media="screen"/>
+        <link rel="stylesheet" href="js/libs/fancybox/helpers/jquery.fancybox-buttons.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="js/libs/fancybox/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
         <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
         <script type="text/javascript" src="js/libs/jquery.js"></script>
         <script type="text/javascript" src="js/libs/jquery-ui.js"></script>
         <script type="text/javascript" src="js/libs/jquery.ui.datepicker-es.js"></script>
         <script type="text/javascript" src="js/libs/jquery.qtip.js"></script>
-        <script type="text/javascript" src="js/libs/moment.js"></script>
-        <script type="text/javascript" src="js/libs/underscore.js"></script> 
         <script type="text/javascript" src="js/libs/fancybox/jquery.fancybox.js"></script>
         <script type="text/javascript" src="js/libs/fancybox/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-buttons.js"></script>
+        <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-media.js"></script>
+        <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-thumbs.js"></script>
+        <script type="text/javascript" src="js/libs/moment.js"></script>
+        <script type="text/javascript" src="js/libs/underscore.js"></script> 
         <script type="text/javascript" src="js/libs/backbone.js"></script>
         <script type="text/javascript" src="js/libs/backbone-validation.js"></script>
         <script type="text/javascript" src="js/libs/handlebars.js"></script>
@@ -110,9 +115,6 @@
                     </div>
                     <a href="#buy/{{flightId}}" class="button button-small">Select</a>
                 </div>
-            </div>
-            <div class="stopovers">
-                <p>Stopovers</p>
             </div>
         </script>
     </head>
@@ -292,6 +294,9 @@
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                    <div id="stopovers">
+                        <p>Stopovers</p>
                     </div>
                 </div>
 
