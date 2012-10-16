@@ -114,11 +114,11 @@ App.Collections.SearchResults = Backbone.Collection.extend({
         };
 
         _.forEach(response.flights, function(flight) {
-            if (flight.outboundRoutes !== undefined) {
+            if (flight.outboundRoutes != undefined) {
                 setOneWayRoutes(flight, flight.outboundRoutes);
                 flight.outboundDate = flight.dateToMoment.format("MMMM Do YYYY");
             }
-            if (flight.inboundRoutes !== undefined) {
+            if (flight.inboundRoutes != undefined) {
                 setOneWayRoutes(flight, flight.boundRoutes);
                 flight.inboundDate = flight.dateToMoment.format("MMMM Do YYYY");
             }
