@@ -23,22 +23,22 @@
             <div class="search-result">
                 <div class="search-result-container">
                     {{#if outboundRoutes}}
-                        <div class="search-result-title"><strong>Depart</strong> <em>May</em> <em>21</em> <em>2012</em></div>
                         {{#outboundRoutes}}
-                            {{#segments}}
+                            <div class="search-result-title"><strong>Depart</strong> <em>{{departure.date}}</em> <em>21</em> <em>2012</em></div>
                             <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
-                                <div class="search-result-icon"><img src="img/green-plane.png"></div>
-                                <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
+                            <div class="search-result-icon"><img src="img/green-plane.png"></div>
+                            <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
+                            {{#segments}}
                             {{/segments}}
                         {{/outboundRoutes}}
                     {{/if}}
                     {{#if inboundRoutes}}
-                        <div class="search-result-title"><strong>Return</strong> <em>May</em> <em>29</em> <em>2012</em></div>
                         {{#inboundRoutes}}
+                            <div class="search-result-title"><strong>Return</strong> <em>May</em> <em>29</em> <em>2012</em></div>
+                            <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
+                            <div class="search-result-icon"><img src="img/blue-plane.png"></div>
+                            <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
                             {{#segments}}
-                                <div class="search-result-info">{{departure.cityName}} ({{departure.airportId}})</div>
-                                <div class="search-result-icon"><img src="img/blue-plane.png"></div>
-                                <div class="search-result-info">{{arrival.cityName}} ({{arrival.airportId}})</div>
                             {{/segments}}
                         {{/inboundRoutes}}
                     {{/if}}
@@ -129,7 +129,7 @@
                                 <div class="column-2">
                                     <div class="search-input-container">
                                         <label for="departure-date">Depart</label>
-                                        <input type="text" name="departure-date-user" data-widget="datepicker" data-bind="dep_date" />
+                                        <input type="text" id="departure-date-user" name="departure-date-user" data-widget="datepicker" data-bind="dep_date" />
                                         <input type="hidden" name="dep_date" id="dep_date" value="" />
                                     </div>
                                     <div class="search-input-container">
@@ -193,18 +193,18 @@
                 <div class="page" id="page-search" data-title="Search Results">
                     <div class="search-filters">
                         <h2>Filter results</h2>
-                        <form action="." class="filter-form">
+                        <form action="." class="filter-form" id="filter-form">
                             <div class="filter">
-                                <label for="from">From</label> <input type="text" name="origin" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
+                                <label for="from">From</label> <input type="text" name="origin" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="from-user" />
                             </div>
                             <div class="filter">
-                                <label for="to">To</label> <input type="text" name="destiny" class="filter-form-input-field" data-widget="autocomplete" data-source="places" />
+                                <label for="to">To</label> <input type="text" name="destiny" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="to-user" />
                             </div>
                             <div class="filter">
-                                <label for="departure-date">Depart</label><input type="text" name="departure-date" id="filter-departure-date" class="filter-form-input-field" data-widget="datepicker" />
+                                <label for="departure-date">Depart</label><input type="text" name="departure-date" id="filter-departure-date" class="filter-form-input-field" data-widget="datepicker" data-from="departure-date-user" />
                             </div>
                             <div class="filter">
-                                <label for="return-date">Return</label><input type="text" name="return-date" id="filter-return-date" class="filter-form-input-field" data-widget="datepicker" />
+                                <label for="return-date">Return</label><input type="text" name="return-date" id="filter-return-date" class="filter-form-input-field" data-widget="datepicker" data-from="return-date"/>
                             </div>
                             <div class="filter">
                                 <label for="filter-airline">Airline</label>

@@ -127,8 +127,15 @@ input:focus {
 
 input[data-widget=datepicker] {
     background-image: url("../img/icon-calendar.png");
-    background-position: 140px 4px;
     background-repeat: no-repeat;
+}
+
+.search-form input[data-widget=datepicker] {
+    background-position: 140px 4px
+}
+
+.filter-form input[data-widget=datepicker] {
+    background-position: 186px 4px;
 }
 
 .search-form {

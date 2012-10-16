@@ -89,6 +89,23 @@ App.Collections.SearchResults = Backbone.Collection.extend({
 
     parse: function(response) {
         this.filters = response.filters;
+        
+        var setRoutes = function(route) {
+            route.departure = route.segments[0].departure;
+            route.arrival = route.segments[route.segments.length - 1].arrival;
+        };
+
+
+        _.forEach(response.flights, function(flight) {
+            if (flight.outboundRoutes !== undefined) {
+                _.forEach(flight.outboundRoutes, setRoutes);
+            }
+            if (flight.inboundRoutes !== undefined) {
+                _.forEach(flight.inboundRoutes, setRoutes);
+            }
+        });
+
+        
         return response.flights;
     },
 
@@ -248,6 +265,12 @@ App.Views.SearchFormView = Backbone.View.extend({
             app.searchResults.setQuery(query).fetch({ success: function() {
                 app.appView.subviews.searchResultsView.render();
             }});
+
+            _.forEach($("input[data-from]"), function(input) {
+                var $input = $(input),
+                    value = $("#" + $input.data("from")).val();
+                $input.val(value);
+             });
 
             app.router.navigate("search", { trigger: true });
 
