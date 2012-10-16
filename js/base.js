@@ -1,27 +1,5 @@
 $(function() {
 
-    $("#search-form").on("click", "button", function() {
-        var data = $(this).parents("form").serializeArray();
-        app.router.navigate("search", { trigger: true });
-        return false;
-    });
-
-	$("#buy-form").on("click", "button", function() {
-
-        var flight = app.flightList.get(app.information.get("flightId"));
-
-        /* $("#confirm-flight-from-airport").html(flight.parameters.fromAirportName);*/
-
-        var data = $(this).parents("form").serializeArray();
-
-        _.forEach(data, function(input) {
-            $("#confirm-" + input.name).html(input.value);
-        });
-
-        app.router.navigate("confirm", { trigger: true });
-        return false;
-    });
-
     $("form").on("change", "input", function(e) {
         var val = $(this).val(),
             param = $(this).data("validate");
@@ -69,9 +47,12 @@ $(function() {
         return res;
     }
 
+    App.init();
+
     Widgets.init();
 
-    App.init();
+    // test
+    // app.flightList.fetch({ success: function() { app.searchResultsView.render(); } })
 
     $("#flight-type").on("click", "input", function(e) {
 
@@ -86,3 +67,6 @@ $(function() {
     });
 
 });
+
+// convenient wrapper for debugging purposes
+var log = function(d) { console.log(d); };

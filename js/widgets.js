@@ -25,7 +25,15 @@ var Widgets = function() {
     var initDatepickers = function() {
 
         $("input[data-widget=datepicker]").each(function() {
-            $(this).datepicker({ minDate: 0 });
+            var options = { minDate: 0 };
+
+            var altField = $(this).data("bind");
+            if (typeof altField !== "undefined") {
+                options.altField = "#" + altField;
+                options.altFormat = "yy-mm-dd";
+            }
+
+            $(this).datepicker(options);
         });
 
     };
@@ -35,11 +43,12 @@ var Widgets = function() {
         // map strings to autocomplete datasources
         var sourceMap = {
             places: function(request, callback) {
-                API.Geo.getAirportsByName(request.term, function(data) {
-                    var list = _.first(_.pluck(data.airports, "description"), 10);
+                API.Geo.getAirportsByName({ name: request.term }, function(data) {
+                    var list = _.first(_.map(data.airports, function(airport) {
+                        return { _value: airport.airportId, label: airport.description };
+                    }), 10);
                     callback(list);
                 });
-
             }
         };
 
@@ -51,7 +60,13 @@ var Widgets = function() {
 
             $el.autocomplete({
                 source: source,
-                minLength: 3
+                minLength: 3,
+                select: function(e, ui) {
+                    var bind = $el.data("bind");
+                    if (typeof bind !== "undefined") {
+                        $("#" + bind).val(ui.item._value);
+                    }
+                }
             });
         });
 
@@ -64,21 +79,21 @@ var Widgets = function() {
             var $el = $(this);
             
             var content = '<label for="birth-day" class="select-label">Day</label> <select name="birth-day">';
-            for (var i = 1; i <= 31; i++) { 
+            for (var i = 1; i <= 31; i++) {
                 content += '<option value=' + i + '>' + i + '</option>'; 
-            }; 
+            }
             content += '</select>';
 
             content += '<label for="birth-month" class="select-label">Month</label> <select name="birth-month">';
-            for (var i = 1; i <= 12; i++) { 
+            for (i = 1; i <= 12; i++) {
                 content += '<option value=' + i + '>' + i + '</option>'; 
-            }; 
+            }
             content += '</select>';
 
             content += '<label for="birth-year" class="select-label">Year</label> <select name="birth-year">';
-            for (var i = new Date().getFullYear(); i >= 1900; i--) { 
+            for (i = new Date().getFullYear(); i >= 1900; i--) {
                 content += '<option value=' + i + '>' + i + '</option>'; 
-            }; 
+            }
             content += '</select>';
 
             $el.after(content).hide();
@@ -92,7 +107,7 @@ var Widgets = function() {
 
 
         });
-    }
+    };
 
     var initButtonSets = function() {
 
@@ -102,6 +117,28 @@ var Widgets = function() {
         
     };
 
+    var initSelects = function() {
+
+        $("[data-range-end]").each(function() {
+            var select = $(this),
+                start = select.data("range-start") || 0,
+                end = select.data("range-end"),
+                delta = (end - start) / Math.abs(end - start);
+
+            var i = start;
+            while (i != end) {
+                var option = document.createElement("option");
+
+                option.value = i;
+                option.innerHTML = i;
+                select.append(option);
+
+                i += delta;
+            }
+        });
+
+    };
+
     var initWidgets = function() {
 
         initSliders();
@@ -109,6 +146,7 @@ var Widgets = function() {
         initAutocompletes();
         initSelectDatepickers();
         initButtonSets();
+        initSelects();
 
     };
 
