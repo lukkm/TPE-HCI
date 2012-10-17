@@ -198,6 +198,17 @@ input[data-widget=datepicker] {
     float:right;
 }
 
+.stopover-total-duration {
+    clear: both;
+    padding: 5px 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #DDD;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
 #flight-type {
     float: left;
     position: relative;
