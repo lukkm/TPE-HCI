@@ -197,7 +197,7 @@ App.Routers.Router = Backbone.Router.extend({
     buy: function(id) {
         this.switchPage("buy");
         var $button = $("#back-purchase");
-        $button.attr("href", Handlebars.compile(button.data("href-template"))(
+        $button.attr("href", Handlebars.compile($button.data("href-template"))(
                     { flightId: id }));
     },
 
@@ -407,6 +407,7 @@ App.Views.BuyFormView = Backbone.View.extend({
     },
     
     submitForm: function(e) {
+        debugger;
         var flight = app.searchResults.get(app.information.get("flightId"));
 
         var data = $(this).parents("form").serializeArray();
