@@ -481,7 +481,7 @@ App.Views.NewsletterView = Backbone.View.extend({
             email = input.val();
         
         if (email !== "") {
-            this.$el.html("Thank you for subscribing to our newsletter!");
+            this.$el.html("<p>Thank you for subscribing to our newsletter!</p>");
             console.log("Subscribing " + email + " to the newsletter!");
         } else {
             input.trigger("focus");
