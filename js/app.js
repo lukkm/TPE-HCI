@@ -328,8 +328,9 @@ App.Views.SearchFormView = Backbone.View.extend({
 
         if (query.isValid(true)) {
 
-            app.searchResults.setQuery(query).fetch({ success: function() {
-                app.appView.subviews.searchResultsView.render();
+            var collection = app.searchResults;
+            collection.setQuery(query).fetch({ success: function() {
+                collection.trigger("update");
             }});
 
             _.forEach($("input[data-from]"), function(input) {
@@ -422,8 +423,19 @@ App.Views.SearchResultsView = Backbone.View.extend({
         "click .page": "changePage"
     },
 
+    filterRenderers: {
+        "airline": "renderAirlineFilter",
+        "stopover": "renderStopoverFilter",
+        "price": "renderPriceFilter"
+    },
+
     initialize: function(options) {
         this.template = options.template;
+
+        var that = this;
+        app.searchResults.on("update", function() {
+            that.render();
+        });
     },
 
     getContext: function() {
@@ -438,6 +450,9 @@ App.Views.SearchResultsView = Backbone.View.extend({
     render: function() {
         var $wrap = this.$el.find(".search-wrap");
         $wrap.html(this.template(this.getContext()));
+
+        this.renderFilters();
+
         return this;
     },
 
@@ -454,6 +469,38 @@ App.Views.SearchResultsView = Backbone.View.extend({
         var page = $(this).data("page");
         this.collection.query.set("page", page);
         this.collection.fetch();
+    },
+
+    renderFilters: function() {
+        var filter,
+            $el = this.$el.find(".search-filters");
+
+        var that = this;
+        _.each(this.collection.filters, function(filter) {
+            var func = that.filterRenderers[filter.key];
+            that[func]($el, filter);
+        });
+    },
+
+    renderAirlineFilter: function($el, filter) {
+        if (filter.values.length > 1) {
+            var template = Handlebars.compile($("#filter-airline").html());
+            $el.append(template({ airlines: filter.values }));
+        }
+    },
+
+    renderPriceFilter: function($el, filter) {
+        if (filter.values.min) {
+            var template = Handlebars.compile($("#filter-price").html());
+            $el.append(template({ max: filter.max, min: filter.min }));
+        }
+    },
+
+    renderStopoverFilter: function($el, filter) {
+        if (filter.values.length > 1) {
+            var template = Handlebars.compile($("#filter-stopovers").html());
+            $el.append(template({ stopovers: filter.values }));
+        }
     }
 
 });

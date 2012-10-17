@@ -151,6 +151,33 @@
                 {{{pagination pagination}}}
             </div>
         </script>
+        <script type="text/x-handlebars-template" id="filter-airline">
+            <div class="filter">
+                <label for="airline">Airline</label>
+                {{#each airlines}}
+                    <div class="check">
+                        <input type="checkbox" value="{{id}}" name="filter-airline" /> {{name}}
+                    </div>
+                {{/each}}
+            </div>
+        </script>
+        <script type="text/x-handlebars-template" id="filter-stopovers">
+            <div class="filter">
+                <label for="stopovers">Stopovers</label>
+                {{#each stopovers}}
+                    <div class="check">
+                        <input type="checkbox" value="{{id}}" name="filter-airline" /> {{count}}
+                    </div>
+                {{/each}}
+            </div>
+        </script>
+        <script type="text/x-handlebars-template" id="filter-price">
+            <div class="filter">
+                <label for="price">Price</label>
+                <input type="text" name="price" id="price" />
+                <div id="slider-range-price" data-widget="slider" data-target="price" data-min="{{min}}" data-max="{{max}}"></div>
+            </div>
+        </script>
     </head>
     <body data-title-base="Travel.ly" data-title-separator=" | ">
         <div class="container"> 
@@ -258,30 +285,20 @@
                             <div class="filter">
                                 <label for="return-date">Return</label><input type="text" name="return-date" id="filter-return-date" class="filter-form-input-field" data-widget="datepicker" data-from="return-date"/>
                             </div>
-                            <div class="filter">
-                                <label for="filter-airline">Airline</label>
-                            </div>
-                            <div class="filter">
-                                <div class="check">
-                                    <input type="checkbox" name="filter-airline" value="LAN" />LAN
-                                </div>
-                                <div class="check">
-                                    <input type="checkbox" name="filter-airline" value="Aerolineas Argentinas" />Aerolineas Argentinas
-                                </div>
-                                <div class="check">
-                                    <input type="checkbox" name="filter-airline" value="TAM" />TAM
-                                </div>
-                            </div>
-                            <div class="filter-title">Price</div>
-                            <div class="search-filter">
-                                <!-- <label for="filter-price">Precio</label> -->
-                                <input type="text" name="filter-price" id="filter-price" />
-                                <div id="slider-range-price" data-widget="slider" data-target="filter-price"></div>
-                            </div>
-                            <div class="filter-option filter-title">
-                                Show only deals
-                                <input type="checkbox" class="filter-checkbox" name="show-deals"/>
-                            </div>
+                            <!-- <div class="filter"> -->
+                                <!-- <label for="filter-airline">Airline</label> -->
+                            <!-- </div> -->
+                            <!-- <div class="filter"> -->
+                                <!-- <div class="check"> -->
+                                    <!-- <input type="checkbox" name="filter-airline" value="LAN" />LAN -->
+                                <!-- </div> -->
+                                <!-- <div class="check"> -->
+                                    <!-- <input type="checkbox" name="filter-airline" value="Aerolineas Argentinas" />Aerolineas Argentinas -->
+                                <!-- </div> -->
+                                <!-- <div class="check"> -->
+                                    <!-- <input type="checkbox" name="filter-airline" value="TAM" />TAM -->
+                                <!-- </div> -->
+                            <!-- </div> -->
                         </form>
                     </div>
                     <div class="search-wrap">

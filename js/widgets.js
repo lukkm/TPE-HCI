@@ -4,12 +4,14 @@ var Widgets = function() {
 
         $("[data-widget=slider]").each(function() {
             var $el = $(this),
-                $target = $("#" + $el.data("target"));
+                $target = $("#" + $el.data("target")),
+                min = $el.data("min"),
+                max = $el.data("max");
 
             $el.slider({
                 range: true,
-                min: 0,
-                max: 500,
+                min: min,
+                max: max,
                 values: [ 75, 300 ],
                 slide: function(event, ui) {
                     $target.val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
