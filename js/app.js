@@ -124,7 +124,7 @@ App.Collections.SearchResults = Backbone.Collection.extend({
 
         var setSegments = function(route){
             _.forEach(route.segments, setSegment);
-            route.id = route.segments[0].flightId;
+            route.id = _.uniqueId();
         }
 
         var setOneWayRoutes = function(flight, routes) { 
@@ -150,11 +150,7 @@ App.Collections.SearchResults = Backbone.Collection.extend({
                 flight.inboundDate = flight.departureDateToMoment.format("MMMM Do YYYY");
             }
 
-           
-
-            /* Ver que hacer con los flightId porque pertenecen a los segmentos */
-
-            flight.flightId = 1;
+            flight.flightId = _.uniqueId();
         });
     },
 

@@ -40,15 +40,15 @@
                         <table>
                         {{#outboundRoutes}}
                                 <tr>
-                                    <td class="radio-col"><input type="radio" name="outbound-{{flightId}}"/></td>
+                                    <td class="radio-col"><input type="radio" name="outbound-{{id}}"/></td>
                                     <td class="text-col">Departs</td>
                                     <td class="datetime-col"><strong>{{departure.time}}</strong></td>
                                     <td class="text-col">Arrives</td>
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col"><a href="#stopovers-outbound" class="fancybox">{{stopovers}}</a></td>
-                                    <div id="stopovers-outbound">
+                                    <td class="scales-col"><a href="#stopovers-outbound-{{id}}" class="fancybox">{{stopovers}}</a></td>
+                                    <div id="stopovers-outbound-{{id}}" class="stopovers">
                                         <h2>Stopovers</h2>
                                         {{#segments}}
                                         <div class="stopover">
@@ -78,15 +78,15 @@
                          <table>
                         {{#inboundRoutes}}
                                 <tr>
-                                    <td class="radio-col"><input type="radio" name="inbound-{{flightId}}"/></td>
+                                    <td class="radio-col"><input type="radio" name="inbound-{{id}}"/></td>
                                     <td class="text-col">Depart</td> 
                                     <td class="datetime-col"><strong>{{departure.time}}</strong></td>
                                     <td class="text-col">Arrives</td> 
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col"><a href="#stopovers-inbound" class="fancybox">{{stopovers}}</a></td>
-                                     <div id="stopovers-inbound">
+                                    <td class="scales-col"><a href="#stopovers-inbound-{{id}}" class="fancybox">{{stopovers}}</a></td>
+                                     <div id="stopovers-inbound-{{id}}" class="stopovers">
                                         <h2>Stopovers</h2>
                                         {{#segments}}
                                         <div class="stopover">

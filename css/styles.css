@@ -502,8 +502,7 @@ label {
     font-size: 14px;
     text-align: center;
 }
-#stopovers-outbound,
-#stopovers-inbound {
+.stopovers {
     display: none;
     width: 700px;
     padding: 10px;
