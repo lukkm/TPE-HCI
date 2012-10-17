@@ -229,6 +229,10 @@ input[data-widget=datepicker] {
     width: 154px;
 }
 
+.comments-form input {
+    margin-right: 20px;
+}
+
 .form-section {
     background: white;
     border: 1px solid #F8CA95;
