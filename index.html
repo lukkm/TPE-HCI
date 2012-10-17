@@ -47,7 +47,23 @@
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col"><a href="#stopovers" class="fancybox">{{stopovers}}</a></td>
+                                    <td class="scales-col"><a href="#stopovers-outbound" class="fancybox">{{stopovers}}</a></td>
+                                    <div id="stopovers-outbound">
+                                        <h2>Stopovers</h2>
+                                        {{#segments}}
+                                        <div class="stopover">
+                                            <div class="stopover-title">Flight: {{flightNumber}} - Class: {{cabinType}}</div>
+                                            <div class="stopover-stop">
+                                                <span class="stopover-airport"><strong>Departs from:</strong> {{departure.airportDescription}}</span>
+                                                <span class="stopover-datetime">{{departure.formatedDate}}, {{departure.formatedTime}}</span>
+                                            <div>
+                                            <div class="stopover-stop">
+                                                <span class="stopover-airport"><strong>Arrives to:</strong> {{arrival.airportDescription}}</span>
+                                                <span class="stopover-datetime">{{arrival.formatedDate}}, {{arrival.formatedTime}}</span>
+                                            </div>
+                                        </div>
+                                        {{/segments}}
+                                    </div>
                                 </tr>
                         {{/outboundRoutes}}
                         </table>
@@ -69,7 +85,23 @@
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col">{{stopovers}}</td>
+                                    <td class="scales-col"><a href="#stopovers-inbound" class="fancybox">{{stopovers}}</a></td>
+                                     <div id="stopovers-inbound">
+                                        <h2>Stopovers</h2>
+                                        {{#segments}}
+                                        <div class="stopover">
+                                            <div class="stopover-title">Flight: {{flightNumber}} - Class: {{cabinType}}</div>
+                                            <div class="stopover-stop">
+                                                <span class="stopover-airport"><strong>Departs from:</strong> {{departure.airportDescription}}</span>
+                                                <span class="stopover-datetime">{{departure.formatedDate}}, {{departure.formatedTime}}</span>
+                                            <div>
+                                            <div class="stopover-stop">
+                                                <span class="stopover-airport"><strong>Arrives to:</strong> {{arrival.airportDescription}}</span>
+                                                <span class="stopover-datetime">{{arrival.formatedDate}}, {{arrival.formatedTime}}</span>
+                                            </div>
+                                        </div>
+                                        {{/segments}}
+                                    </div>
                                 </tr>
                         {{/inboundRoutes}}
                         </table>
@@ -118,9 +150,6 @@
                     </div>
                     <a href="#buy/{{flightId}}" class="button button-small">Select</a>
                 </div>
-            </div>
-            <div id="stopovers">
-                <p>Stopovers</p>
             </div>
         </script>
         <script type="text/x-handlebars-template" id="search-results">
