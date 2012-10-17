@@ -99,25 +99,28 @@ App.Collections.SearchResults = Backbone.Collection.extend({
 
             var flightLength = route.segments.length;
 
-            route.stopovers = (flightLength == 1) ? "Direct" : (flightLength-1) + ((flightLength > 2) ? " stopovers" : " stopover");
+            route.stopovers = (flightLength == 1) ? "Direct" : (flightLength-1) + " stopover";
+            if (flightLength > 2)
+                    route.stopovers += "s";
         };
 
         var setOneWayRoutes = function(flight, routes) { 
             _.forEach(routes, setRoutes);
             flight.departure = routes[0].departure;
             flight.arrival = routes[0].arrival;
-            flight.departure.time = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss").format("h:mm a");
-            flight.arrival.time = moment(flight.arrival.date, "YYYY-MM-DD hh:mm:ss").format("h:mm a");
+            flight.dateToMoment = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss");
+            flight.departure.time = flight.dateToMoment.format("h:mm a");
+            flight.arrival.time = flight.departure.time;
         };
 
         _.forEach(response.flights, function(flight) {
-            if (flight.outboundRoutes !== undefined) {
+            if (flight.outboundRoutes != 'undefined') {
                 setOneWayRoutes(flight, flight.outboundRoutes);
-                flight.outboundDate = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss").format("MMMM Do YYYY");
+                flight.outboundDate = flight.dateToMoment.format("MMMM Do YYYY");
             }
-            if (flight.inboundRoutes !== undefined) {
+            if (flight.inboundRoutes != 'undefined') {
                 setOneWayRoutes(flight, flight.boundRoutes);
-                flight.inboundDate = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss").format("MMMM Do YYYY");
+                flight.inboundDate = flight.dateToMoment.format("MMMM Do YYYY");
             }
 
            
