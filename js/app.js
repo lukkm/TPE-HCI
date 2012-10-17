@@ -23,7 +23,7 @@ App.Models.Query = Backbone.Model.extend({
         to: { required: true },
         repeat: { oneOf: ["one-way", "round-trip"] },
         dep_date: { pattern: /\d{4}-\d{2}-\d{2}/ },
-        ret_date: { pattern: /\d{4}-\d{2}-\d{2}/ }
+        ret_date: { required: false, pattern: /\d{4}-\d{2}-\d{2}/ }
     }
 
 });
