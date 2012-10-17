@@ -501,7 +501,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
     },
 
     renderPriceFilter: function($el, filter) {
-        if (filter.values.min) {
+        if (filter.min) {
             var template = Handlebars.compile($("#filter-price").html());
             $el.append(template({ max: filter.max, min: filter.min }));
         }
