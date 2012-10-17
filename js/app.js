@@ -86,10 +86,10 @@ App.Collections.SearchResults = Backbone.Collection.extend({
         };
         this.filters = response.filters;
         this.pagination = {
-            page: response.page,
+            page:     response.page,
             pageSize: response.pageSize,
-            total: response.total,
-            pages: Math.ceil(response.total / response.pageSize),
+            total:    response.total,
+            pages:    Math.ceil(response.total / response.pageSize),
             hasPages: Math.ceil(response.total / response.pageSize) > 1
         };
         

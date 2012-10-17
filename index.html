@@ -233,17 +233,6 @@
                             </form>
                         </div>
 
-                        <div class="secondary-deals">
-                            <div class="deal" id="deal1">
-                                Deal 1
-                            </div>
-                            <div class="deal" id="deal2"> 
-                                Deal 2
-                            </div>
-                            <div class="deal" id="deal3">
-                                Deal 3
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -439,6 +428,24 @@
 
             </div>
 
+        </div>
+
+        <div class="recommendations">
+            <div class="wrap">
+                <h2>Search and publish flight recommendations</h2>
+                <form action="" method="post">
+                    <div class="search-input-container">
+                        <label for="airline">Airline</label>
+                        <input type="text" name="airline" value="" data-widget="autocomplete" data-source="airlines" />
+                    </div>
+                    <div class="search-input-container">
+                        <label for="flight_number">Flight number</label>
+                        <input type="text" name="flight_number" value="" />
+                    </div>
+                    <button type="submit" class="button button-small">Find recommendations</button>
+                </form>
+
+            </div>
         </div>
 
         <div class="footer">

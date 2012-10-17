@@ -35,19 +35,21 @@ p {
 
 .container {
     overflow: auto;
-    background: white url("../img/background.png") repeat-x;
+    background: #FBDEB9;
     padding-bottom: 40px;
+    border-bottom: 1px solid #FDBB7D;
 }
 
 /* =Newsletter */
 
 .newsletter-subscribe {
-    border: 1px solid #BBB;
+    border: 1px solid #F5A300;
     margin-top: 15px;
     width: 525px;
     float: left;
     font-size: 14px;
     padding: 20px 20px 11px 20px;
+    background: white;
 }
 
 .newsletter-subscribe p {
@@ -141,7 +143,7 @@ input[data-widget=datepicker] {
 .search-form {
     background-color: white;
     width: 335px;
-    border: 1px #F5A300 solid;
+    border: 1px solid #F5A300;
     height: 330px;
     margin: 0 10px 10px 0;
     padding: 20px;
@@ -167,10 +169,6 @@ input[data-widget=datepicker] {
 	font-weight: bold;
 	color: #999;
     margin: 3px 0;
-}
-
-.search-form button {
-	margin-top: -5px;
 }
 
 .search-form label[for=adults],
@@ -209,7 +207,7 @@ input[data-widget=datepicker] {
     overflow: auto;
 }
 
-.form-section label {
+label {
     display: block;
     font-size: 13px;
     font-weight: bold;
@@ -326,7 +324,7 @@ input[data-widget=datepicker] {
 
 .deal-title {
     float: right;
-    margin-top: 182px;
+    margin-top: 160px;
     height: 130px;
     width: 300px;
 }
@@ -337,6 +335,7 @@ input[data-widget=datepicker] {
     width: 300px;
     position: absolute;
     opacity: 0.6;
+    border-radius: 10px 0 0 10px;
 }
 
 .deal-text {
@@ -349,28 +348,6 @@ input[data-widget=datepicker] {
 .deal-text h2 {
     margin: 0;
     font-size: 32px;
-}
-
-.secondary-deals {
-    float: left;
-    clear: both;
-    overflow: auto;
-    margin-top: 5px;
-}
-
-.deal {
-    width: 310px;
-    height: 150px;
-    margin-left: 15px;
-    padding-top: 110px;
-    background-color: #E2E2E2;
-    text-align: center;
-    font-weight: bold;
-    float: left;
-}
-
-#deal1 {
-    margin-left: 0;
 }
 
 /* =Page */
@@ -457,7 +434,7 @@ input[data-widget=datepicker] {
     padding: 10px 0;
     margin-top: 70px;
     margin-bottom: 10px;
-    background-color: #DDD; 
+    background-color: #DDD;
     text-align: center;
 }
 
@@ -546,6 +523,10 @@ input[data-widget=datepicker] {
     font-weight: bold;
     margin-bottom: 5px;
     display: block;
+}
+
+.search-form .submit {
+    margin-top: 15px;
 }
 
 .submit {
@@ -652,6 +633,12 @@ input[data-widget=datepicker] {
     padding: 20px 0 40px;;
     margin: 0 auto;
     width: 960px;
+}
+
+.recommendations {
+    border-top: 1px solid white;
+    padding-top: 10px;
+    background: #FFF7EA;
 }
 
 .invalid {
