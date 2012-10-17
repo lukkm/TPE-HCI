@@ -357,7 +357,7 @@ label {
 
 .search-filters {
     width: 220px;
-    border: 8px solid #F8CA95;
+    border: 2px solid #F8CA95;
     padding: 16px;
     float: left;
 }
@@ -431,11 +431,12 @@ label {
 
 .search-result-title {
     clear: both;
-    padding: 10px 0;
+    padding: 5px 0;
     margin-top: 70px;
     margin-bottom: 10px;
     background-color: #DDD;
     text-align: center;
+    font-size: 12px;
 }
 
 .search-result-container table {
@@ -451,7 +452,8 @@ label {
 }
 
 .search-result-container td {
-    padding: 0 5px;
+    padding: 5px;
+    font-size: 12px;
 }
 
 .search-result-icon img {

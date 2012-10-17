@@ -92,7 +92,14 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             pages:    Math.ceil(response.total / response.pageSize),
             hasPages: Math.ceil(response.total / response.pageSize) > 1
         };
-        
+
+        this.extractRoutes(response);
+
+        return response.flights;
+    },
+
+    extractRoutes: function(response) {
+
         var setRoutes = function(route) {
             route.departure = route.segments[0].departure;
             route.arrival = route.segments[route.segments.length - 1].arrival;
@@ -100,17 +107,22 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             var flightLength = route.segments.length;
 
             route.stopovers = (flightLength == 1) ? "Direct" : (flightLength-1) + " stopover";
-            if (flightLength > 2)
-                    route.stopovers += "s";
+
+            if (flightLength > 2) {
+                route.stopovers += "s";
+            }
         };
 
         var setOneWayRoutes = function(flight, routes) { 
+
             _.forEach(routes, setRoutes);
-            flight.departure = routes[0].departure;
-            flight.arrival = routes[0].arrival;
-            flight.dateToMoment = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss");
+
+            flight.departure      = routes[0].departure;
+            flight.arrival        = routes[0].arrival;
+            flight.dateToMoment   = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss");
             flight.departure.time = flight.dateToMoment.format("h:mm a");
-            flight.arrival.time = flight.departure.time;
+            flight.arrival.time   = flight.departure.time;
+
         };
 
         _.forEach(response.flights, function(flight) {
@@ -129,8 +141,6 @@ App.Collections.SearchResults = Backbone.Collection.extend({
 
             flight.flightId = 1;
         });
-
-        return response.flights;
     },
 
     setQuery: function(query) {
@@ -175,8 +185,8 @@ App.Routers.Router = Backbone.Router.extend({
 
     buy: function(id) {
         this.switchPage("buy");
-        var button = $("#back-purchase");
-        button.attr("href", Handlebars.render(button.data("href-template"),
+        var $button = $("#back-purchase");
+        $button.attr("href", Handlebars.compile(button.data("href-template"))(
                     { flightId: id }));
     },
 
