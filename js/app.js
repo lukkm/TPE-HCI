@@ -113,33 +113,44 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             }
         };
 
+        var setSegment = function(segment){
+            var dateToMoment = moment(segment.departure.date, "YYYY-MM-DD hh:mm:ss");
+            segment.departure.formatedDate = dateToMoment.format("MMMM Do YYYY");
+            segment.departure.formatedTime = dateToMoment.format("h:mm a"); 
+            dateToMoment = moment(segment.arrival.date, "YYYY-MM-DD hh:mm:ss");
+            segment.arrival.formatedDate = dateToMoment.format("MMMM Do YYYY");
+            segment.arrival.formatedTime = dateToMoment.format("h:mm a"); 
+        }
+
+        var setSegments = function(route){
+            _.forEach(route.segments, setSegment);
+            route.id = _.uniqueId();
+        }
+
         var setOneWayRoutes = function(flight, routes) { 
 
             _.forEach(routes, setRoutes);
+            _.forEach(routes, setSegments);
 
             flight.departure      = routes[0].departure;
             flight.arrival        = routes[0].arrival;
-            flight.dateToMoment   = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss");
-            flight.departure.time = flight.dateToMoment.format("h:mm a");
-            flight.arrival.time   = flight.departure.time;
-
+            flight.departureDateToMoment   = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss");
+            flight.arrivalDateToMoment   = moment(flight.arrival.date, "YYYY-MM-DD hh:mm:ss");
+            flight.departure.time = flight.departureDateToMoment.format("h:mm a");
+            flight.arrival.time   = flight.arrivalDateToMoment.format("h:mm a");
         };
 
         _.forEach(response.flights, function(flight) {
             if (typeof flight.outboundRoutes !== 'undefined') {
                 setOneWayRoutes(flight, flight.outboundRoutes);
-                flight.outboundDate = flight.dateToMoment.format("MMMM Do YYYY");
+                flight.outboundDate = flight.departureDateToMoment.format("MMMM Do YYYY");
             }
             if (typeof flight.inboundRoutes !== 'undefined') {
-                setOneWayRoutes(flight, flight.boundRoutes);
-                flight.inboundDate = flight.dateToMoment.format("MMMM Do YYYY");
+                setOneWayRoutes(flight, flight.inboundRoutes);
+                flight.inboundDate = flight.departureDateToMoment.format("MMMM Do YYYY");
             }
 
-           
-
-            /* Ver que hacer con los flightId porque pertenecen a los segmentos */
-
-            flight.flightId = 1;
+            flight.flightId = _.uniqueId();
         });
     },
 
@@ -230,7 +241,7 @@ App.Routers.Router = Backbone.Router.extend({
             baseTitle = $("body").data("title-base"),
             separator = $("body").data("title-separator");
 
-        if (pageTitle !== undefined) {
+        if (typeof pageTitle !== 'undefined') {
             document.title = pageTitle + separator + baseTitle;
         } else {
             document.title = baseTitle;
@@ -517,7 +528,7 @@ App.Views.NewsletterView = Backbone.View.extend({
             email = input.val();
         
         if (email !== "") {
-            this.$el.html("Thank you for subscribing to our newsletter!");
+            this.$el.html("<p>Thank you for subscribing to our newsletter!</p>");
             console.log("Subscribing " + email + " to the newsletter!");
         } else {
             input.trigger("focus");

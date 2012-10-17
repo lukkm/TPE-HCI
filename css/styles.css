@@ -152,7 +152,7 @@ input[data-widget=datepicker] {
 
 .search-form h2 {
     float: left;
-    width: 168px;
+    width: 167px;
 }
 
 .search-form input { 
@@ -179,6 +179,36 @@ input[data-widget=datepicker] {
     display: block;
 }
 
+/* =Stopovers */
+
+.stopover {
+    margin-top: 30px;
+    font-size: 13px;
+}
+
+.stopover-title {
+    color: #AAA;
+    margin-bottom: 10px;
+    border-bottom: solid 1px #CCC;
+    font-style: italic;
+    padding-bottom: 8px;
+}
+
+.stopover-datetime {
+    float:right;
+}
+
+.stopover-total-duration {
+    clear: both;
+    padding: 5px 0;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    background-color: #DDD;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
 #flight-type {
     float: left;
     position: relative;
@@ -197,6 +227,10 @@ input[data-widget=datepicker] {
 
 .column-2 input {
     width: 154px;
+}
+
+.comments-form input {
+    margin-right: 20px;
 }
 
 .form-section {
@@ -483,8 +517,7 @@ label {
     font-size: 14px;
     text-align: center;
 }
-
-#stopovers {
+.stopovers {
     display: none;
     width: 700px;
     padding: 10px;

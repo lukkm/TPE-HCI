@@ -40,14 +40,31 @@
                         <table>
                         {{#outboundRoutes}}
                                 <tr>
-                                    <td class="radio-col"><input type="radio" name="outbound-{{flightId}}"/></td>
+                                    <td class="radio-col"><input type="radio" name="outbound-{{id}}"/></td>
                                     <td class="text-col">Departs</td>
                                     <td class="datetime-col"><strong>{{departure.time}}</strong></td>
                                     <td class="text-col">Arrives</td>
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col"><a href="#stopovers" class="fancybox">{{stopovers}}</a></td>
+                                    <td class="scales-col"><a href="#stopovers-outbound-{{id}}" class="fancybox">{{stopovers}}</a></td>
+                                    <div id="stopovers-outbound-{{id}}" class="stopovers">
+                                        <h2>Stopovers</h2>
+                                        {{#segments}}
+                                        <div class="stopover">
+                                            <div class="stopover-title">Flight: {{flightNumber}} - Class: {{cabinType}}</div>
+                                            <div class="stopover-stop">
+                                                <span class="stopover-airport"><strong>Departs from:</strong> {{departure.airportDescription}}</span>
+                                                <span class="stopover-datetime">{{departure.formatedDate}}, {{departure.formatedTime}}</span>
+                                            <div>
+                                            <div class="stopover-stop">
+                                                <span class="stopover-airport"><strong>Arrives to:</strong> {{arrival.airportDescription}}</span>
+                                                <span class="stopover-datetime">{{arrival.formatedDate}}, {{arrival.formatedTime}}</span>
+                                            </div>
+                                        </div>
+                                        {{/segments}}
+                                        <div class="stopover-total-duration">Total duration: {{duration}}</div>
+                                    </div>
                                 </tr>
                         {{/outboundRoutes}}
                         </table>
@@ -62,14 +79,31 @@
                          <table>
                         {{#inboundRoutes}}
                                 <tr>
-                                    <td class="radio-col"><input type="radio" name="inbound-{{flightId}}"/></td>
+                                    <td class="radio-col"><input type="radio" name="inbound-{{id}}"/></td>
                                     <td class="text-col">Depart</td> 
                                     <td class="datetime-col"><strong>{{departure.time}}</strong></td>
                                     <td class="text-col">Arrives</td> 
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col">{{stopovers}}</td>
+                                    <td class="scales-col"><a href="#stopovers-inbound-{{id}}" class="fancybox">{{stopovers}}</a></td>
+                                     <div id="stopovers-inbound-{{id}}" class="stopovers">
+                                        <h2>Stopovers</h2>
+                                        {{#segments}}
+                                        <div class="stopover">
+                                            <div class="stopover-title">Flight: {{flightNumber}} - Class: {{cabinType}}</div>
+                                            <div class="stopover-stop">
+                                                <span class="stopover-airport"><strong>Departs from:</strong> {{departure.airportDescription}}</span>
+                                                <span class="stopover-datetime">{{departure.formatedDate}}, {{departure.formatedTime}}</span>
+                                            <div>
+                                            <div class="stopover-stop">
+                                                <span class="stopover-airport"><strong>Arrives to:</strong> {{arrival.airportDescription}}</span>
+                                                <span class="stopover-datetime">{{arrival.formatedDate}}, {{arrival.formatedTime}}</span>
+                                            </div>
+                                        </div>
+                                        {{/segments}}
+                                        <div class="stopover-total-duration">Total duration: {{duration}}</div>
+                                    </div>
                                 </tr>
                         {{/inboundRoutes}}
                         </table>
@@ -118,9 +152,6 @@
                     </div>
                     <a href="#buy/{{flightId}}" class="button button-small">Select</a>
                 </div>
-            </div>
-            <div id="stopovers">
-                <p>Stopovers</p>
             </div>
         </script>
         <script type="text/x-handlebars-template" id="search-results">
@@ -453,7 +484,7 @@
         <div class="recommendations">
             <div class="wrap">
                 <h2>Search and publish flight recommendations</h2>
-                <form action="" method="post">
+                <form action="" method="post" class="comments-form">
                     <div class="search-input-container">
                         <label for="airline">Airline</label>
                         <input type="text" name="airline" value="" data-widget="autocomplete" data-source="airlines" />
