@@ -9,17 +9,9 @@
     var call = function(service, data, options) {
         var url = BASE_URL + service + ".groovy";
 
-        if (isFunction(options)) {
-            var callback = options;
-            options = {};
-        } else {
-            options = options || {};
-        }
-
         options.url      = url;
         options.data     = data;
         options.dataType = options.dataType || "jsonp";
-        options.success  = options.success || callback;
 
         return $.ajax(options);
     };
@@ -166,6 +158,9 @@
             data = data || {};
             data.method = "BookFlight";
             options = options || {};
+            if (isFunction(options)) {
+                options = { success: options };
+            }
             options.type = "POST";
             options.contentType = "application/json";
             return call("Booking", data, options);
@@ -192,6 +187,9 @@
             data = data || {};
             data.method = "ReviewAirline";
             options = options || {};
+            if (isFunction(options)) {
+                options = { success: options };
+            }
             options.type = "POST";
             return call("Review", data, options);
         }
