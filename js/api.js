@@ -9,6 +9,12 @@
     var call = function(service, data, options) {
         var url = BASE_URL + service + ".groovy";
 
+        if (isFunction(options)) {
+            options = { success: options };
+        } else {
+            options = options || {};
+        }
+
         options.url      = url;
         options.data     = data;
         options.dataType = options.dataType || "jsonp";

@@ -78,7 +78,14 @@ var Widgets = function() {
 
         $("input[data-widget=datepicker-select]").each(function() {
             
-            var $el = $(this);
+            var $el = $(this),
+                hasWidget = $el.data("has-widget");
+
+            if (hasWidget) {
+                return;
+            }
+
+            $el.data("has-widget", true);
             
             var content = '<label for="birth-day" class="select-label">Day</label> <select name="birth-day">';
             for (var i = 1; i <= 31; i++) {
@@ -123,29 +130,40 @@ var Widgets = function() {
 
         $("[data-range-end]").each(function() {
             var select = $(this),
-                start = select.data("range-start") || 0,
+                hasWidget = select.data("has-widget");
+
+            if (hasWidget) {
+                return;
+            }
+
+            select.data("has-widget", true);
+
+            var start = select.data("range-start") || 0,
                 end = select.data("range-end"),
-                delta = (end - start) / Math.abs(end - start);
+                delta = (end - start) / Math.abs(end - start),
+                selected = select.data("selected");
 
-            var i = start;
-            while (i != end) {
-                var option = document.createElement("option");
+            var i = start,
+                options = "",
+                checked = "";
 
-                option.value = i;
-                option.innerHTML = i;
-                select.append(option);
-
+            while (i !== end) {
+                checked = (i == selected) ? " selected" : "";
+                options += '<option value="' + i + '"' + checked + '>' + i + '</option>';
                 i += delta;
             }
+            select.append(options);
         });
 
     };
 
     var initFancyBox = function() {
+
         $(".fancybox").fancybox({
             openEffect  : 'none',
             closeEffect : 'none'
-        })
+        });
+
     };
 
     var initWidgets = function() {

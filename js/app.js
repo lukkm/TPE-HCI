@@ -77,10 +77,19 @@ App.Collections.SearchResults = Backbone.Collection.extend({
         this.query.set("sort_order", sort_order);
 
         // @TODO: validate query model
-        this.fetch();
+        var that = this;
+        this.fetch({ success: function() {
+            that.trigger("update");
+        } });
     },
 
     parse: function(response) {
+        // @TODO: see if there is a cleaner way to handle errors
+        if (response.error) {
+            this.trigger("error", response.error);
+            return [];
+        }
+
         this.metadata = {
             currencyId: response.currencyId
         };
@@ -166,6 +175,7 @@ App.Routers.Router = Backbone.Router.extend({
     routes: {
         ""          : "home",
         "about"     : "about",
+        "toc"       : "toc",
         "search"    : "search",
         "buy/:id"   : "buy",
         "confirm"   : "confirm",
@@ -183,6 +193,10 @@ App.Routers.Router = Backbone.Router.extend({
 
     about: function() {
         this.switchPage("about");
+    },
+
+    toc: function() {
+        this.switchPage("toc");
     },
 
     search: function() {
@@ -268,7 +282,8 @@ App.Views.AppView = Backbone.View.extend({
 
         this.subviews.searchResultsView = new App.Views.SearchResultsView({
             el: $("#page-search"),
-            template: Handlebars.compile($("#search-results").html()),
+            template: app.templates["search-results"],
+            errorTemplate: app.templates["search-error"],
             collection: app.searchResults
         });
 
@@ -444,19 +459,27 @@ App.Views.SearchResultsView = Backbone.View.extend({
     initialize: function(options) {
         this.template = options.template;
 
-        var that = this;
-        app.searchResults.on("update", function() {
-            that.render();
+        var view = this;
+        this.collection.on("update", function() {
+            view.render();
+        });
+        this.collection.on("error", function(error) {
+            view.showError(error);
         });
     },
 
     getContext: function() {
         return {
-            flights: this.collection.toJSON(),
+            flights:    this.collection.toJSON(),
             pagination: this.collection.pagination,
-            filters: this.collection.filters,
-            metadata: this.collection.metadata
+            filters:    this.collection.filters,
+            metadata:   this.collection.metadata
         };
+    },
+
+    showError: function(error) {
+        var $wrap = this.$el.find(".search-wrap");
+        $wrap.html(this.errorTemplate(error));
     },
 
     render: function() {
@@ -485,7 +508,9 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     renderFilters: function() {
         var filter,
-            $el = this.$el.find(".search-filters");
+            $el = this.$el.find(".dynamic-filters");
+
+        $el.html(null);
 
         var that = this;
         _.each(this.collection.filters, function(filter) {
@@ -496,21 +521,22 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     renderAirlineFilter: function($el, filter) {
         if (filter.values.length > 1) {
-            var template = Handlebars.compile($("#filter-airline").html());
+            var template = app.templates["filter-airline"];
             $el.append(template({ airlines: filter.values }));
         }
     },
 
     renderPriceFilter: function($el, filter) {
-        if (filter.min) {
-            var template = Handlebars.compile($("#filter-price").html());
+        if (filter.min && filter.max && filter.min !== filter.max) {
+            var template = app.templates["filter-price"];
             $el.append(template({ max: filter.max, min: filter.min }));
         }
+        Widgets.init();
     },
 
     renderStopoverFilter: function($el, filter) {
-        if (filter.values.length > 1) {
-            var template = Handlebars.compile($("#filter-stopovers").html());
+        if (filter.value.length > 1) {
+            var template = app.templates["filter-stopovers"];
             $el.append(template({ stopovers: filter.values }));
         }
     }
@@ -557,6 +583,12 @@ App.Info = function() {
 App.init = function() {
 
     window.app = {};
+
+    // init templates
+    var templates = app.templates = {};
+    $("script[type='text/x-handlebars-template']").each(function() {
+        templates[this.id] = Handlebars.compile(this.innerHTML);
+    });
 
     // initialize main router
     app.router = new App.Routers.Router();

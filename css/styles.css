@@ -137,7 +137,7 @@ input[data-widget=datepicker] {
 }
 
 .filter-form input[data-widget=datepicker] {
-    background-position: 186px 4px;
+    background-position: 190px 4px;
 }
 
 .search-form {
@@ -394,7 +394,7 @@ label {
 }
 
 .search-filters {
-    width: 220px;
+    width: 232px;
     border: 2px solid #F8CA95;
     padding: 16px;
     float: left;
@@ -453,7 +453,7 @@ label {
 
 .search-result {
     background-color: white;
-    border: 1px solid #F8CA95;
+    border: 2px solid #F8CA95;
     font-size: 14px;
     margin-bottom: 16px;
     overflow: auto;
@@ -601,7 +601,7 @@ label {
 /* =Sorting */
 .search-results-header {
     background: white;
-    border: 1px solid #F8CA95;
+    border: 2px solid #F8CA95;
     padding: 10px 20px;
     border-radius: 3px;
     font-size: 13px;

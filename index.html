@@ -187,7 +187,7 @@
                 <label for="airline">Airline</label>
                 {{#each airlines}}
                     <div class="check">
-                        <input type="checkbox" value="{{id}}" name="filter-airline" /> {{name}}
+                        <input type="checkbox" value="{{id}}" name="filter-airline" checked /> {{name}}
                     </div>
                 {{/each}}
             </div>
@@ -207,6 +207,12 @@
                 <label for="price">Price</label>
                 <input type="text" name="price" id="price" />
                 <div id="slider-range-price" data-widget="slider" data-target="price" data-min="{{min}}" data-max="{{max}}"></div>
+            </div>
+        </script>
+        <script type="text/x-handlebars-template" id="search-error">
+            <div class="search-error">
+                <h2>Search error</h2>
+                <p>{{message}} (code: {{code}})</p>
             </div>
         </script>
     </head>
@@ -250,19 +256,19 @@
                                 <div class="column-2">
                                     <div class="search-input-container">
                                         <label for="departure-date">Depart</label>
-                                        <input type="text" id="departure-date-user" name="departure-date-user" data-widget="datepicker" data-bind="dep_date" />
+                                        <input type="text" id="departure-date-user" name="departure-date-user" data-widget="datepicker" data-bind="dep_date" placeholder="dd/mm/aaaa" />
                                         <input type="hidden" name="dep_date" id="dep_date" value="" />
                                     </div>
                                     <div class="search-input-container">
                                         <label for="return-date">Return</label>
-                                        <input type="text" name="return-date" id="return-date" data-widget="datepicker" data-bind="ret_date" />
+                                        <input type="text" name="return-date" id="return-date" data-widget="datepicker" data-bind="ret_date" placeholder="dd/mm/aaaa" />
                                         <input type="hidden" name="ret_date" id="ret_date" value="" />
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="search-input-container">
                                     <label for="adults">Number of adults</label>
-                                    <select name="adults" id="adults" data-range-start="0" data-range-end="9"></select>
+                                    <select name="adults" id="adults" data-range-start="0" data-range-end="9" data-selected="1"></select>
                                 </div>
                                 <div class="search-input-container">
                                     <label for="children">Number of children</label>
@@ -316,20 +322,7 @@
                             <div class="filter">
                                 <label for="return-date">Return</label><input type="text" name="return-date" id="filter-return-date" class="filter-form-input-field" data-widget="datepicker" data-from="return-date"/>
                             </div>
-                            <!-- <div class="filter"> -->
-                                <!-- <label for="filter-airline">Airline</label> -->
-                            <!-- </div> -->
-                            <!-- <div class="filter"> -->
-                                <!-- <div class="check"> -->
-                                    <!-- <input type="checkbox" name="filter-airline" value="LAN" />LAN -->
-                                <!-- </div> -->
-                                <!-- <div class="check"> -->
-                                    <!-- <input type="checkbox" name="filter-airline" value="Aerolineas Argentinas" />Aerolineas Argentinas -->
-                                <!-- </div> -->
-                                <!-- <div class="check"> -->
-                                    <!-- <input type="checkbox" name="filter-airline" value="TAM" />TAM -->
-                                <!-- </div> -->
-                            <!-- </div> -->
+                            <div class="dynamic-filters"></div>
                         </form>
                     </div>
                     <div class="search-wrap">
@@ -339,6 +332,13 @@
                 <div class="page" id="page-about" data-title="About">
                     <h1>About travel.ly</h1>
                     <p>travel.ly is the leading site in online flight sales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
+                    <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
+                    <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
+                    <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
+                </div>
+
+                <div class="page" id="page-toc" data-title="Terms of Service">
+                    <h1>Terms of service</h1>
                     <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
                     <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
                     <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
