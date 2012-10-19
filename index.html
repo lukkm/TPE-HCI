@@ -249,24 +249,24 @@
                                 </span>
                                 <div class="clearfix"></div>
                                 <div class="search-input-container">
-                                    <label for="from">From</label>
+                                    <label for="from-user">From</label>
                                     <input type="text" name="from-user" id="from-user" data-validate="required" data-widget="autocomplete" data-source="places" data-bind="from" />
                                     <input type="hidden" name="from" id="from" />
                                 </div>
                                 <div class="search-input-container">
-                                    <label for="to">To</label>
+                                    <label for="to-user">To</label>
                                     <input type="text" name="to-user" id="to-user" data-validate="required" data-widget="autocomplete" data-source="places" data-bind="to" />
                                     <input type="hidden" name="to" id="to" />
                                 </div>
                                 <div class="column-2">
                                     <div class="search-input-container">
-                                        <label for="departure-date">Depart</label>
+                                        <label for="departure-date-user">Depart</label>
                                         <input type="text" id="departure-date-user" name="departure-date-user" data-widget="datepicker" data-bind="dep_date" placeholder="dd/mm/aaaa" />
                                         <input type="hidden" name="dep_date" id="dep_date" value="" />
                                     </div>
                                     <div class="search-input-container">
-                                        <label for="return-date">Return</label>
-                                        <input type="text" name="return-date" id="return-date" data-widget="datepicker" data-bind="ret_date" placeholder="dd/mm/aaaa" />
+                                        <label for="return-date-user">Return</label>
+                                        <input type="text" name="return-date-user" id="return-date-user" data-widget="datepicker" data-bind="ret_date" placeholder="dd/mm/aaaa" />
                                         <input type="hidden" name="ret_date" id="ret_date" value="" />
                                     </div>
                                 </div>
@@ -316,16 +316,20 @@
                         <h2>Filter results</h2>
                         <form action="." class="filter-form" id="filter-form">
                             <div class="filter">
-                                <label for="from">From</label> <input type="text" name="origin" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="from-user" />
+                                <label for="from-filter">From</label>
+                                <input type="text" name="from-filter" id="from-filter" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="from-user" />
                             </div>
                             <div class="filter">
-                                <label for="to">To</label> <input type="text" name="destiny" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="to-user" />
+                                <label for="to-filter">To</label>
+                                <input type="text" name="to-filter" id="to-filter" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="to-user" />
                             </div>
                             <div class="filter">
-                                <label for="departure-date">Depart</label><input type="text" name="departure-date" id="filter-departure-date" class="filter-form-input-field" data-widget="datepicker" data-from="departure-date-user" />
+                                <label for="departure-date-filter">Depart</label>
+                                <input type="text" name="departure-date-filter" id="departure-date-filter" class="filter-form-input-field" data-widget="datepicker" data-from="departure-date-user" />
                             </div>
                             <div class="filter">
-                                <label for="return-date">Return</label><input type="text" name="return-date" id="filter-return-date" class="filter-form-input-field" data-widget="datepicker" data-from="return-date"/>
+                                <label for="return-date-filter">Return</label>
+                                <input type="text" name="return-date-filter" id="return-date-filter" class="filter-form-input-field" data-widget="datepicker" data-from="return-date-user"/>
                             </div>
                             <div class="dynamic-filters"></div>
                         </form>
@@ -335,149 +339,160 @@
                 </div>
 
                 <div class="page" id="page-about" data-title="About">
-                    <h1>About travel.ly</h1>
-                    <p>travel.ly is the leading site in online flight sales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
-                    <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
-                    <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
-                    <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
+                    <div class="sheet">
+                        <h1>About travel.ly</h1>
+                        <p>travel.ly is the leading site in online flight sales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
+                        <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
+                        <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
+                        <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
+                    </div>
                 </div>
 
                 <div class="page" id="page-toc" data-title="Terms of Service">
-                    <h1>Terms of service</h1>
-                    <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
-                    <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
-                    <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
+                    <div class="sheet">
+                        <h1>Terms of service</h1>
+                        <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
+                        <p>Dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.</p>
+                        <p>Proin quis tortor orci. Etiam at risus et justo dignissim congue. Donec congue lacinia dui, a porttitor lectus condimentum laoreet. Nunc eu ullamcorper orci. Quisque eget odio ac lectus vestibulum faucibus eget in metus. In pellentesque faucibus vestibulum. Nulla at nulla justo, eget luctus tortor. Nulla facilisi. Duis aliquet.</p>
+                    </div>
                 </div>
 
                 <div class="page" id="page-buy" data-title="Confirm Purchase">
-                    <div class="nav">
-                        <a href="#search" class="button">&larr; Choose other flight</a>
-                    </div>
-                    <h1>Confirm purchase</h1>
-                    <form action="." method="post" id="buy-form">
+                    <div class="sheet">
+                        <div class="nav">
+                            <a href="#search" class="button">&larr; Choose other flight</a>
+                        </div>
+                        <h1>Confirm purchase</h1>
+                        <form action="." method="post" id="buy-form">
 
-                        <h3>Passengers</h3>
+                            <h3>Passengers</h3>
+                            <div class="form-section">
+                                <label for="first-name">First Name</label>
+                                <input type="text" data-validate="required" name="first-name" id="first-name" value="" />
+                                <label for="last-name">Last Name</label>
+                                <input type="text" data-validate="required" name="last-name" id="last-name" value="" />
+                                <label for="birth-date">Birth Date</label>
+                                <input type="text" name="birth-date" id="birth-date" value="" data-widget="datepicker-select" />
+                            </div>
+
+                            <h3>Billing</h3>
+                            <div class="form-section">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" data-validate="card-number" name="card-number" id="card-number" value="" />
+                                <label for="card-expire-date">Expire Date</label>
+                                <input type="text" data-validate="card-expire-date" name="card-expire-date" id="card-expire-date" value="" />
+                                <label for="card-security-code">Security Code</label>
+                                <input type="text" data-validate="required" name="card-security-code" id="card-security-code" value="" />
+                                <label for="card-holder">Holder</label>
+                                <input type="text" data-validate="required" name="card-holder" id="card-holder" value="" />
+                                <label for="card-document-number">Document Number</label>
+                                <input type="text" data-validate="required" name="card-document-number" id="card-document-number" value="" />
+                            </div>
+
+                            <h3>Contact Information</h3>
+                            <div class="form-section">
+                                <label for="email">Email</label>
+                                <input type="text" name="email" id="email" value="" />
+                                <label for="email-confirm">Confirm Email</label>
+                                <input type="text" name="email-confirm" id="email-confirm" value="" />
+                                <label for="phone-number">Phone number</label>
+                                <input type="text" name="phone-number" id="phone-number" value="" />
+                            </div>
+
+                            <div class="form-terms">
+                                <input type="checkbox" name="terms" id="terms" value="1" />
+                                <label for="terms" class="inline-block-label">I have read and accept the <a href="tos">terms and conditions</a>.</label>
+                            </div>
+
+                            <button type="submit" class="button">Buy</button>
+
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="page" id="page-confirm" data-title="Confirmation">
+                    <div class="sheet">
+                        <h1>Please confirm the information</h1>
+
+                        <div class="nav">
+                            <a data-href-template="#buy/{{flightId}}" href="#" class="button" id="back-purchase">&larr; Back to purchase</a>
+                        </div>
+
+                        <h3>Flight</h3>
+                        <div class="form-section" id="buy-flight-information">
+                            <h4>From</h4>
+                            <dl>
+                                <dt>Airport</dt>
+                                <dd id="confirm-flight-from-airport"></dd>
+                                <dt>City</dt>
+                                <dd id="confirm-flight-from-city"></dd>
+                                <dt>Country</dt>
+                                <dd id="confirm-flight-from-country"></dd>
+                            </dl>
+                            <h4>To</h4>
+                            <dl>
+                                <dt>Airport</dt>
+                                <dd id="confirm-flight-to-airport"></dd>
+                                <dt>City</dt>
+                                <dd id="confirm-flight-to-city"></dd>
+                                <dt>Country</dt>
+                                <dd id="confirm-flight-to-country"></dd>
+                            </dl>
+                        </div>
+
+                        <h3>Passenger</h3>
                         <div class="form-section">
-                            <label for="first-name">First Name</label>
-                            <input type="text" data-validate="required" name="first-name" value="" />
-                            <label for="last-name">Last Name</label>
-                            <input type="text" data-validate="required" name="last-name" value="" />
-                            <label for="birth-date">Birth Date</label>
-                            <input type="text" name="birth-date" value="" data-widget="datepicker-select" />
+                            <dl id="confirm-information">
+                                <dt>First Name</dt>
+                                <dd id="confirm-first-name"></dd>
+                                <dt>Last Name</dt>
+                                <dd id="confirm-last-name"></dd>
+                                <dt>Birth Date</dt>
+                                <dd id="confirm-birth-date"></dd>
+                            </dl>
                         </div>
 
                         <h3>Billing</h3>
                         <div class="form-section">
-                            <label for="card-number">Card Number</label>
-                            <input type="text" data-validate="card-number" name="card-number" value="" />
-                            <label for="card-expire-date">Expire Date</label>
-                            <input type="text" data-validate="card-expire-date" name="card-expire-date" value="" />
-                            <label for="card-security-code">Security Code</label>
-                            <input type="text" data-validate="required" name="card-security-code" value="" />
-                            <label for="card-holder">Holder</label>
-                            <input type="text" data-validate="required" name="card-holder" value="" />
-                            <label for="card-document-number">Document Number</label>
-                            <input type="text" data-validate="required" name="card-document-number" value="" />
+                            <dl>
+                                <dt>Card</dt>
+                                <dd id="confirm-card"></dd>
+                                <dt>Card Number</dt>
+                                <dd id="confirm-card-number"></dd>
+                                <dt>Expire Date</dt>
+                                <dd id="confirm-card-expire-date"></dd>
+                                <dt>Security Code</dt>
+                                <dd id="confirm-card-security-code"></dd>
+                                <dt>Holder</dt>
+                                <dd id="confirm-card-holder"></dd>
+                                <dt>Document Number</dt>
+                                <dd id="confirm-card-document-number"></dd>
+                            </dl>
                         </div>
 
                         <h3>Contact Information</h3>
                         <div class="form-section">
-                            <label for="email">Email</label>
-                            <input type="text" name="email" value="" />
-                            <label for="confirm-email">Confirm Email</label>
-                            <input type="text" name="confirm-email" value="" />
-                            <label for="phone-number">Phone number</label>
-                            <input type="text" name="phone-number" value="" />
+                            <dl>
+                                <dt>Email</dt>
+                                <dd id="confirm-email"></dd>
+                                <dt>Phone Number</dt>
+                                <dd id="confirm-phone-number"></dd>
+                            </dl>
                         </div>
-
-                        <div class="form-terms">
-                            <input type="checkbox" name="terms" id="terms" value="1" />
-                            <label for="terms" class="inline-block-label">I have read and accept the terms and conditions.</label>
+                        <div class="nav">
+                            <a href="#thanks" class="button">Confirm</a>
                         </div>
-
-                        <button type="submit" class="button">Buy</button>
-
-                    </form>
-                </div>
-
-                <div class="page" id="page-confirm" data-title="Confirmation">
-                    <h1>Please confirm the information</h1>
-
-                    <div class="nav">
-                        <a data-href-template="#buy/{{flightId}}" href="#" class="button" id="back-purchase">&larr; Back to purchase</a>
-                    </div>
-
-                    <h3>Flight</h3>
-                    <div class="form-section" id="buy-flight-information">
-                        <h4>From</h4>
-                        <dl>
-                            <dt>Airport</dt>
-                            <dd id="confirm-flight-from-airport"></dd>
-                            <dt>City</dt>
-                            <dd id="confirm-flight-from-city"></dd>
-                            <dt>Country</dt>
-                            <dd id="confirm-flight-from-country"></dd>
-                        </dl>
-                        <h4>To</h4>
-                        <dl>
-                            <dt>Airport</dt>
-                            <dd id="confirm-flight-to-airport"></dd>
-                            <dt>City</dt>
-                            <dd id="confirm-flight-to-city"></dd>
-                            <dt>Country</dt>
-                            <dd id="confirm-flight-to-country"></dd>
-                        </dl>
-                    </div>
-
-                    <h3>Passenger</h3>
-                    <div class="form-section">
-                        <dl id="confirm-information">
-                            <dt>First Name</dt>
-                            <dd id="confirm-first-name"></dd>
-                            <dt>Last Name</dt>
-                            <dd id="confirm-last-name"></dd>
-                            <dt>Birth Date</dt>
-                            <dd id="confirm-birth-date"></dd>
-                        </dl>
-                    </div>
-
-                    <h3>Billing</h3>
-                    <div class="form-section">
-                        <dl>
-                            <dt>Card</dt>
-                            <dd id="confirm-card"></dd>
-                            <dt>Card Number</dt>
-                            <dd id="confirm-card-number"></dd>
-                            <dt>Expire Date</dt>
-                            <dd id="confirm-card-expire-date"></dd>
-                            <dt>Security Code</dt>
-                            <dd id="confirm-card-security-code"></dd>
-                            <dt>Holder</dt>
-                            <dd id="confirm-card-holder"></dd>
-                            <dt>Document Number</dt>
-                            <dd id="confirm-card-document-number"></dd>
-                        </dl>
-                    </div>
-
-                    <h3>Contact Information</h3>
-                    <div class="form-section">
-                        <dl>
-                            <dt>Email</dt>
-                            <dd id="confirm-email"></dd>
-                            <dt>Phone Number</dt>
-                            <dd id="confirm-phone-number"></dd>
-                        </dl>
-                    </div>
-                    <div class="nav">
-                        <a href="#thanks" class="button">Confirm</a>
                     </div>
                 </div>
 
                 <div class="page" id="page-thanks" data-title="Thank you">
-                    <div class="form-section">
-                        <h1>Thank you for buying with Travel.ly</h1>
-                        <div class="nav-home">
-                            <a href="#" class="button">Back to Home</a>
+                    <div class="sheet">
+                        <div class="form-section">
+                            <h1>Thank you for buying with Travel.ly</h1>
+                            <div class="nav-home">
+                                <a href="#" class="button">Back to Home</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -489,14 +504,14 @@
         <div class="recommendations">
             <div class="wrap">
                 <h2>Search and publish flight recommendations</h2>
-                <form action="" method="post" class="comments-form">
+                <form action="." method="post" class="comments-form">
                     <div class="search-input-container">
                         <label for="airline">Airline</label>
-                        <input type="text" name="airline" value="" data-widget="autocomplete" data-source="airlines" />
+                        <input type="text" name="airline" id="airline" value="" data-widget="autocomplete" data-source="airlines" />
                     </div>
                     <div class="search-input-container">
                         <label for="flight_number">Flight number</label>
-                        <input type="text" name="flight_number" value="" />
+                        <input type="text" name="flight_number" id="flight_number" value="" />
                     </div>
                     <button type="submit" class="button button-small">Find recommendations</button>
                 </form>

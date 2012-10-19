@@ -57,7 +57,7 @@ App.Models.Query.fromSerializedArray = function(serializedArray) {
     });
 
     attributes = _.omit(attributes, ["from-user", "to-user",
-            "departure-date-user", "return-date" ]);
+            "departure-date-user", "return-date-user" ]);
 
     return new App.Models.Query(attributes, { parse: true });
 };
@@ -265,6 +265,9 @@ App.Routers.Router = Backbone.Router.extend({
 
         $(".page.current").removeClass("current").hide();
         $(this.pages[pageName]).addClass("current").show();
+
+        $("a.current").removeClass("current");
+        $("a[href=#" + pageName + "]").addClass("current");
 
         window.scrollTo(0,0);
 

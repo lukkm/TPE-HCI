@@ -40,10 +40,16 @@ p {
     border-bottom: 1px solid #FDBB7D;
 }
 
+.sheet {
+    background: white;
+    border: 2px solid #F8CA95;
+    padding: 0 20px 20px;
+}
+
 /* =Newsletter */
 
 .newsletter-subscribe {
-    border: 1px solid #F5A300;
+    border: 2px solid #F8CA95;
     margin-top: 15px;
     width: 525px;
     float: left;
@@ -116,6 +122,10 @@ p {
     color: #444;
 }
 
+.header-menu a.current {
+    background: #FFF6EF;
+}
+
 /* =Forms */
 input {
     border: 1px solid #CCC;
@@ -143,7 +153,7 @@ input[data-widget=datepicker] {
 .search-form {
     background-color: white;
     width: 335px;
-    border: 1px solid #F5A300;
+    border: 2px solid #F8CA95;
     height: 330px;
     margin: 0 10px 10px 0;
     padding: 20px;
