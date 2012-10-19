@@ -521,6 +521,14 @@ label {
     font-size: 14px;
     text-align: center;
 }
+
+.search-loading {
+    background: white;
+    border: 2px solid #F8CA95;
+    padding: 30px 20px 20px;
+    text-align: center;
+}
+
 .stopovers {
     display: none;
     width: 700px;

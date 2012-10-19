@@ -22,8 +22,29 @@ App.Models.Query = Backbone.Model.extend({
         from: { required: true },
         to: { required: true },
         repeat: { oneOf: ["one-way", "round-trip"] },
-        dep_date: { pattern: /\d{4}-\d{2}-\d{2}/ },
-        ret_date: { required: false, pattern: /\d{4}-\d{2}-\d{2}/ }
+        dep_date: function(value) {
+            try {
+                // @TODO: Add one or two days before its valid
+                var departureDate = new Date(value),
+                    valid = departureDate >= Date.now();
+
+                if (valid) { return; }
+            } catch(e) {}
+
+            return "Invalid return date";
+        },
+        ret_date: function(value, key, form) {
+            try {
+                var returnDate = new Date(value),
+                    departureDate = new Date(form.dep_date);
+                    valid = form.repeat === "one-way" ||
+                            returnDate >= departureDate;
+
+                if (valid) { return; }
+            } catch(e) {}
+
+            return "Invalid return date";
+        }
     }
 
 });
@@ -335,15 +356,15 @@ App.Views.SearchFormView = Backbone.View.extend({
 
     initialize: function(options) {
         _.extend(this, Backbone.events);
-        this.on('error', function(e) {
-            this.showErrors(e);
+
+        this.on("validation", function(errors) {
+            this.updateErrors(errors);
         });
     },
     
     events: {
         "click button": "submitForm",
-        "change input": "resetValidation",
-        "error": "showErrors"
+        "focus input": "resetValidation"
     },
 
     submitForm: function(e) {
@@ -352,29 +373,33 @@ App.Views.SearchFormView = Backbone.View.extend({
             parameters = $form.serializeArray(),
             query = App.Models.Query.fromSerializedArray(parameters);
 
+        this.trigger("validation", query.validate());
+
         if (query.isValid(true)) {
 
             var collection = app.searchResults;
             collection.setQuery(query).fetch({ success: function() {
                 collection.trigger("update");
             }});
+            collection.trigger("fetch");
 
-            _.forEach($("input[data-from]"), function(input) {
-                var $input = $(input),
-                    value = $("#" + $input.data("from")).val();
-                $input.val(value);
-             });
+            this.updateFilterFields();
 
             app.router.navigate("search", { trigger: true });
 
-        } else {
-
-            $form.data("errors", query.validate());
-            this.trigger("error");
-        
         }
 
         e.preventDefault();
+
+    },
+
+    updateFilterFields: function() {
+
+        _.forEach($("input[data-from]"), function(input) {
+            var $input = $(input),
+                value = $("#" + $input.data("from")).val();
+            $input.val(value);
+         });
 
     },
 
@@ -385,15 +410,14 @@ App.Views.SearchFormView = Backbone.View.extend({
 
     },
 
-    showErrors: function(e) {
+    updateErrors: function(errors) {
 
-        var $form = this.$el.find("form"),
-            errors = $form.data("errors");
+        var $form = this.$el.find("form");
 
         $form.find("input").each(function() {
             var name = $(this).attr("name");
 
-            if (errors[name]) {
+            if (errors && errors[name]) {
                 $(this).add($("[data-bind=" + name + "]"))
                     .addClass("invalid");
             } else {
@@ -423,7 +447,6 @@ App.Views.BuyFormView = Backbone.View.extend({
     },
     
     submitForm: function(e) {
-        debugger;
         var flight = app.searchResults.get(app.information.get("flightId"));
 
         var data = $(this).parents("form").serializeArray();
@@ -466,6 +489,9 @@ App.Views.SearchResultsView = Backbone.View.extend({
         this.collection.on("error", function(error) {
             view.showError(error);
         });
+        this.collection.on("fetch", function() {
+            view.showLoadingMessage();
+        });
     },
 
     getContext: function() {
@@ -479,7 +505,12 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     showError: function(error) {
         var $wrap = this.$el.find(".search-wrap");
-        $wrap.html(this.errorTemplate(error));
+        $wrap.html(app.templates["search-error"](error));
+    },
+
+    showLoadingMessage: function() {
+        var $wrap = this.$el.find(".search-wrap");
+        $wrap.html(app.templates["search-loading"]());
     },
 
     render: function() {

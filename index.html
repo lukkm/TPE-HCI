@@ -215,6 +215,11 @@
                 <p>{{message}} (code: {{code}})</p>
             </div>
         </script>
+        <script type="text/x-handlebars-template" id="search-loading">
+            <div class="search-loading">
+                <h2>Searching...</h2>
+            </div>
+        </script>
     </head>
     <body data-title-base="Travel.ly" data-title-separator=" | ">
         <div class="container"> 
@@ -268,7 +273,7 @@
                                 <div class="clearfix"></div>
                                 <div class="search-input-container">
                                     <label for="adults">Number of adults</label>
-                                    <select name="adults" id="adults" data-range-start="0" data-range-end="9" data-selected="1"></select>
+                                    <select name="adults" id="adults" data-range-start="1" data-range-end="9" data-selected="1"></select>
                                 </div>
                                 <div class="search-input-container">
                                     <label for="children">Number of children</label>
