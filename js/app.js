@@ -203,7 +203,7 @@ App.Routers.Router = Backbone.Router.extend({
     routes: {
         ""            : "home",
         "about"       : "about",
-        "toc"         : "toc",
+        "tos"         : "tos",
         "search"      : "search",
         "buy/:id"     : "buy",
         "confirm"     : "confirm",
@@ -224,8 +224,8 @@ App.Routers.Router = Backbone.Router.extend({
         this.switchPage("about");
     },
 
-    toc: function() {
-        this.switchPage("toc");
+    tos: function() {
+        this.switchPage("tos");
     },
 
     search: function() {
