@@ -249,6 +249,23 @@ input[data-widget=datepicker] {
     border-radius: 3px;
     padding: 20px;
     overflow: auto;
+    margin-top: 20px;
+}
+
+#rating-section {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+
+#rating-section label {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#rating-section input {
+    margin: 5px 15px 0 5px;
+    width: 15px;
 }
 
 label {

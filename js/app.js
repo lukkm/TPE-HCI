@@ -201,14 +201,15 @@ App.Collections.SearchResults = Backbone.Collection.extend({
 App.Routers.Router = Backbone.Router.extend({
 
     routes: {
-        ""          : "home",
-        "about"     : "about",
-        "toc"       : "toc",
-        "search"    : "search",
-        "buy/:id"   : "buy",
-        "confirm"   : "confirm",
-        "thanks"    : "thanks",
-        "*actions"  : "defaultRoute"
+        ""            : "home",
+        "about"       : "about",
+        "toc"         : "toc",
+        "search"      : "search",
+        "buy/:id"     : "buy",
+        "confirm"     : "confirm",
+        "publish-rec" : "publishRec",
+        "thanks"      : "thanks",
+        "*actions"    : "defaultRoute"
     },
 
     initialize: function(options) {
@@ -245,6 +246,10 @@ App.Routers.Router = Backbone.Router.extend({
 
     confirm: function(id) {
         this.switchPage("confirm");
+    },
+
+    publishRec: function(id){
+        this.switchPage("publish-rec");
     },
 
     thanks: function(id){
@@ -311,6 +316,10 @@ App.Views.AppView = Backbone.View.extend({
             el: $("#buy-form")
         });
 
+        this.subviews.recommendationsForm = new App.Views.RecommendationsFormView({
+            el: $("#recommendations-form")
+        });
+
         this.subviews.searchResultsView = new App.Views.SearchResultsView({
             el: $("#page-search"),
             template: app.templates["search-results"],
@@ -358,6 +367,18 @@ App.Views.AppView = Backbone.View.extend({
         for (var view in this.subviews) {
             view.render();
         }
+    }
+
+});
+
+App.Views.RecommendationsFormView = Backbone.View.extend({
+
+    events:{
+        "click #publish-rec" : "publishRecommendation"
+    },
+
+    publishRecommendation: function(e){
+        app.router.navigate("publish-rec", { trigger: true });
     }
 
 });
@@ -457,7 +478,7 @@ App.Views.BuyFormView = Backbone.View.extend({
     },
     
     submitForm: function(e) {
-        var flight = app.searchResults.get(app.information.get("flightId"));
+        var flight = app.searchResults.getFlightById(app.info.get("flightId"));
         
         var data = $("#buy-form").serializeArray();
 
@@ -509,13 +530,12 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     loadMaps: function(e) {
 
-        function getTravelMarker(travel, obj, field) {
-        $.when($.ajax(API.Geo.getAirportById ({ id: travel.airportId }).then(function(ajaxArgs) {
-                
-                console.log("Argumentos de ajax")
-                console.log(ajaxArgs)
-
-                var airport = ajaxArgs.airport; 
+        var getTravelMarker = function(travel) {
+            return API.Geo.getAirportById ({ id: travel.airportId });
+        };               
+               
+        /*
+                var airport = data.airport; 
                 
                 var airportLatLng = new google.maps.LatLng(airport.latitude, airport.longitude);
                 var marker = new google.maps.Marker({
@@ -526,7 +546,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
                 return marker;
             })));
         };
-        
+        */
         var $link = $(e.target);
         var myFlightId = $link.data("flightid");
         var myId = $link.data("id");
@@ -558,8 +578,8 @@ App.Views.SearchResultsView = Backbone.View.extend({
            
             var travel = {};
 
-            $.when($.ajax(getTravelMarker(segment.departure, travel, "departurePos"), 
-                          getTravelMarker(segment.arrival, travel, "arrivalPos"))).done( function (arg1, arg2) {
+            $.when($.ajax(getTravelMarker(segment.departure), 
+                          getTravelMarker(segment.arrival))).done( function (arg1, arg2) {
                         /*console.log(travel);
 
                         var marker1 = travel.departurePos;
