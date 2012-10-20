@@ -1,3 +1,7 @@
+# Tool to cache API responses using Redis
+# Had to finish it offline while on the bus so never got the chance to build
+# proper request caching. Responses get added manually using the debugger
+
 require "redis"
 require "debugger"
 
