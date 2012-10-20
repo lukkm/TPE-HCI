@@ -510,9 +510,12 @@ App.Views.SearchResultsView = Backbone.View.extend({
     loadMaps: function(e) {
 
         function getTravelMarker(travel, obj, field) {
-        API.Geo.getAirportById({ id: travel.airportId }, function(data) {
-            
-                var airport = data.airport; 
+        $.when($.ajax(API.Geo.getAirportById ({ id: travel.airportId }).then(function(ajaxArgs) {
+                
+                console.log("Argumentos de ajax")
+                console.log(ajaxArgs)
+
+                var airport = ajaxArgs.airport; 
                 
                 var airportLatLng = new google.maps.LatLng(airport.latitude, airport.longitude);
                 var marker = new google.maps.Marker({
@@ -520,8 +523,8 @@ App.Views.SearchResultsView = Backbone.View.extend({
                     title: airport.description
                 });
             
-                obj[field] = marker;
-            });
+                return marker;
+            })));
         };
         
         var $link = $(e.target);
@@ -555,29 +558,33 @@ App.Views.SearchResultsView = Backbone.View.extend({
            
             var travel = {};
 
-            getTravelMarker(segment.departure, travel, "departurePos");
-            getTravelMarker(segment.arrival, travel, "arrivalPos");
+            $.when($.ajax(getTravelMarker(segment.departure, travel, "departurePos"), 
+                          getTravelMarker(segment.arrival, travel, "arrivalPos"))).done( function (arg1, arg2) {
+                        /*console.log(travel);
 
-            console.log(travel);
+                        var marker1 = travel.departurePos;
+                        var marker2 = travel.arrivalPos;
 
-            var marker1 = travel.departurePos;
+                        console.log(marker1);*/
 
-            console.log(marker1);
+                        console.log(arg1);
 
-            var flightPath = new google.maps.Polyline({
-                path: [ marker1.position, marker2.position ],
-                strokeColor: "#FF0000",
-                strokeOpacity: 1.0,
-                strokeWeight: 2
-            });
+                        console.log("done");
 
-            marker1.setMap(map);
-            marker2.setMap(map);
+                        var flightPath = new google.maps.Polyline({
+                            path: [ marker1.position, marker2.position ],
+                            strokeColor: "#FF0000",
+                            strokeOpacity: 1.0,
+                            strokeWeight: 2
+                        });
 
-            flightPath.setMap(map);
+                        marker1.setMap(map);
+                        marker2.setMap(map);
 
-            console.log(travel);
+                        flightPath.setMap(map);
 
+                        console.log(travel);
+                   });
         });
     },
 
