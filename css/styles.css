@@ -292,6 +292,21 @@ label .hint {
     margin-bottom: 30px;
 }
 
+.average-score {
+    padding: 15px 0;
+    margin-top: 10px;
+    border-bottom: 1px solid #CCC;
+    border-top: 1px solid #CCC;
+}
+
+.general-comments {
+    margin-top: 30px;
+}
+
+.general-comments textarea {
+    margin-left: 35px;
+}
+
 
 #post-rec {
     margin-top: 30px;
