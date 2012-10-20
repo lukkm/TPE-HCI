@@ -412,6 +412,10 @@ label {
 	padding-right: 24px;
 }
 
+.form-terms a {
+	color: #F5A300;
+}
+
 /* =Deals */
 
 .deals {
