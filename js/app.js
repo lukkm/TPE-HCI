@@ -157,12 +157,12 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             dateToMoment = moment(segment.arrival.date, "YYYY-MM-DD hh:mm:ss");
             segment.arrival.formatedDate = dateToMoment.format("MMMM Do YYYY");
             segment.arrival.formatedTime = dateToMoment.format("h:mm a"); 
-        }
+        };
 
         var setSegments = function(route){
             _.forEach(route.segments, setSegment);
             route.id = _.uniqueId();
-        }
+        };
 
         var setOneWayRoutes = function(flight, routes) { 
 
@@ -171,12 +171,12 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             _.forEach(routes, setRoutes);
             _.forEach(routes, setSegments);
 
-            flight.departure      = routes[0].departure;
-            flight.arrival        = routes[0].arrival;
-            flight.departureDateToMoment   = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss");
-            flight.arrivalDateToMoment   = moment(flight.arrival.date, "YYYY-MM-DD hh:mm:ss");
+            flight.departure = routes[0].departure;
+            flight.arrival = routes[0].arrival;
+            flight.departureDateToMoment = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss");
+            flight.arrivalDateToMoment = moment(flight.arrival.date, "YYYY-MM-DD hh:mm:ss");
             flight.departure.time = flight.departureDateToMoment.format("h:mm a");
-            flight.arrival.time   = flight.arrivalDateToMoment.format("h:mm a");
+            flight.arrival.time = flight.arrivalDateToMoment.format("h:mm a");
         };
 
         _.forEach(response.flights, function(flight) {
@@ -510,7 +510,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
     loadMaps: function(e) {
 
         function getTravelMarker(travel, obj, field) {
-        API.Geo.getAirportById({ id: travel.airportId }, function(data) {
+            API.Geo.getAirportById({ id: travel.airportId }, function(data) {
             
                 var airport = data.airport; 
                 
@@ -522,7 +522,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
             
                 obj[field] = marker;
             });
-        };
+        }
         
         var $link = $(e.target);
         var myFlightId = $link.data("flightid");
@@ -534,7 +534,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
         var route = _.find(flight.get("outboundRoutes"), function(route){
             return route.id == myId; 
-        })
+        });
 
         var myOptions = {
             zoom: 4,
@@ -547,7 +547,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
             map.setCenter(new google.maps.LatLng(airport.latitude, airport.longitude));
         });
 
-        var el = document.getElementById("map-canvas-outbound-" + myId)
+        var el = document.getElementById("map-canvas-outbound-" + myId);
         var map = new google.maps.Map(el, myOptions);
 
 
