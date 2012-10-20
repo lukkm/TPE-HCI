@@ -193,10 +193,14 @@ input[data-widget=datepicker] {
     margin: 3px 0;
 }
 
+label .hint {
+    font-weight: normal;
+}
+
 .search-form label[for=adults],
 .search-form label[for=children],
 .search-form label[for=infants] {
-    width: 175px;
+    width: 200px;
     float: left;
     display: block;
 }
