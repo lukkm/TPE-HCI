@@ -356,6 +356,11 @@ label {
 	display: inline;
 }
 
+.form-section label {
+	margin: 0 0 5px;
+	display: inline;
+}
+
 .form-section select {
 	margin-right: 20px;
 	font-size: 14px;
@@ -364,6 +369,14 @@ label {
 .form-section input {
 	font-size: 14px;
 	width: 200px;
+}
+
+.form-section table {
+	width: 100%;
+}
+
+.form-section td {
+	padding-right: 24px;
 }
 
 /* =Deals */
