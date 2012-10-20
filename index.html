@@ -507,11 +507,56 @@
                     </div>
                 </div>
 
+                <div class="page" id="page-publish-rec" data-title="Thank you">
+                    <div class="form-section" id="rating-section">
+                        <h2>Rate your flight</h2>
+                        
+                        <table>
+
+                            <tr>
+
+                                <div class="rating-section">
+                                    <td><label for="kindness">Kindness</label></td>
+                                    <td>1 <input type="radio" name="kindness" value="1"/></td>
+                                    <td>2 <input type="radio" name="kindness" value="2"/></td>
+                                    <td>3 <input type="radio" name="kindness" value="3"/></td>
+                                    <td>4 <input type="radio" name="kindness" value="4"/></td>
+                                    <td>5 <input type="radio" name="kindness" value="5"/></td>
+                                    <td>6 <input type="radio" name="kindness" value="6"/></td>
+                                    <td>7 <input type="radio" name="kindness" value="7"/></td>
+                                    <td>8 <input type="radio" name="kindness" value="8"/></td>
+                                    <td>9 <input type="radio" name="kindness" value="9"/></td>
+                                    <td>10 <input type="radio" name="kindness" value="10"/></td>
+                                </div>
+
+                            </tr>
+                            <tr>
+
+                                <div class="rating-section">
+                                    <td><label for="food">Food</label></td>
+                                    <td>1 <input type="radio" name="food" value="1"/></td>
+                                    <td>2 <input type="radio" name="food" value="2"/></td>
+                                    <td>3 <input type="radio" name="food" value="3"/></td>
+                                    <td>4 <input type="radio" name="food" value="4"/></td>
+                                    <td>5 <input type="radio" name="food" value="5"/></td>
+                                    <td>6 <input type="radio" name="food" value="6"/></td>
+                                    <td>7 <input type="radio" name="food" value="7"/></td>
+                                    <td>8 <input type="radio" name="food" value="8"/></td>
+                                    <td>9 <input type="radio" name="food" value="9"/></td>
+                                    <td>10 <input type="radio" name="food" value="10"/></td>
+                                </div>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <div class="recommendations">
+        <div class="recommendations" id="recommendations-form">
             <div class="wrap">
                 <h2>Search and publish flight recommendations</h2>
                 <form action="." method="post" class="comments-form">
@@ -523,7 +568,8 @@
                         <label for="flight_number">Flight number</label>
                         <input type="text" name="flight_number" id="flight_number" value="" />
                     </div>
-                    <button type="submit" class="button button-small">Find recommendations</button>
+                    <button class="button button-small" id="find-rec">Find recommendations</button>
+                    <button class="button button-small" id="publish-rec">Publish recommendations</button>
                 </form>
 
             </div>
