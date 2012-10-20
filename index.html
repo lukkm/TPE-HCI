@@ -49,7 +49,7 @@
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col"><a href="#stopovers-outbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}">{{stopovers}}</a></td>
+                                    <td class="scales-col"><a href="#stopovers-outbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}" data-bound="outbound">{{stopovers}}</a></td>
                                     <div id="stopovers-outbound-{{id}}" class="stopovers">
                                         <h2>Stopovers</h2>
                                         {{#segments}}
@@ -89,7 +89,7 @@
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col"><a href="#stopovers-inbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}">{{stopovers}}</a></td>
+                                    <td class="scales-col"><a href="#stopovers-inbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}" data-bound="inbound">{{stopovers}}</a></td>
                                      <div id="stopovers-inbound-{{id}}" class="stopovers">
                                         <h2>Stopovers</h2>
                                         {{#segments}}
@@ -226,6 +226,12 @@
         </script>
     </head>
     <body data-title-base="Travel.ly" data-title-separator=" | ">
+        <div class="language-select">
+            <div class="wrap">
+                <a href="#" hreflang="en">English</a>
+                 | <a href="#" hreflang="es">Spanish</a>
+            </div>
+        </div>
         <div class="container"> 
             <div class="wrap">
 
@@ -352,7 +358,7 @@
                     </div>
                 </div>
 
-                <div class="page" id="page-toc" data-title="Terms of Service">
+                <div class="page" id="page-tos" data-title="Terms of Service">
                     <div class="sheet">
                         <h1>Terms of service</h1>
                         <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
@@ -573,11 +579,56 @@
                     </div>
                 </div>
 
+                <div class="page" id="page-publish-rec" data-title="Thank you">
+                    <div class="form-section" id="rating-section">
+                        <h2>Rate your flight</h2>
+                        
+                        <table>
+
+                            <tr>
+
+                                <div class="rating-section">
+                                    <td><label for="kindness">Kindness</label></td>
+                                    <td>1 <input type="radio" name="kindness" value="1"/></td>
+                                    <td>2 <input type="radio" name="kindness" value="2"/></td>
+                                    <td>3 <input type="radio" name="kindness" value="3"/></td>
+                                    <td>4 <input type="radio" name="kindness" value="4"/></td>
+                                    <td>5 <input type="radio" name="kindness" value="5"/></td>
+                                    <td>6 <input type="radio" name="kindness" value="6"/></td>
+                                    <td>7 <input type="radio" name="kindness" value="7"/></td>
+                                    <td>8 <input type="radio" name="kindness" value="8"/></td>
+                                    <td>9 <input type="radio" name="kindness" value="9"/></td>
+                                    <td>10 <input type="radio" name="kindness" value="10"/></td>
+                                </div>
+
+                            </tr>
+                            <tr>
+
+                                <div class="rating-section">
+                                    <td><label for="food">Food</label></td>
+                                    <td>1 <input type="radio" name="food" value="1"/></td>
+                                    <td>2 <input type="radio" name="food" value="2"/></td>
+                                    <td>3 <input type="radio" name="food" value="3"/></td>
+                                    <td>4 <input type="radio" name="food" value="4"/></td>
+                                    <td>5 <input type="radio" name="food" value="5"/></td>
+                                    <td>6 <input type="radio" name="food" value="6"/></td>
+                                    <td>7 <input type="radio" name="food" value="7"/></td>
+                                    <td>8 <input type="radio" name="food" value="8"/></td>
+                                    <td>9 <input type="radio" name="food" value="9"/></td>
+                                    <td>10 <input type="radio" name="food" value="10"/></td>
+                                </div>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <div class="recommendations">
+        <div class="recommendations" id="recommendations-form">
             <div class="wrap">
                 <h2>Search and publish flight recommendations</h2>
                 <form action="." method="post" class="comments-form">
@@ -589,7 +640,8 @@
                         <label for="flight_number">Flight number</label>
                         <input type="text" name="flight_number" id="flight_number" value="" />
                     </div>
-                    <button type="submit" class="button button-small">Find recommendations</button>
+                    <button class="button button-small" id="find-rec">Find recommendations</button>
+                    <button class="button button-small" id="publish-rec">Publish recommendations</button>
                 </form>
 
             </div>

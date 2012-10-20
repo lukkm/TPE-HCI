@@ -33,6 +33,18 @@ p {
     clear: both;
 }
 
+.language-select {
+    color: #999;
+    padding: 3px 0 6px;
+    text-align: right;
+}
+
+.language-select a {
+    color: #CCC;
+    font-size: 13px;
+    text-decoration: none;
+}
+
 .container {
     overflow: auto;
     background: #FBDEB9;
@@ -181,10 +193,14 @@ input[data-widget=datepicker] {
     margin: 3px 0;
 }
 
+label .hint {
+    font-weight: normal;
+}
+
 .search-form label[for=adults],
 .search-form label[for=children],
 .search-form label[for=infants] {
-    width: 175px;
+    width: 200px;
     float: left;
     display: block;
 }
@@ -249,6 +265,23 @@ input[data-widget=datepicker] {
     border-radius: 3px;
     padding: 20px;
     overflow: auto;
+    margin-top: 20px;
+}
+
+#rating-section {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+
+#rating-section label {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#rating-section input {
+    margin: 5px 15px 0 5px;
+    width: 15px;
 }
 
 label {
@@ -706,14 +739,13 @@ label {
 }
 
 .wrap {
-    padding: 20px 0 40px;;
     margin: 0 auto;
     width: 960px;
 }
 
 .recommendations {
+    padding: 30px 0 40px;;
     border-top: 1px solid white;
-    padding-top: 10px;
     background: #FFF7EA;
 }
 

@@ -157,12 +157,12 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             dateToMoment = moment(segment.arrival.date, "YYYY-MM-DD hh:mm:ss");
             segment.arrival.formatedDate = dateToMoment.format("MMMM Do YYYY");
             segment.arrival.formatedTime = dateToMoment.format("h:mm a"); 
-        }
+        };
 
         var setSegments = function(route){
             _.forEach(route.segments, setSegment);
             route.id = _.uniqueId();
-        }
+        };
 
         var setOneWayRoutes = function(flight, routes) { 
 
@@ -171,12 +171,12 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             _.forEach(routes, setRoutes);
             _.forEach(routes, setSegments);
 
-            flight.departure      = routes[0].departure;
-            flight.arrival        = routes[0].arrival;
-            flight.departureDateToMoment   = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss");
-            flight.arrivalDateToMoment   = moment(flight.arrival.date, "YYYY-MM-DD hh:mm:ss");
+            flight.departure = routes[0].departure;
+            flight.arrival = routes[0].arrival;
+            flight.departureDateToMoment = moment(flight.departure.date, "YYYY-MM-DD hh:mm:ss");
+            flight.arrivalDateToMoment = moment(flight.arrival.date, "YYYY-MM-DD hh:mm:ss");
             flight.departure.time = flight.departureDateToMoment.format("h:mm a");
-            flight.arrival.time   = flight.arrivalDateToMoment.format("h:mm a");
+            flight.arrival.time = flight.arrivalDateToMoment.format("h:mm a");
         };
 
         _.forEach(response.flights, function(flight) {
@@ -201,14 +201,15 @@ App.Collections.SearchResults = Backbone.Collection.extend({
 App.Routers.Router = Backbone.Router.extend({
 
     routes: {
-        ""          : "home",
-        "about"     : "about",
-        "toc"       : "toc",
-        "search"    : "search",
-        "buy/:id"   : "buy",
-        "confirm"   : "confirm",
-        "thanks"    : "thanks",
-        "*actions"  : "defaultRoute"
+        ""            : "home",
+        "about"       : "about",
+        "tos"         : "tos",
+        "search"      : "search",
+        "buy/:id"     : "buy",
+        "confirm"     : "confirm",
+        "publish-rec" : "publishRec",
+        "thanks"      : "thanks",
+        "*actions"    : "defaultRoute"
     },
 
     initialize: function(options) {
@@ -223,8 +224,8 @@ App.Routers.Router = Backbone.Router.extend({
         this.switchPage("about");
     },
 
-    toc: function() {
-        this.switchPage("toc");
+    tos: function() {
+        this.switchPage("tos");
     },
 
     search: function() {
@@ -245,6 +246,10 @@ App.Routers.Router = Backbone.Router.extend({
 
     confirm: function(id) {
         this.switchPage("confirm");
+    },
+
+    publishRec: function(id){
+        this.switchPage("publish-rec");
     },
 
     thanks: function(id){
@@ -311,6 +316,10 @@ App.Views.AppView = Backbone.View.extend({
             el: $("#buy-form")
         });
 
+        this.subviews.recommendationsForm = new App.Views.RecommendationsFormView({
+            el: $("#recommendations-form")
+        });
+
         this.subviews.searchResultsView = new App.Views.SearchResultsView({
             el: $("#page-search"),
             template: app.templates["search-results"],
@@ -358,6 +367,18 @@ App.Views.AppView = Backbone.View.extend({
         for (var view in this.subviews) {
             view.render();
         }
+    }
+
+});
+
+App.Views.RecommendationsFormView = Backbone.View.extend({
+
+    events:{
+        "click #publish-rec" : "publishRecommendation"
+    },
+
+    publishRecommendation: function(e){
+        app.router.navigate("publish-rec", { trigger: true });
     }
 
 });
@@ -457,7 +478,7 @@ App.Views.BuyFormView = Backbone.View.extend({
     },
     
     submitForm: function(e) {
-        var flight = app.searchResults.get(app.information.get("flightId"));
+        var flight = app.searchResults.getFlightById(app.info.get("flightId"));
         
         var data = $("#buy-form").serializeArray();
 
@@ -509,75 +530,70 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     loadMaps: function(e) {
 
-        function getTravelMarker(travel, obj, field) {
-        API.Geo.getAirportById({ id: travel.airportId }, function(data) {
-            
-                var airport = data.airport; 
-                
-                var airportLatLng = new google.maps.LatLng(airport.latitude, airport.longitude);
-                var marker = new google.maps.Marker({
-                    position: airportLatLng,
-                    title: airport.description
-                });
-            
-                obj[field] = marker;
+        var getAirport = function(travel) {
+            return API.Geo.getAirportById ({ id: travel.airportId });
+        };     
+
+        var getMarker = function (jqxhr) {
+            var airportPosition = new google.maps.LatLng(jqxhr[0].airport.latitude, jqxhr[0].airport.longitude);
+            return new google.maps.Marker({
+                position: airportPosition,
+                title: jqxhr[0].airport.description
             });
-        };
-        
+
+        };     
+
+        var generateOptions = function(zoom, center) {
+            return {
+                zoom: zoom,
+                center: center,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+        }  
+               
         var $link = $(e.target);
         var myFlightId = $link.data("flightid");
         var myId = $link.data("id");
 
-        $("#stopovers-outbound-" + myFlightId).append(""); 
+        var bound = $link.data("bound");
 
         var flight = app.searchResults.getFlightById(myFlightId);
 
-        var route = _.find(flight.get("outboundRoutes"), function(route){
+        var route = _.find(flight.get(bound + "Routes"), function(route){
             return route.id == myId; 
-        })
-
-        var myOptions = {
-            zoom: 4,
-            center: new google.maps.LatLng(0,0),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-
-        API.Geo.getAirportById({ id: route.segments[0].departure.airportId }, function(data) {
-            var airport = data.airport;     
-            map.setCenter(new google.maps.LatLng(airport.latitude, airport.longitude));
         });
 
-        var el = document.getElementById("map-canvas-outbound-" + myId)
+        var myOptions = generateOptions(4, new google.maps.LatLng(0,0));
+
+        var el = document.getElementById("map-canvas-" + bound + "-" + myId)
         var map = new google.maps.Map(el, myOptions);
 
 
         _.forEach(route.segments, function(segment){
-           
-            var travel = {};
 
-            getTravelMarker(segment.departure, travel, "departurePos");
-            getTravelMarker(segment.arrival, travel, "arrivalPos");
+            $.when(getAirport(segment.departure), 
+                   getAirport(segment.arrival)).done( function (arg1, arg2) {
 
-            console.log(travel);
+                        marker1 = getMarker(arg1);
+                        marker2 = getMarker(arg2);
 
-            var marker1 = travel.departurePos;
+                        var flightPath = new google.maps.Polyline({
+                            path: [ marker1.position, marker2.position ],
+                            strokeColor: "#FF0000",
+                            strokeOpacity: 1.0,
+                            strokeWeight: 2
+                        });
 
-            console.log(marker1);
+                        marker1.setMap(map);
+                        marker2.setMap(map);
 
-            var flightPath = new google.maps.Polyline({
-                path: [ marker1.position, marker2.position ],
-                strokeColor: "#FF0000",
-                strokeOpacity: 1.0,
-                strokeWeight: 2
-            });
+                        flightPath.setMap(map);
 
-            marker1.setMap(map);
-            marker2.setMap(map);
+                        if (segment == route.segments[0]) {
+                            map.setCenter(marker1.position);
+                        }
 
-            flightPath.setMap(map);
-
-            console.log(travel);
-
+                   });
         });
     },
 
@@ -595,7 +611,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
         $wrap.html(app.templates["search-error"](error));
     },
 
-    showLoadingMessage: function() {
+showLoadingMessage: function() {
         var $wrap = this.$el.find(".search-wrap");
         $wrap.html(app.templates["search-loading"]());
     },
