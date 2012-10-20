@@ -157,6 +157,24 @@ var Widgets = function() {
 
     };
 
+    var initCommentRadios = function() {
+        $("[data-radio]").each(function() {
+            var select = $(this);
+
+            console.log(select);
+
+            var controlName = select.data("radio");
+            var inner = "<td><label for='" + controlName + "'>" + controlName + "</label>";
+
+            for (i = 1; i <= 10; i++){
+                inner +=  "<td>" + i + "<input type='radio' name='" + controlName + "' value=" + i + "></td>"
+            }
+
+            select.append(inner);
+
+        });
+    };
+
     var initFancyBox = function() {
 
         $(".fancybox").fancybox({
@@ -174,6 +192,7 @@ var Widgets = function() {
         initSelectDatepickers();
         initButtonSets();
         initSelects();
+        initCommentRadios();
         initFancyBox();
 
     };
