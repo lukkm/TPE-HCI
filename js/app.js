@@ -128,6 +128,13 @@ App.Collections.SearchResults = Backbone.Collection.extend({
         return response.flights;
     },
 
+    getFlightById: function(id) {
+        var flight = this.find(function(model) {
+            return model.get("flightId") == id;
+        });
+        return flight;
+    },
+
     extractRoutes: function(response) {
 
         var setRoutes = function(route) {
@@ -159,6 +166,8 @@ App.Collections.SearchResults = Backbone.Collection.extend({
 
         var setOneWayRoutes = function(flight, routes) { 
 
+            flight.flightId = _.uniqueId();
+
             _.forEach(routes, setRoutes);
             _.forEach(routes, setSegments);
 
@@ -179,8 +188,6 @@ App.Collections.SearchResults = Backbone.Collection.extend({
                 setOneWayRoutes(flight, flight.inboundRoutes);
                 flight.inboundDate = flight.departureDateToMoment.format("MMMM Do YYYY");
             }
-
-            flight.flightId = _.uniqueId();
         });
     },
 
@@ -301,7 +308,7 @@ App.Views.AppView = Backbone.View.extend({
         });
 
         this.subviews.buyForm = new App.Views.BuyFormView({
-            el: $(".buy-form")
+            el: $("#buy-form")
         });
 
         this.subviews.searchResultsView = new App.Views.SearchResultsView({
@@ -451,15 +458,15 @@ App.Views.BuyFormView = Backbone.View.extend({
     
     submitForm: function(e) {
         var flight = app.searchResults.get(app.information.get("flightId"));
+        
+        var data = $("#buy-form").serializeArray();
 
-        var data = $(this).parents("form").serializeArray();
 
         _.forEach(data, function(input) {
             $("#confirm-" + input.name).html(input.value);
         });
 
         app.router.navigate("confirm", { trigger: true });
-
         e.preventDefault();
     },
 
@@ -473,7 +480,8 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     events: {
         "change #sort": "changeSort",
-        "click .page": "changePage"
+        "click .page": "changePage",
+        "click .fancybox": "loadMaps"
     },
 
     filterRenderers: {
@@ -494,6 +502,82 @@ App.Views.SearchResultsView = Backbone.View.extend({
         });
         this.collection.on("fetch", function() {
             view.showLoadingMessage();
+        });
+    },
+
+
+
+    loadMaps: function(e) {
+
+        function getTravelMarker(travel, obj, field) {
+        API.Geo.getAirportById({ id: travel.airportId }, function(data) {
+            
+                var airport = data.airport; 
+                
+                var airportLatLng = new google.maps.LatLng(airport.latitude, airport.longitude);
+                var marker = new google.maps.Marker({
+                    position: airportLatLng,
+                    title: airport.description
+                });
+            
+                obj[field] = marker;
+            });
+        };
+        
+        var $link = $(e.target);
+        var myFlightId = $link.data("flightid");
+        var myId = $link.data("id");
+
+        $("#stopovers-outbound-" + myFlightId).append(""); 
+
+        var flight = app.searchResults.getFlightById(myFlightId);
+
+        var route = _.find(flight.get("outboundRoutes"), function(route){
+            return route.id == myId; 
+        })
+
+        var myOptions = {
+            zoom: 4,
+            center: new google.maps.LatLng(0,0),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        API.Geo.getAirportById({ id: route.segments[0].departure.airportId }, function(data) {
+            var airport = data.airport;     
+            map.setCenter(new google.maps.LatLng(airport.latitude, airport.longitude));
+        });
+
+        var el = document.getElementById("map-canvas-outbound-" + myId)
+        var map = new google.maps.Map(el, myOptions);
+
+
+        _.forEach(route.segments, function(segment){
+           
+            var travel = {};
+
+            getTravelMarker(segment.departure, travel, "departurePos");
+            getTravelMarker(segment.arrival, travel, "arrivalPos");
+
+            console.log(travel);
+
+            var marker1 = travel.departurePos;
+
+            console.log(marker1);
+
+            var flightPath = new google.maps.Polyline({
+                path: [ marker1.position, marker2.position ],
+                strokeColor: "#FF0000",
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            marker1.setMap(map);
+            marker2.setMap(map);
+
+            flightPath.setMap(map);
+
+            console.log(travel);
+
         });
     },
 

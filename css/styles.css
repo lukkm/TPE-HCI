@@ -272,6 +272,11 @@ label {
     padding: 20px;
 }
 
+.map-canvas {
+    width: 700px;
+    height: 200px;
+}
+
 .nav {
     overflow: auto;
     margin-bottom: 20px;

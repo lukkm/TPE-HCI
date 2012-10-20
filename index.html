@@ -18,6 +18,7 @@
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-buttons.js"></script>
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-media.js"></script>
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-thumbs.js"></script>
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
         <script type="text/javascript" src="js/libs/moment.js"></script>
         <script type="text/javascript" src="js/libs/underscore.js"></script> 
         <script type="text/javascript" src="js/libs/backbone.js"></script>
@@ -27,6 +28,7 @@
         <script type="text/javascript" src="js/widgets.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/base.js"></script>
+
         <script type="text/x-handlebars-template" class="partial" id="flight">
             <div class="search-result">
                 <div class="search-result-container">
@@ -47,7 +49,7 @@
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col"><a href="#stopovers-outbound-{{id}}" class="fancybox">{{stopovers}}</a></td>
+                                    <td class="scales-col"><a href="#stopovers-outbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}">{{stopovers}}</a></td>
                                     <div id="stopovers-outbound-{{id}}" class="stopovers">
                                         <h2>Stopovers</h2>
                                         {{#segments}}
@@ -64,6 +66,7 @@
                                         </div>
                                         {{/segments}}
                                         <div class="stopover-total-duration">Total duration: {{duration}}</div>
+                                        <div id="map-canvas-outbound-{{id}}" class="map-canvas"></div>
                                     </div>
                                 </tr>
                         {{/outboundRoutes}}
@@ -86,7 +89,7 @@
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">Duration</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
-                                    <td class="scales-col"><a href="#stopovers-inbound-{{id}}" class="fancybox">{{stopovers}}</a></td>
+                                    <td class="scales-col"><a href="#stopovers-inbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}">{{stopovers}}</a></td>
                                      <div id="stopovers-inbound-{{id}}" class="stopovers">
                                         <h2>Stopovers</h2>
                                         {{#segments}}
@@ -103,6 +106,7 @@
                                         </div>
                                         {{/segments}}
                                         <div class="stopover-total-duration">Total duration: {{duration}}</div>
+                                        <div id="map-canvas-inbound-{{id}}" class="map-canvas"></div>
                                     </div>
                                 </tr>
                         {{/inboundRoutes}}
