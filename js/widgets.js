@@ -164,6 +164,7 @@ var Widgets = function() {
             console.log(select);
 
             var controlName = select.data("radio");
+            select.html("");
             var inner = "<td><label for='" + controlName + "'>" + controlName + "</label>";
 
             for (i = 1; i <= 10; i++){
