@@ -530,66 +530,52 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     loadMaps: function(e) {
 
-        var getTravelMarker = function(travel) {
+        var getAirport = function(travel) {
             return API.Geo.getAirportById ({ id: travel.airportId });
-        };               
+        };     
+
+        var getMarker = function (jqxhr) {
+            var airportPosition = new google.maps.LatLng(jqxhr[0].airport.latitude, jqxhr[0].airport.longitude);
+            return new google.maps.Marker({
+                position: airportPosition,
+                title: jqxhr[0].airport.description
+            });
+
+        };     
+
+        var generateOptions = function(zoom, center) {
+            return {
+                zoom: zoom,
+                center: center,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+        }  
                
-        /*
-                var airport = data.airport; 
-                
-                var airportLatLng = new google.maps.LatLng(airport.latitude, airport.longitude);
-                var marker = new google.maps.Marker({
-                    position: airportLatLng,
-                    title: airport.description
-                });
-            
-                return marker;
-            })));
-        };
-        */
         var $link = $(e.target);
         var myFlightId = $link.data("flightid");
         var myId = $link.data("id");
 
-        $("#stopovers-outbound-" + myFlightId).append(""); 
+        var bound = $link.data("bound");
 
         var flight = app.searchResults.getFlightById(myFlightId);
 
-        var route = _.find(flight.get("outboundRoutes"), function(route){
+        var route = _.find(flight.get(bound + "Routes"), function(route){
             return route.id == myId; 
         });
 
-        var myOptions = {
-            zoom: 4,
-            center: new google.maps.LatLng(0,0),
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
+        var myOptions = generateOptions(4, new google.maps.LatLng(0,0));
 
-        API.Geo.getAirportById({ id: route.segments[0].departure.airportId }, function(data) {
-            var airport = data.airport;     
-            map.setCenter(new google.maps.LatLng(airport.latitude, airport.longitude));
-        });
-
-        var el = document.getElementById("map-canvas-outbound-" + myId);
+        var el = document.getElementById("map-canvas-" + bound + "-" + myId)
         var map = new google.maps.Map(el, myOptions);
 
 
         _.forEach(route.segments, function(segment){
-           
-            var travel = {};
 
-            $.when($.ajax(getTravelMarker(segment.departure), 
-                          getTravelMarker(segment.arrival))).done( function (arg1, arg2) {
-                        /*console.log(travel);
+            $.when(getAirport(segment.departure), 
+                   getAirport(segment.arrival)).done( function (arg1, arg2) {
 
-                        var marker1 = travel.departurePos;
-                        var marker2 = travel.arrivalPos;
-
-                        console.log(marker1);*/
-
-                        console.log(arg1);
-
-                        console.log("done");
+                        marker1 = getMarker(arg1);
+                        marker2 = getMarker(arg2);
 
                         var flightPath = new google.maps.Polyline({
                             path: [ marker1.position, marker2.position ],
@@ -603,7 +589,10 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
                         flightPath.setMap(map);
 
-                        console.log(travel);
+                        if (segment == route.segments[0]) {
+                            map.setCenter(marker1.position);
+                        }
+
                    });
         });
     },
@@ -622,7 +611,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
         $wrap.html(app.templates["search-error"](error));
     },
 
-    showLoadingMessage: function() {
+showLoadingMessage: function() {
         var $wrap = this.$el.find(".search-wrap");
         $wrap.html(app.templates["search-loading"]());
     },
