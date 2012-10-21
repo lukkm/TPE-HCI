@@ -166,7 +166,7 @@ var Widgets = function() {
             var inner = "<td><label for='" + controlName + "'>" + controlName + "</label>";
 
             for (i = 1; i <= 10; i++){
-                inner +=  "<td>" + i + "<input type='radio' name='" + controlName + "' value=" + i + "></td>"
+                inner +=  "<td>" + i + "<input type='radio' data-selector='rating' name='" + controlName + "' value=" + i + "></td>"
             }
 
             select.append(inner);
@@ -174,27 +174,21 @@ var Widgets = function() {
         });
 
 
-        /*
-
-        Falta terminar
-
         $("[data-radio]").change( function(){
-            var avg = 0, cant = 0;
-            $("[data-radio]").each( function() {
-                var $el = $(this); 
-                _.forEach($el, function(input){
-                    console.log(input);
-                    if (input.value != ""){
-                        avg += input.value;
-                        cant++;
-                    }
-                });
+
+            var sum = 0, cant = 0;
+
+            _.forEach($(":checked[data-selector='rating']"), function(el){
+                sum += Number(el.value);
+                cant++;
             });
-            console.log(avg);
-            console.log(cant);
-            $("#av-score").html(avg/cant)
+
+            var result = ((cant > 0) ? (sum/cant) : 0).toFixed(2);
+
+            $("#av-score").html(result);
+            $("#avg-score")[0].value = result;
         });
-        */
+        
 
     };
 

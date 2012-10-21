@@ -789,6 +789,15 @@ label {
     background: #FFF7EA;
 }
 
+#av-score {
+    margin-left: 20px;
+    border: 1px solid #F8CA95;
+    padding: 6px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
 .invalid {
     border: 1px solid red;
     background-color: #FFEEEE;
