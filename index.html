@@ -65,7 +65,7 @@
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
                                     <td class="scales-col"><a href="#stopovers-outbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}" data-bound="outbound">{{stopovers}}</a></td>
                                     <div id="stopovers-outbound-{{id}}" class="stopovers">
-                                        <h2>Stopovers</h2>
+                                        <h2>{{{i18n "stopovers" }}}</h2>
                                         {{#segments}}
                                         {{> flight-segments}}
                                         {{/segments}}
@@ -95,7 +95,7 @@
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
                                     <td class="scales-col"><a href="#stopovers-inbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}" data-bound="inbound">{{stopovers}}</a></td>
                                     <div id="stopovers-inbound-{{id}}" class="stopovers">
-                                        <h2>{{{i18n "stepovers" }}}</h2>
+                                        <h2>{{{i18n "stopovers" }}}</h2>
                                         {{#segments}}
                                         {{> flight-segments}}
                                         {{/segments}}
