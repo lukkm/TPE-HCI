@@ -55,7 +55,8 @@ var i18n = (function() {
             "number_children_hint"        : "(2-11 years)",
             "number_infants"              : "Number of infants",
             "number_infants_hint"         : "(0-2 years)",
-            "search_button"               : "Search"
+            "search_button"               : "Search",
+            "filter_results"              : "Filter Results"
         },
         "es": {
             "search_form_title"           : "Buscar Vuelos",
@@ -109,7 +110,8 @@ var i18n = (function() {
             "number_children_hint"        : "(2-11 años)",
             "number_infants"              : "Número de infantes",
             "number_infants_hint"         : "(0-2 años)",
-            "search_button"               : "Buscar"
+            "search_button"               : "Buscar",
+            "filter_results"              : "Filtrar resultados"
         }
     };
 

@@ -49,6 +49,7 @@ App.Views.AppView = Backbone.View.extend({
             el: $("#page-search"),
             template: app.templates["search-results"],
             errorTemplate: app.templates["search-error"],
+            filtersTemplate: app.templates["search-filters"],
             collection: app.searchResults
         });
 
@@ -240,23 +241,11 @@ App.Views.SearchFormView = Backbone.View.extend({
             }});
             collection.trigger("fetch");
 
-            this.updateFilterFields();
-
             app.router.navigate("search", { trigger: true });
 
         }
 
         e.preventDefault();
-
-    },
-
-    updateFilterFields: function() {
-
-        _.forEach($("input[data-from]"), function(input) {
-            var $input = $(input),
-                value = $("#" + $input.data("from")).val();
-            $input.val(value);
-         });
 
     },
 
@@ -345,6 +334,8 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
     initialize: function(options) {
         this.template = options.template;
+        this.filtersTemplate = options.filtersTemplate;
+        this.errorTemplate = options.errorTemplate;
 
         var view = this;
         this.collection.on("change", function() {
@@ -356,6 +347,16 @@ App.Views.SearchResultsView = Backbone.View.extend({
         this.collection.on("fetch", function() {
             view.showLoadingMessage();
         });
+    },
+
+    updateFilterFields: function() {
+
+        $("input[data-from]").each(function(index, input) {
+            var $input = $(input),
+                value = $("#" + $input.data("from")).val();
+            $input.val(value);
+         });
+
     },
 
     loadMaps: function(e) {
@@ -449,14 +450,23 @@ App.Views.SearchResultsView = Backbone.View.extend({
     render: function() {
         var $wrap;
 
+        this.$el.find(".search-filters").html(this.filtersTemplate());
+        this.updateFilterFields();
+
+        // @TODO: Fix this hack
         if (this.collection.length > 0) {
 
             $wrap = this.$el.find(".search-wrap");
             $wrap.html(this.template(this.getContext()));
+
+            var sortKey = this.collection.query.get("sort_key");
+            var sortOrder = this.collection.query.get("sort_order");
+
+            $wrap.find("#sort").val([sortKey, sortOrder].join(" "));
+
             this.renderFilters();
 
         }
-
         return this;
     },
 

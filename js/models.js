@@ -40,7 +40,6 @@ App.Models.Query = Backbone.Model.extend({
 });
 
 App.Models.Query.fromSerializedArray = function(serializedArray) {
-
     var attributes = {};
     _.each(serializedArray, function(input) {
         attributes[input.name] = input.value;

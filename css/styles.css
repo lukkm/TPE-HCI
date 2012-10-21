@@ -149,6 +149,10 @@ input:focus {
     border-color: #999;
 }
 
+input:disabled {
+    background-color: #EEE;
+}
+
 input[data-widget=datepicker] {
     background-image: url("../img/icon-calendar.png");
     background-repeat: no-repeat;
@@ -359,8 +363,8 @@ label {
     margin: 5px 0 10px;
 }
 
-.filter-form #filter-price {
-    color: #F6A828;
+.filter-price input {
+    color: #F6A828 !important;
     border: none;
     font-weight: bold;
     font-size: 13px;
@@ -487,7 +491,7 @@ label {
 }
 
 .search-filters {
-    width: 232px;
+    width: 215px;
     border: 2px solid #F8CA95;
     padding: 16px;
     float: left;
@@ -506,7 +510,7 @@ label {
     margin-top: 25px;
 }
 
-.filter-price-input {
+.filter-price input {
     width: 150px;
 }
 
@@ -517,7 +521,7 @@ label {
 /* =Search Results */
 
 .search-wrap {
-    width: 676px;
+    width: 692px;
     float: left;
     margin-left: 16px;
 }

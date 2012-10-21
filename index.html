@@ -67,19 +67,9 @@
                                     <div id="stopovers-outbound-{{id}}" class="stopovers">
                                         <h2>Stopovers</h2>
                                         {{#segments}}
-                                        <div class="stopover">
-                                            <div class="stopover-title">Flight: {{flightNumber}} - Class: {{cabinType}}</div>
-                                            <div class="stopover-stop">
-                                                <span class="stopover-airport"><strong>Departs from:</strong> {{departure.airportDescription}}</span>
-                                                <span class="stopover-datetime">{{departure.formatedDate}}, {{departure.formatedTime}}</span>
-                                            <div>
-                                            <div class="stopover-stop">
-                                                <span class="stopover-airport"><strong>Arrives to:</strong> {{arrival.airportDescription}}</span>
-                                                <span class="stopover-datetime">{{arrival.formatedDate}}, {{arrival.formatedTime}}</span>
-                                            </div>
-                                        </div>
+                                        {{> flight-segments}}
                                         {{/segments}}
-                                        <div class="stopover-total-duration">Total duration: {{duration}}</div>
+                                        <div class="stopover-total-duration">{{{i18n "total_duration" }}}: {{duration}}</div>
                                         <div id="map-canvas-outbound-{{id}}" class="map-canvas"></div>
                                     </div>
                                 </tr>
@@ -97,27 +87,17 @@
                         {{#inboundRoutes}}
                                 <tr>
                                     <td class="radio-col"><input type="radio" name="inbound-{{id}}"/></td>
-                                    <td class="text-col">Depart</td> 
+                                    <td class="text-col">{{{i18n "depart_label" }}}</td> 
                                     <td class="datetime-col"><strong>{{departure.time}}</strong></td>
-                                    <td class="text-col">Arrives</td> 
+                                    <td class="text-col">{{{i18n "return_label" }}}</td> 
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">{{{i18n "duration" }}}</td> 
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
                                     <td class="scales-col"><a href="#stopovers-inbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}" data-bound="inbound">{{stopovers}}</a></td>
-                                     <div id="stopovers-inbound-{{id}}" class="stopovers">
-                                        <h2>Stopovers</h2>
+                                    <div id="stopovers-inbound-{{id}}" class="stopovers">
+                                        <h2>{{{i18n "stepovers" }}}</h2>
                                         {{#segments}}
-                                        <div class="stopover">
-                                            <div class="stopover-title">{{{i18n "flight" }}}: {{flightNumber}} - {{{i18n "flight_class" }}}: {{cabinType}}</div>
-                                            <div class="stopover-stop">
-                                                <span class="stopover-airport"><strong>{{{i18n "departs_from" }}}:</strong> {{departure.airportDescription}}</span>
-                                                <span class="stopover-datetime">{{departure.formatedDate}}, {{departure.formatedTime}}</span>
-                                            <div>
-                                            <div class="stopover-stop">
-                                                <span class="stopover-airport"><strong>{{{i18n "arrives_to" }}}:</strong> {{arrival.airportDescription}}</span>
-                                                <span class="stopover-datetime">{{arrival.formatedDate}}, {{arrival.formatedTime}}</span>
-                                            </div>
-                                        </div>
+                                        {{> flight-segments}}
                                         {{/segments}}
                                         <div class="stopover-total-duration">{{{i18n "total_duration" }}}: {{duration}}</div>
                                         <div id="map-canvas-inbound-{{id}}" class="map-canvas"></div>
@@ -127,49 +107,65 @@
                         </table>
                     {{/if}}
                 </div>
-                <div class="search-result-price">
-                    <div class="price-text">
-                        {{#with price}}
-                        <ul>
-                            {{#if adults}}
-                            <li>
-                                <span class="label">{{{i18n "adults" }}}:</span>
-                                <span class="value">{{adults.quantity}} x $ {{{currency adults.baseFare}}}</span>
-                            </li>
-                            {{/if}}
-                            {{#if children}}
-                            <li>
-                                <span class="label">{{{i18n "children" }}}:</span>
-                                <span class="value">{{children.quantity}} x $ {{{currency children.baseFare}}}</span>
-                            </li>
-                            {{/if}}
-                            {{#if infants}}
-                            <li>
-                            <span class="label">{{{i18n "infants" }}}:</span>
-                                <span class="value">{{children.quantity}} x $ {{{currency infants.baseFare}}}</span>
-                            </li>
-                            {{/if}}
-                        </ul>
-                        <h6 class="title">{{{i18n "total" }}}</h6>
-                        <ul>
-                            <li>
-                                <span class="label">{{{i18n "charges" }}}:</span>
-                                <span class="value">$ {{{currency total.charges}}</span>
-                            </li>
-                            <li>
-                                <span class="label">{{{i18n "fare" }}}:</span>
-                                <span class="value">$ {{{currency total.fare}}}</span>
-                            </li>
-                            <li>
-                                <span class="label">{{{i18n "taxes" }}}:</span>
-                                <span class="value">$ {{{currency total.taxes}}}</span>
-                            </li>
-                        </ul>
-                        <span class="total">$ {{{currency total.total}}}</span>
-                        {{/with}}
-                    </div>
-                    <a href="#buy/{{flightId}}" class="button button-small">{{{i18n "select_button" }}}</a>
+                {{> flight-price}}
+            </div>
+        </script>
+        <script type="text/x-handlebars-template" class="partial" id="flight-segments">
+            <div class="stopover">
+                <div class="stopover-title">{{{i18n "flight" }}}: {{flightNumber}} - {{{i18n "flight_class" }}}: {{cabinType}}</div>
+                <div class="stopover-stop">
+                    <span class="stopover-airport"><strong>{{{i18n "departs_from" }}}:</strong> {{departure.airportDescription}}</span>
+                    <span class="stopover-datetime">{{departure.formatedDate}}, {{departure.formatedTime}}</span>
+                <div>
+                <div class="stopover-stop">
+                    <span class="stopover-airport"><strong>{{{i18n "arrives_to" }}}:</strong> {{arrival.airportDescription}}</span>
+                    <span class="stopover-datetime">{{arrival.formatedDate}}, {{arrival.formatedTime}}</span>
                 </div>
+            </div>
+        </script>
+        <script type="text/x-handlebars-template" class="partial" id="flight-price">
+            <div class="search-result-price">
+                <div class="price-text">
+                    {{#with price}}
+                    <ul>
+                        {{#if adults}}
+                        <li>
+                            <span class="label">{{{i18n "adults" }}}:</span>
+                            <span class="value">{{adults.quantity}} x $ {{{currency adults.baseFare}}}</span>
+                        </li>
+                        {{/if}}
+                        {{#if children}}
+                        <li>
+                            <span class="label">{{{i18n "children" }}}:</span>
+                            <span class="value">{{children.quantity}} x $ {{{currency children.baseFare}}}</span>
+                        </li>
+                        {{/if}}
+                        {{#if infants}}
+                        <li>
+                        <span class="label">{{{i18n "infants" }}}:</span>
+                            <span class="value">{{children.quantity}} x $ {{{currency infants.baseFare}}}</span>
+                        </li>
+                        {{/if}}
+                    </ul>
+                    <h6 class="title">{{{i18n "total" }}}</h6>
+                    <ul>
+                        <li>
+                            <span class="label">{{{i18n "charges" }}}:</span>
+                            <span class="value">$ {{{currency total.charges}}</span>
+                        </li>
+                        <li>
+                            <span class="label">{{{i18n "fare" }}}:</span>
+                            <span class="value">$ {{{currency total.fare}}}</span>
+                        </li>
+                        <li>
+                            <span class="label">{{{i18n "taxes" }}}:</span>
+                            <span class="value">$ {{{currency total.taxes}}}</span>
+                        </li>
+                    </ul>
+                    <span class="total">$ {{{currency total.total}}}</span>
+                    {{/with}}
+                </div>
+                <a href="#buy/{{flightId}}" class="button button-small">{{{i18n "select_button" }}}</a>
             </div>
         </script>
         <script type="text/x-handlebars-template" id="search-results">
@@ -202,6 +198,28 @@
                 {{{pagination pagination}}}
             </div>
         </script>
+        <script type="text/x-handlebars-template" id="search-filters">
+            <h2>{{{i18n "filter_results" }}}</h2>
+            <form action="." class="filter-form" id="filter-form">
+                <div class="filter">
+                    <label for="from-filter">{{{i18n "from_label" }}}</label>
+                    <input type="text" name="from-filter" id="from-filter" class="filter-form-input-field" data-from="from-user" disabled="disabled" />
+                </div>
+                <div class="filter">
+                    <label for="to-filter">{{{i18n "to_label" }}}</label>
+                    <input type="text" name="to-filter" id="to-filter" class="filter-form-input-field" data-from="to-user" disabled="disabled" />
+                </div>
+                <div class="filter">
+                    <label for="departure-date-filter">{{{i18n "depart_label" }}}</label>
+                    <input type="text" name="departure-date-filter" id="departure-date-filter" class="filter-form-input-field" data-from="departure-date-user" disabled="disabled" />
+                </div>
+                <div class="filter">
+                    <label for="return-date-filter">{{{i18n "return_label" }}}</label>
+                    <input type="text" name="return-date-filter" id="return-date-filter" class="filter-form-input-field" data-from="return-date-user" disabled="disabled" />
+                </div>
+                <div class="dynamic-filters"></div>
+            </form>
+        </script>
         <script type="text/x-handlebars-template" id="filter-airline">
             <div class="filter">
                 <label for="airline">{{{i18n "stopovers" }}}</label>
@@ -223,10 +241,10 @@
             </div>
         </script>
         <script type="text/x-handlebars-template" id="filter-price">
-            <div class="filter">
+            <div class="filter filter-price">
                 <label for="price">{{{i18n "price" }}}</label>
                 <input type="text" name="price" id="price" />
-                <div id="slider-range-price" data-widget="slider" data-target="price" data-min="{{min}}" data-max="{{max}}"></div>
+                <div id="slider-range-price" data-widget="slider" data-target="price" data-min="{{min}}" data-max="{{max}}" disabled="disabled"></div>
             </div>
         </script>
         <script type="text/x-handlebars-template" id="search-error">
@@ -358,30 +376,8 @@
                 </div>
 
                 <div class="page" id="page-search" data-title="Search Results">
-                    <div class="search-filters">
-                        <h2>Filter results</h2>
-                        <form action="." class="filter-form" id="filter-form">
-                            <div class="filter">
-                                <label for="from-filter">From</label>
-                                <input type="text" name="from-filter" id="from-filter" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="from-user" />
-                            </div>
-                            <div class="filter">
-                                <label for="to-filter">To</label>
-                                <input type="text" name="to-filter" id="to-filter" class="filter-form-input-field" data-widget="autocomplete" data-source="places" data-from="to-user" />
-                            </div>
-                            <div class="filter">
-                                <label for="departure-date-filter">Depart</label>
-                                <input type="text" name="departure-date-filter" id="departure-date-filter" class="filter-form-input-field" data-widget="datepicker" data-from="departure-date-user" />
-                            </div>
-                            <div class="filter">
-                                <label for="return-date-filter">Return</label>
-                                <input type="text" name="return-date-filter" id="return-date-filter" class="filter-form-input-field" data-widget="datepicker" data-from="return-date-user"/>
-                            </div>
-                            <div class="dynamic-filters"></div>
-                        </form>
-                    </div>
-                    <div class="search-wrap">
-                    </div>
+                    <div class="search-filters"> </div>
+                    <div class="search-wrap"> </div>
                 </div>
 
                 <div class="page" id="page-about" data-title="About">
