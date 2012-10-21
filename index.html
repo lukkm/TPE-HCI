@@ -413,36 +413,108 @@
 
                             <h3>Passengers</h3>
                             <div class="form-section">
-                                <label for="first-name">First Name</label>
-                                <input type="text" data-validate="required" name="first-name" id="first-name" value="" />
-                                <label for="last-name">Last Name</label>
-                                <input type="text" data-validate="required" name="last-name" id="last-name" value="" />
-                                <label for="birth-date">Birth Date</label>
-                                <input type="text" name="birth-date" id="birth-date" value="" data-widget="datepicker-select" />
+                                <table>
+                                    <tr>
+                                        <td id="buy-passengers">
+                                            <label for="passenger-number"></label>
+                                        </td>
+                                        <td>
+                                            <label for="first-name">First Name</label>
+                                        </td>
+                                        <td>
+                                            <label for="last-name">Last Name</label>
+                                        </td>
+                                        <td>
+                                            <label for="birth-date">Birth Date</label>
+                                        </td>
+                                    </tr>
+                                    <tr id="buy-single-passanger">
+                                        <td id="buy-passengers">
+                                            <!-- Nro de pasajero -->
+                                        </td>
+                                        <td>
+                                            <input type="text" data-validate="required" name="first-name" id="first-name" value="" />
+                                        </td>
+                                        <td>
+                                            <input type="text" data-validate="required" name="last-name" id="last-name" value="" />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="birth-date" id="birth-date" value="" data-widget="datepicker-select" />                                            
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
 
                             <h3>Billing</h3>
                             <div class="form-section">
-                                <label for="card-number">Card Number</label>
-                                <input type="text" data-validate="card-number" name="card-number" id="card-number" value="" />
-                                <label for="card-expire-date">Expire Date</label>
-                                <input type="text" data-validate="card-expire-date" name="card-expire-date" id="card-expire-date" value="" />
-                                <label for="card-security-code">Security Code</label>
-                                <input type="text" data-validate="required" name="card-security-code" id="card-security-code" value="" />
-                                <label for="card-holder">Holder</label>
-                                <input type="text" data-validate="required" name="card-holder" id="card-holder" value="" />
-                                <label for="card-document-number">Document Number</label>
-                                <input type="text" data-validate="required" name="card-document-number" id="card-document-number" value="" />
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label for="card-number">Card Number</label>
+                                        </td>
+                                        <td>
+                                            <label for="card-expire-date">Expire Date</label>
+                                        </td>
+                                        <td>
+                                            <label for="card-security-code">Security Code</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" data-validate="card-number" name="card-number" id="card-number" value="" />
+                                        </td>
+                                        <td>
+                                            <input type="text" data-validate="card-expire-date" name="card-expire-date" id="card-expire-date" value="" />
+                                        </td>
+                                        <td>
+                                            <input type="text" data-validate="required" name="card-security-code" id="card-security-code" value="" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label for="card-holder">Holder</label>
+                                        </td>
+                                        <td>
+                                            <label for="card-document-number">Document Number</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" data-validate="required" name="card-holder" id="card-holder" value="" />
+                                        </td>
+                                        <td>
+                                            <input type="text" data-validate="required" name="card-document-number" id="card-document-number" value="" />
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
 
                             <h3>Contact Information</h3>
                             <div class="form-section">
-                                <label for="email">Email</label>
-                                <input type="text" name="email" id="email" value="" />
-                                <label for="email-confirm">Confirm Email</label>
-                                <input type="text" name="email-confirm" id="email-confirm" value="" />
-                                <label for="phone-number">Phone number</label>
-                                <input type="text" name="phone-number" id="phone-number" value="" />
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label for="email">Email</label>
+                                        </td>
+                                        <td>
+                                            <label for="phone-number">Phone number</label>
+                                        </td>
+                                        <td>
+                                            <label for="email-confirm">Confirm Email</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="email" id="email" value="" />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="phone-number" id="phone-number" value="" />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="email-confirm" id="email-confirm" value="" />
+                                        </td>
+                                    </tr>                                    
+                                </table>
                             </div>
 
                             <div class="form-terms">
@@ -547,45 +619,19 @@
                     <div class="form-section" id="rating-section">
                         <h2>Rate your flight</h2>
                         
-                        <table>
-
-                            <tr>
-
-                                <div class="rating-section">
-                                    <td><label for="kindness">Kindness</label></td>
-                                    <td>1 <input type="radio" name="kindness" value="1"/></td>
-                                    <td>2 <input type="radio" name="kindness" value="2"/></td>
-                                    <td>3 <input type="radio" name="kindness" value="3"/></td>
-                                    <td>4 <input type="radio" name="kindness" value="4"/></td>
-                                    <td>5 <input type="radio" name="kindness" value="5"/></td>
-                                    <td>6 <input type="radio" name="kindness" value="6"/></td>
-                                    <td>7 <input type="radio" name="kindness" value="7"/></td>
-                                    <td>8 <input type="radio" name="kindness" value="8"/></td>
-                                    <td>9 <input type="radio" name="kindness" value="9"/></td>
-                                    <td>10 <input type="radio" name="kindness" value="10"/></td>
-                                </div>
-
-                            </tr>
-                            <tr>
-
-                                <div class="rating-section">
-                                    <td><label for="food">Food</label></td>
-                                    <td>1 <input type="radio" name="food" value="1"/></td>
-                                    <td>2 <input type="radio" name="food" value="2"/></td>
-                                    <td>3 <input type="radio" name="food" value="3"/></td>
-                                    <td>4 <input type="radio" name="food" value="4"/></td>
-                                    <td>5 <input type="radio" name="food" value="5"/></td>
-                                    <td>6 <input type="radio" name="food" value="6"/></td>
-                                    <td>7 <input type="radio" name="food" value="7"/></td>
-                                    <td>8 <input type="radio" name="food" value="8"/></td>
-                                    <td>9 <input type="radio" name="food" value="9"/></td>
-                                    <td>10 <input type="radio" name="food" value="10"/></td>
-                                </div>
-
-                            </tr>
-
-                        </table>
-
+                        <form>
+                            <table>
+                                <tr class="rating-section" data-radio="Kindness"></tr>
+                                <tr class="rating-section" data-radio="Food"></tr>
+                                <tr class="rating-section" data-radio="Punctuality"></tr>
+                                <tr class="rating-section" data-radio="Frecuent travelers program"></tr>
+                                <tr class="rating-section" data-radio="Confort"></tr>
+                                <tr class="rating-section" data-radio="Price-Quality Relation"></tr>
+                            </table>
+                                <div class="average-score"><strong>Average score:</strong></div>
+                                <div class="general-comments"><strong>Comments:</strong><textarea name="general-comments" rows="4" cols="125"></textarea></div>
+                        </form>
+                        <button type="submit" class="button small-button" id="post-rec">Post recommendation</button>
                     </div>
                 </div>
             </div>
