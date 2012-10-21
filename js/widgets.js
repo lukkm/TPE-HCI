@@ -161,8 +161,6 @@ var Widgets = function() {
         $("[data-radio]").each(function() {
             var select = $(this);
 
-            console.log(select);
-
             var controlName = select.data("radio");
             select.html("");
             var inner = "<td><label for='" + controlName + "'>" + controlName + "</label>";
@@ -174,7 +172,32 @@ var Widgets = function() {
             select.append(inner);
 
         });
+
+
+        /*
+
+        Falta terminar
+
+        $("[data-radio]").change( function(){
+            var avg = 0, cant = 0;
+            $("[data-radio]").each( function() {
+                var $el = $(this); 
+                _.forEach($el, function(input){
+                    console.log(input);
+                    if (input.value != ""){
+                        avg += input.value;
+                        cant++;
+                    }
+                });
+            });
+            console.log(avg);
+            console.log(cant);
+            $("#av-score").html(avg/cant)
+        });
+        */
+
     };
+
 
     var initFancyBox = function() {
 
