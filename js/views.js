@@ -190,6 +190,7 @@ App.Views.RecommendationsFormView = Backbone.View.extend({
 
     publishRecommendation: function(e){
         app.router.navigate("publish-rec", { trigger: true });
+        return false;
     }
 
 });
