@@ -96,6 +96,9 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             dateToMoment = moment(segment.arrival.date, "YYYY-MM-DD hh:mm:ss");
             segment.arrival.formatedDate = dateToMoment.format("MMMM Do YYYY");
             segment.arrival.formatedTime = dateToMoment.format("h:mm a"); 
+            var filters = getAirlineFilters();
+            debugger;
+            segment.airlineLogo = getAirlineLogo(filters, segment.airlineId);
         };
 
         var setSegments = function(route){
@@ -118,6 +121,27 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             flight.arrival.time = flight.arrivalDateToMoment.format("h:mm a");
         };
 
+        var getAirlineFilters = function() { 
+            var $content = response.filters;
+            var ans;
+            _.forEach($content, function(filter){
+                if (filter.key == "airline"){
+                    ans = filter;
+                }
+            });
+            return ans;
+        };
+
+        var getAirlineLogo = function(airlineFilters, airlineId){
+            var ans;
+            _.forEach(airlineFilters.values, function(filter){
+                if (filter.id = airlineId){
+                    ans = filter.logo;
+                }
+            });
+            return ans;
+        }
+
         _.forEach(response.flights, function(flight) {
             if (typeof flight.outboundRoutes !== 'undefined') {
                 setOneWayRoutes(flight, flight.outboundRoutes);
@@ -127,6 +151,7 @@ App.Collections.SearchResults = Backbone.Collection.extend({
                 setOneWayRoutes(flight, flight.inboundRoutes);
                 flight.inboundDate = flight.departureDateToMoment.format("MMMM Do YYYY");
             }
+
         });
     },
 

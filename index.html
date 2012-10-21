@@ -112,7 +112,7 @@
         </script>
         <script type="text/x-handlebars-template" class="partial" id="flight-segments">
             <div class="stopover">
-                <div class="stopover-title">{{{i18n "flight" }}}: {{flightNumber}} - {{{i18n "flight_class" }}}: {{cabinType}}</div>
+                <div class="stopover-title">{{{i18n "flight" }}}: {{flightNumber}} - {{{i18n "flight_class" }}}: {{cabinType}} - Airline: {{airlineName}} <img src="{{airlineLogo}}"> </div> 
                 <div class="stopover-stop">
                     <span class="stopover-airport"><strong>{{{i18n "departs_from" }}}:</strong> {{departure.airportDescription}}</span>
                     <span class="stopover-datetime">{{departure.formatedDate}}, {{departure.formatedTime}}</span>

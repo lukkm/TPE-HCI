@@ -224,6 +224,10 @@ label .hint {
     padding-bottom: 8px;
 }
 
+.stopover-title img {
+    margin-left: 5px;
+}
+
 .stopover-datetime {
     float:right;
 }
