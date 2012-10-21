@@ -59,9 +59,9 @@
                                     <td class="radio-col"><input type="radio" name="outbound-{{id}}"/></td>
                                     <td class="text-col">{{{i18n "departs" }}}</td>
                                     <td class="datetime-col"><strong>{{departure.time}}</strong></td>
-                                    <td class="text-col">{{{i18n "returns" }}}</td>
+                                    <td class="text-col">{{{i18n "arrives" }}}</td>
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
-                                    <td class="text-col"></td> 
+                                    <td class="text-col">{{{i18n "duration" }}}</td>
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
                                     <td class="scales-col"><a href="#stopovers-outbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}" data-bound="outbound">{{stopovers}}</a></td>
                                     <div id="stopovers-outbound-{{id}}" class="stopovers">
@@ -87,11 +87,11 @@
                         {{#inboundRoutes}}
                                 <tr>
                                     <td class="radio-col"><input type="radio" name="inbound-{{id}}"/></td>
-                                    <td class="text-col">{{{i18n "depart_label" }}}</td> 
+                                    <td class="text-col">{{{i18n "departs" }}}</td> 
                                     <td class="datetime-col"><strong>{{departure.time}}</strong></td>
-                                    <td class="text-col">{{{i18n "return_label" }}}</td> 
+                                    <td class="text-col">{{{i18n "arrives" }}}</td> 
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
-                                    <td class="text-col">{{{i18n "duration" }}}</td> 
+                                    <td class="text-col">{{{i18n "duration" }}}</td>
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
                                     <td class="scales-col"><a href="#stopovers-inbound-{{id}}" class="fancybox" data-id="{{id}}" data-flightid="{{../flightId}}" data-bound="inbound">{{stopovers}}</a></td>
                                     <div id="stopovers-inbound-{{id}}" class="stopovers">
