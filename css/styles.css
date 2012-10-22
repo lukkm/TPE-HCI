@@ -503,8 +503,9 @@ label {
     position: absolute;
     z-index: 1000 !important;
     color: white;
+    text-align: center;
     margin-top: 10px;
-    margin-left: 225px; 
+    width: 563px;
 }
 
 .nivoSlider {

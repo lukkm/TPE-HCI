@@ -219,23 +219,25 @@ var Widgets = function() {
             var currency = data.currencyId;
 
             var urlList = _.map(deals, function(deal) {
-                var baseAdress = "http://maps.google.com/maps/api/staticmap?",
+                var data = {},
+                    baseAdress = "http://maps.google.com/maps/api/staticmap?",
                     params = { center: [deal.cityLatitude, deal.cityLongitude].join(","),
                                zoom: 14,
                                size: "563x246",
                                sensor: false,
-                               markers: "icon:http://tinyurl.com/2ftvtt6|" + [deal.cityLatitude, deal.cityLongitude].join(",") },
-                    url = baseAdress + _.map(params, function(value, key) { return key + "=" + value; }).join("&");
+                               maptype: "roadmap",
+                               markers: "color:red|label:Deal|" + [deal.cityLatitude, deal.cityLongitude].join(",") };
+                    data.url = baseAdress + _.map(params, function(value, key) { return key + "=" + value; }).join("&"),
+                    data.title = deal.cityName.split(",")[0];
+                    data.price = deal.price;
 
-                return url;
+                return data;
             });
-
-            console.log(urlList);
         
             var sliderDiv = $("#nivo-slider");
 
-            _.forEach(urlList, function(url){
-                sliderDiv.append("<img src='" + url + "'/>")
+            _.forEach(urlList, function(data){
+                sliderDiv.append("<img src='" + data.url + "' data-slider='" + data.title + "' data-price='" + currency + " " + data.price + "'/>")
             });
 
             sliderDiv.nivoSlider({
@@ -252,7 +254,13 @@ var Widgets = function() {
                 nextText: 'Next', // Next directionNav text
                 randomStart: false, // Start on a random slide
                 beforeChange: function(){}, // Triggers before a slide transition
-                afterChange: function(){}, // Triggers after a slide transition
+                afterChange: function(){
+                    var mainImg = $(".nivo-main-image");
+                    var currImg = _.find($("[data-slider]"), function(img){
+                        return img.getAttribute("src") ===  mainImg.attr("src");
+                    });
+                    $("#deal-title-text").html("Flights to " + currImg.getAttribute("data-slider") + " - From: " + currImg.getAttribute("data-price"));
+                }, // Triggers after a slide transition
                 slideshowEnd: function(){}, // Triggers after all slides have been shown
                 lastSlide: function(){}, // Triggers when last slide is shown
                 afterLoad: function(){} // Triggers when slider has loaded
