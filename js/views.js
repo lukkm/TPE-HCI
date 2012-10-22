@@ -359,6 +359,21 @@ App.Views.BuyFormView = Backbone.View.extend({
         this.on("validation", function(errors) {
             this.updateErrors(errors);
         });
+        
+        $.fn.qtip.styles.errorTip = { 
+			width: 200,
+			
+			background: '#E73636',
+			color: 'white',
+			textAlign: 'center',
+			border: {
+				width: 1,
+				radius: 5,
+				color: '#E73636'
+			},
+			tip: 'bottomLeft',
+			
+		}
     },
     
     events: {
@@ -406,11 +421,19 @@ App.Views.BuyFormView = Backbone.View.extend({
         var $form = this.$el;
         
         $form.find("input").each(function() {
-            var name = $(this).attr("name");
+            var name = $(this).attr("data-bind");
             
             if (errors && errors[name]) {
                 $(this).add($("#" + name))
                     .addClass("invalid");
+                $(this).qtip({
+					content: errors[name],
+					position: { corner:{target:'rightTop',tooltip:'bottomLeft'},
+						adjust:{screen:true, resize:true}},
+					show: 'focus',
+					hide: 'blur',
+					style: 'errorTip'
+					});
             } else {
                 $(this).removeClass("invalid");
             }
@@ -425,8 +448,9 @@ App.Views.BuyFormView = Backbone.View.extend({
 			form = App.Models.Buy.fromSerializedArray(data),
 			changed = $(e.target),
 			errors = form.validate();
+		console.log(errors);	
 		
-		if (errors && errors[changed.attr("name")]) {
+		if (errors && errors[changed.attr("data-bind")]) {
                 changed.addClass("invalid");
             } else {
                 changed.removeClass("invalid");
