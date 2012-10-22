@@ -37,6 +37,10 @@ App.Views.AppView = Backbone.View.extend({
             template: app.templates["search-form"]
         });
 
+        this.subviews.searchRecommendationsForm = new App.Views.SearchRecommendationsForm({
+            el: $("#recommendations-form")
+        });
+
         this.subviews.buyForm = new App.Views.BuyFormView({
             el: $("#buy-form")
         });
@@ -183,6 +187,40 @@ App.Views.LanguageSelect = Backbone.View.extend({
 
     render: function() {
         this.$el.html(this.template());
+    }
+
+});
+
+App.Views.SearchRecommendationsForm = Backbone.View.extend({
+
+    events:{
+        "click #find-rec" : "findRecommendations"
+    },
+
+    findRecommendations: function(e) {
+
+        var airline = $("#airline").val();
+
+        API.Review.getAirlineReviews({ airline_id: airline }, function(e){
+
+            console.log(e)
+
+            var cantReviews = e.reviews.length;
+
+            if (e.reviews.length == 1){
+                cantReviews += " match found";
+            } else {
+                cantReviews += " matches found";
+            }
+
+            $("#reviews-title").html("Reviews for " + airline);
+            $("#review-matches-found").html(cantReviews)
+            $("#reviews").html(Handlebars.compile($("#airline-review").html())(e));
+        });
+
+        app.router.navigate("find-rec", { trigger: true });
+
+        e.preventDefault();
     }
 
 });

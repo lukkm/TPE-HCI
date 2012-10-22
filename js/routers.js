@@ -11,6 +11,7 @@ App.Routers.Router = Backbone.Router.extend({
         "buy/:id"     : "buy",
         "confirm"     : "confirm",
         "publish-rec" : "publishRec",
+        "find-rec"    : "findRec",
         "thanks"      : "thanks",
         "*actions"    : "defaultRoute"
     },
@@ -53,6 +54,10 @@ App.Routers.Router = Backbone.Router.extend({
 
     publishRec: function(id){
         this.switchPage("publish-rec");
+    },
+
+    findRec: function(id){
+        this.switchPage("find-rec");
     },
 
     thanks: function(id){
