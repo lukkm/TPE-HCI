@@ -340,8 +340,6 @@ App.Views.SearchFormView = Backbone.View.extend({
 
         this.trigger("validation", query.validate());
 
-        console.log(query);
-
         if (query.isValid(true)) {
 
             var collection = app.searchResults;
@@ -438,16 +436,16 @@ App.Views.BuyFormView = Backbone.View.extend({
         var flight = app.info.get("currentFlight");
 
         var data = this.$el.serializeArray();
-		var form = App.Models.Buy.fromSerializedArray(data);
+		var order= App.Models.Buy.fromSerializedArray(data);
 
 
         _.forEach(data, function(input) {
             $("#confirm-" + input.name).html(input.value);
         });
 
-        this.trigger("validation", form.validate());
+        this.trigger("validation", order.validate());
 
-        if (form.isValid(true)) {
+        if (order.isValid(true)) {
 			 var dep = flight.attributes.departure, arr = flight.attributes.arrival;
 
 			$("#confirm-flight-from-airport").html(dep.airportDescription);
@@ -469,9 +467,9 @@ App.Views.BuyFormView = Backbone.View.extend({
 
     updateErrors: function(errors) {
 
-        var $form = this.$el;
+        var $order = this.$el;
 
-        $form.find("input").each(function() {
+        $order.find("input").each(function() {
             var name = $(this).attr("name");
 
             if (errors && errors[name]) {
@@ -495,9 +493,9 @@ App.Views.BuyFormView = Backbone.View.extend({
     validateForm: function(e) {
 
 		var data = this.$el.serializeArray(),
-			form = App.Models.Buy.fromSerializedArray(data),
+			order = App.Models.Buy.fromSerializedArray(data),
 			changed = $(e.target),
-			errors = form.validate();
+			errors = order.validate();
 
 		if (errors && errors[changed.attr("name")]) {
                 changed.addClass("invalid");
