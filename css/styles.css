@@ -355,6 +355,10 @@ label {
 	margin: 10px 0 0 0;
 }
 
+.form-section-title {
+    text-align: center;
+}
+
 .form-terms {
     padding: 20px;
 }
@@ -505,6 +509,50 @@ label {
 .deal-text h2 {
     margin: 0;
     font-size: 32px;
+}
+
+.review-table {
+    font-size: 13px;
+    width: 280px !important;
+    text-align: left;
+    display: inline-table;
+    float: left;  
+}
+
+.review-row {
+    border: 1px solid #CCC;
+    height: 30px;
+    margin-top: -55px;
+}
+
+.review-item {
+    width: 160px;
+    font-weight: bold;
+    border: 1px solid #CCC;
+    padding-left: 5px;
+}
+
+.review-value {
+    width: 1px;
+    padding-left: 10px;
+    padding-right: 3px !important;
+}
+
+.review-comments {
+    display: inline-block;
+    float: right;
+    border: 1px solid #F8CA95;
+    width: 570px;
+}
+
+.review-comments h2 {
+    margin-top: 20px;
+}
+
+.review-comments p {
+    margin-top: 20px;
+    width: 530px;
+    margin-left: 20px;
 }
 
 /* =Page */

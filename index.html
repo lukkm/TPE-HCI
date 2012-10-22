@@ -230,6 +230,7 @@
                 {{/each}}
             </div>
         </script>
+
         <script type="text/x-handlebars-template" id="filter-stopovers">
             <div class="filter">
                 <label for="stopovers">{{{i18n "stopovers" }}}</label>
@@ -246,6 +247,23 @@
                 <input type="text" name="price" id="price" />
                 <div id="slider-range-price" data-widget="slider" data-target="price" data-min="{{min}}" data-max="{{max}}" disabled="disabled"></div>
             </div>
+        </script>
+        <script type="text/x-handlebars-template" id="airline-review">
+            {{#reviews}}
+                <div class="form-section">
+                    <table class="review-table">
+                        <tr class="review-row"><td class="review-item">Overall Rating:</td><td class="review-value">{{overallRating}}</td></tr>
+                        <tr class="review-row"><td class="review-item">Kindness Rating:</td><td class="review-value">{{friendlinessRating}}</td></tr>
+                        <tr class="review-row"><td class="review-item">Food Rating:</td><td class="review-value">{{foodRating}}</td></tr>
+                        <tr class="review-row"><td class="review-item">Punctuality Rating:</td><td class="review-value">{{punctualityRating}}</td></tr>
+                        <tr class="review-row"><td class="review-item">Mileage Program Rating:</td><td class="review-value">{{mileageProgramRating}}</td></tr>
+                        <tr class="review-row"><td class="review-item">Comfort Rating:</td><td class="review-value">{{comfortRating}}</td></tr>
+                        <tr class="review-row"><td class="review-item">Price-Quality Relation Rating:</td><td class="review-value">{{qualityPriceRating}}</td></tr>
+                        <tr class="review-row"><td class="review-item">Recommended:</td><td class="review-value">{{yesRecommend}}</td></tr>
+                    </table>
+                        <div class="review-comments"><h2>Comments</h2><p>{{comments}}</p></div>
+                </div>
+            {{/reviews}}
         </script>
         <script type="text/x-handlebars-template" id="search-error">
             <div class="search-error">
@@ -615,7 +633,7 @@
                     </div>
                 </div>
 
-                <div class="page" id="page-publish-rec" data-title="Thank you">
+                <div class="page" id="page-publish-rec" data-title="Publish reviews">
                     <div class="form-section" id="rating-section">
                         <h2>Rate your flight</h2>
                         
@@ -640,19 +658,28 @@
                         <button type="submit" class="button small-button" id="post-rec">Post recommendation</button>
                     </div>
                 </div>
+
+                <div class="page" id="page-find-rec" data-title="Find reviews">
+                    <div class="form-section form-section-title">
+                        <h2 id="reviews-title"></h2>
+                        <div id="review-matches-found"></div>
+                        <div id="reviews"></div> 
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
         <div class="recommendations" id="recommendations-form">
             <div class="wrap">
-                <h2>Search airline recommendations</h2>
+                <h2>Search airline reviews</h2>
                 <form action="." method="post" class="comments-form">
                     <div class="search-input-container">
                         <label for="airline">Airline</label>
                         <input type="text" name="airline" id="airline" value="" data-widget="autocomplete" data-source="airlines" />
                     </div>
-                    <button class="button button-small" id="find-rec">Find recommendations</button>
+                    <button class="button button-small" id="find-rec">Find reviews</button>
                 </form>
 
             </div>
