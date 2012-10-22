@@ -667,6 +667,17 @@
                     </div>
                 </div>
 
+                <div class="page" id="page-rec-posted" data-title="Review uploaded">
+                    <div class="sheet">
+                        <div class="form-section">
+                            <h1>Your review has been uploaded</h1>
+                            <div class="nav-home">
+                                <a href="#" class="button">Back to Home</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -677,7 +688,8 @@
                 <form action="." method="post" class="comments-form">
                     <div class="search-input-container">
                         <label for="airline">Airline</label>
-                        <input type="text" name="airline" id="airline" value="" data-widget="autocomplete" data-source="airlines" />
+                        <input type="text" name="airline" id="airline" value="" data-widget="autocomplete" data-bind="get-airline-review" data-source="airlines" />
+                        <input type="hidden" name="get-airline-review" id="get-airline-review"/>
                     </div>
                     <button class="button button-small" id="find-rec">Find reviews</button>
                 </form>
