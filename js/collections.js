@@ -97,7 +97,6 @@ App.Collections.SearchResults = Backbone.Collection.extend({
             segment.arrival.formatedDate = dateToMoment.format("MMMM Do YYYY");
             segment.arrival.formatedTime = dateToMoment.format("h:mm a"); 
             var filters = getAirlineFilters();
-            debugger;
             segment.airlineLogo = getAirlineLogo(filters, segment.airlineId);
         };
 

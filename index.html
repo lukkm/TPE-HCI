@@ -165,7 +165,7 @@
                     <span class="total">$ {{{currency total.total}}}</span>
                     {{/with}}
                 </div>
-                <a href="#buy/{{flightId}}" class="button button-small">{{{i18n "select_button" }}}</a>
+                <a href="#buy/{{flightId}}" class="button button-small select-button" data-flightid="{{flightId}}">{{{i18n "select_button" }}}</a>
             </div>
         </script>
         <script type="text/x-handlebars-template" id="search-results">
@@ -536,7 +536,7 @@
                         <h3>Flight</h3>
                         <div class="form-section" id="buy-flight-information">
                             <h4>From</h4>
-                            <dl>
+                            <dl class="confirm-flight-data">
                                 <dt>Airport</dt>
                                 <dd id="confirm-flight-from-airport"></dd>
                                 <dt>City</dt>
@@ -545,7 +545,7 @@
                                 <dd id="confirm-flight-from-country"></dd>
                             </dl>
                             <h4>To</h4>
-                            <dl>
+                            <dl class="confirm-flight-data">
                                 <dt>Airport</dt>
                                 <dd id="confirm-flight-to-airport"></dd>
                                 <dt>City</dt>
@@ -607,6 +607,9 @@
                             <div class="nav-home">
                                 <a href="#" class="button">Back to Home</a>
                             </div>
+                            <div id="recommend-form">
+                                <button class="button button-small" id="publish-rec">Rate your flight</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -617,16 +620,21 @@
                         
                         <form>
                             <table>
-                                <tr class="rating-section" data-radio="Kindness"></tr>
-                                <tr class="rating-section" data-radio="Food"></tr>
-                                <tr class="rating-section" data-radio="Punctuality"></tr>
-                                <tr class="rating-section" data-radio="Frecuent travelers program"></tr>
-                                <tr class="rating-section" data-radio="Confort"></tr>
-                                <tr class="rating-section" data-radio="Price-Quality Relation"></tr>
+                                <tr class="rating-section" data-radio="Kindness" data-name="friendlinessRating"></tr>
+                                <tr class="rating-section" data-radio="Food" data-name="foodRating"></tr>
+                                <tr class="rating-section" data-radio="Punctuality" data-name="punctualityRating"></tr>
+                                <tr class="rating-section" data-radio="Frecuent travelers program" data-name="mileageProgramRating"></tr>
+                                <tr class="rating-section" data-radio="Comfort" data-name="comfortRating"></tr>
+                                <tr class="rating-section" data-radio="Price-Quality Relation" data-name="qualityPriceRating"></tr>
                             </table>
                                 <div class="average-score"><strong>Average score:</strong><label id="av-score">0.00</label></div>
                                 <input type="hidden" name="av-score" id="avg-score" value=""/>
-                                <div class="general-comments"><strong>Comments:</strong><textarea name="general-comments" rows="4" cols="125"></textarea></div>
+                                <div id="recommend-flight">
+                                    Recommend flight: 
+                                        <label for="recommend">Yes</label><input type="radio" name="recommend" data-bool="true"/> 
+                                        <label for="recommend">No</label><input type="radio" name="recommend" data-bool="false"/>
+                                </div>
+                                <div class="general-comments"><strong>Comments:</strong><textarea name="general-comments" id="general-comments" rows="4" cols="125"></textarea></div>
                         </form>
                         <button type="submit" class="button small-button" id="post-rec">Post recommendation</button>
                     </div>
@@ -648,7 +656,6 @@
                         <input type="text" name="flight_number" id="flight_number" value="" />
                     </div>
                     <button class="button button-small" id="find-rec">Find recommendations</button>
-                    <button class="button button-small" id="publish-rec">Publish recommendations</button>
                 </form>
 
             </div>
