@@ -216,18 +216,48 @@ var Widgets = function() {
     var initHomeSlider = function() {
         API.Booking.getFlightDeals({from: "BUE"}, function(data){
             var deals = _.first(data.deals, 5);
+            var currency = data.currencyId;
 
             var urlList = _.map(deals, function(deal) {
                 var baseAdress = "http://maps.google.com/maps/api/staticmap?",
                     params = { center: [deal.cityLatitude, deal.cityLongitude].join(","),
-                               zoom: 12,
-                               size: "567x284",
-                               sensor: false },
+                               zoom: 14,
+                               size: "563x246",
+                               sensor: false,
+                               markers: "icon:http://tinyurl.com/2ftvtt6|" + [deal.cityLatitude, deal.cityLongitude].join(",") },
                     url = baseAdress + _.map(params, function(value, key) { return key + "=" + value; }).join("&");
 
                 return url;
             });
-        console.log(urlList);
+
+            console.log(urlList);
+        
+            var sliderDiv = $("#nivo-slider");
+
+            _.forEach(urlList, function(url){
+                sliderDiv.append("<img src='" + url + "'/>")
+            });
+
+            sliderDiv.nivoSlider({
+                effect: 'sliceDown', // Specify sets like: 'fold,fade,sliceDown'
+                slices: 15, // For slice animations
+                animSpeed: 500, // Slide transition speed
+                pauseTime: 3000, // How long each slide will show
+                directionNav: true, // Next & Prev navigation
+                controlNav: true, // 1,2,3... navigation
+                controlNavThumbs: false, // Use thumbnails for Control Nav
+                pauseOnHover: true, // Stop animation while hovering
+                manualAdvance: false, // Force manual transitions
+                prevText: 'Prev', // Prev directionNav text
+                nextText: 'Next', // Next directionNav text
+                randomStart: false, // Start on a random slide
+                beforeChange: function(){}, // Triggers before a slide transition
+                afterChange: function(){}, // Triggers after a slide transition
+                slideshowEnd: function(){}, // Triggers after all slides have been shown
+                lastSlide: function(){}, // Triggers when last slide is shown
+                afterLoad: function(){} // Triggers when slider has loaded
+            });
+
         });
 
     };

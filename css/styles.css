@@ -62,7 +62,7 @@ p {
 
 .newsletter-subscribe {
     border: 2px solid #F8CA95;
-    margin-top: 15px;
+    margin-top: 13px;
     width: 525px;
     float: left;
     font-size: 14px;
@@ -178,7 +178,7 @@ input[data-widget=datepicker] {
 
 .search-form h2 {
     float: left;
-    width: 167px;
+    width: 165px;
 }
 
 .search-form input { 
@@ -483,37 +483,44 @@ label {
 
 .deals {
     float: left;
-    height: 284px;
-    width: 567px;
-    background-image: url('../img/panama.jpg');
+    height: 283px;
+    width: 563px;
+    border: 2px solid #F8CA95;
+    background-color: white;
 }
 
 .deal-title {
-    float: right;
-    margin-top: 160px;
-    height: 130px;
-    width: 300px;
-}
-
-.deal-title-container{
     background-color: black;
-    height: 100px;
-    width: 300px;
     position: absolute;
+    width: 563px;
+    height: 45px;
+    z-index: 999 !important;
     opacity: 0.6;
-    border-radius: 10px 0 0 10px;
+    text-align: center;
 }
 
-.deal-text {
+#deal-title-text {
+    position: absolute;
+    z-index: 1000 !important;
+    color: white;
+    margin-top: 10px;
+    margin-left: 225px; 
+}
+
+.nivoSlider {
     position:relative;
-    padding: 10px 15px 10px 10px;
-    text-align: right;
-    color:white;
+    height: 284px;
+    width: 567px;
 }
-
-.deal-text h2 {
-    margin: 0;
-    font-size: 32px;
+.nivoSlider img {
+    position:absolute;
+    top:0px;
+    left:0px;
+    display:none;
+}
+.nivoSlider a {
+    border:0;
+    display:block;
 }
 
 .review-table {

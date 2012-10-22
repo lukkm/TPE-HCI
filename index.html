@@ -13,6 +13,9 @@
         <link rel="stylesheet" type="text/css" href="js/libs/fancybox/jquery.fancybox.css" media="screen"/>
         <link rel="stylesheet" href="js/libs/fancybox/helpers/jquery.fancybox-buttons.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="js/libs/fancybox/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="js/libs/nivo-slider/nivo-slider.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="js/libs/nivo-slider/themes/light/light.css" type="text/css" media="screen" />
+
 
         <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
 
@@ -26,6 +29,7 @@
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-buttons.js"></script>
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-media.js"></script>
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-thumbs.js"></script>
+        <script type="text/javascript" src="js/libs/nivo-slider/jquery.nivo.slider.pack.js"></script>
         <script type="text/javascript" src="js/libs/moment.js"></script>
         <script type="text/javascript" src="js/libs/underscore.js"></script>
         <script type="text/javascript" src="js/libs/backbone.js"></script>
@@ -376,16 +380,10 @@
                     <div class="content-primary">
 
                         <div class="search-form"></div>
-
-                        <div class="deals">
-                            <div class="deal-title">
-                                <div class="deal-title-container">
-                                </div>
-                                <div class="deal-text">
-                                    <h2>Tickets to Panama</h2>
-                                    <p>From US$ 2,400</p>
-                                </div>
-                            </div>
+                        <div class="deals theme-light">
+                            <h2 id="deal-title-text">Flight deals</h2>
+                            <div class="deal-title"></div>
+                            <div class="nivoSlider" id="nivo-slider"></div>
                         </div>
 
                         <div class="newsletter-subscribe"></div>
