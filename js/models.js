@@ -39,33 +39,33 @@ App.Models.Query = Backbone.Model.extend({
 
 });
 
-cardValidate: function(value, key, form) {
-				try {
-					var data = {},
-						opt = {};
-					data.number = form.card_number;
-					data.exp_date = form.card_expire_date;
-					data.sec_code = card_security_code;
-						
-					var	valid = API.Booking.validateCreditCard(data, opt);
-
-					if (valid) { return; }
-				} catch(e) {}
-
-				return "Check the credit card information";
-			};
 
 App.Models.Buy = Backbone.Model.extend({
-	
+    
+    cardValidate: function(value, key, form) {
+		try {
+			var data = {},
+				opt = {};
+			data.number = form.card_number;
+			data.exp_date = form.card_expire_date;
+			data.sec_code = card_security_code;
+				
+			var	valid = API.Booking.validateCreditCard(data, opt);
+
+			if (valid) { return; }
+		} catch(e) {}
+
+		return "Check the credit card information";
+    },
 	
 			
 	validation: {
 		first_name: { required: true },
         last_name: { required: true },
         birth_date: { required: true },
-        card_number: cardValidate,
-        card_expire_date: cardValidate,
-        card_security_code: cardValidate,
+        card_number: this.cardValidate,
+        card_expire_date: this.cardValidate,
+        card_security_code: this.cardValidate,
         card_holder: { required: true,
 						msg: "Card holder is required"},
         card_document_number: { required: true, 
