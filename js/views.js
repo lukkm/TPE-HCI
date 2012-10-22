@@ -41,9 +41,14 @@ App.Views.AppView = Backbone.View.extend({
             el: $("#buy-form")
         });
 
-        this.subviews.recommendationsForm = new App.Views.RecommendationsFormView({
-            el: $("#recommendations-form")
+        this.subviews.thanksForm = new App.Views.ThanksFormView({
+            el: $("#recommend-form")
         });
+
+        this.subviews.reviewsForm = new App.Views.ReviewsFormView({
+            el: $("#rating-section")
+        });
+
 
         this.subviews.searchResultsView = new App.Views.SearchResultsView({
             el: $("#page-search"),
@@ -182,7 +187,7 @@ App.Views.LanguageSelect = Backbone.View.extend({
 
 });
 
-App.Views.RecommendationsFormView = Backbone.View.extend({
+App.Views.ThanksFormView = Backbone.View.extend({
 
     events:{
         "click #publish-rec" : "publishRecommendation"
@@ -193,6 +198,57 @@ App.Views.RecommendationsFormView = Backbone.View.extend({
 
         e.preventDefault();
     }
+
+});
+
+App.Views.ReviewsFormView = Backbone.View.extend({
+    events:{
+        "click #post-rec": "postRecommendation"
+    },
+
+
+    postRecommendation: function(e){
+
+        var callApi = function(routes){
+            if (typeof routes !== 'undefined') {
+                _.forEach(routes, function(route){
+                    _.forEach(route.segments, function(segment){
+                        data.flightNumber = segment.flightNumber;
+                        data.airlineId = segment.airlineId;
+                        console.log(API.Review.reviewAirline(data));
+                    });
+                });
+            }
+        };
+
+        var data = {};
+
+        var flight = app.info.get("currentFlight");
+
+        var ratings = $(":checked[data-selector]");
+
+        if (ratings.length < 6){
+            return false;
+        }
+
+        _.forEach(ratings , function(ratingRadio){
+            data[ratingRadio.getAttribute("name")] = ratingRadio.value;
+        });
+
+        var recommend = $(":checked[data-bool]");
+
+        if (recommend.length < 1){
+            return false;
+        }
+
+        data.yesRecommend = recommend.data("bool");
+
+        data.comments = $("#general-comments").val();
+
+        callApi(flight.attributes.outboundRoutes);
+        callApi(flight.attributes.inboundRoutes);
+    }
+
 
 });
 
@@ -311,7 +367,7 @@ App.Views.BuyFormView = Backbone.View.extend({
     },
     
     submitForm: function(e) {
-        var flight = app.searchResults.getFlightById(app.info.get("flightId"));
+        var flight = app.info.get("currentFlight");
         
         var data = this.$el.serializeArray();
 		var form = App.Models.Buy.fromSerializedArray(data);
@@ -326,10 +382,22 @@ App.Views.BuyFormView = Backbone.View.extend({
         console.log(form.validate());
         
         if (form.isValid(true)) {
+			 var dep = flight.attributes.departure, arr = flight.attributes.arrival;
+
+			$("#confirm-flight-from-airport").html(dep.airportDescription);
+			$("#confirm-flight-from-city").html(dep.cityName);
+			$("#confirm-flight-from-country").html(dep.countryName);
+
+			$("#confirm-flight-to-airport").html(arr.airportDescription);
+			$("#confirm-flight-to-city").html(arr.cityName);
+			$("#confirm-flight-to-country").html(arr.countryName);
+
+
 			app.router.navigate("confirm", { trigger: true });
 		} else {
 			$("#buy-show-error").removeClass("hide");
 		}
+
         e.preventDefault();
     },
     
@@ -373,7 +441,8 @@ App.Views.SearchResultsView = Backbone.View.extend({
     events: {
         "change #sort": "changeSort",
         "click .page": "changePage",
-        "click .fancybox": "loadMaps"
+        "click .fancybox": "loadMaps",
+        "click .select-button": "saveFlightInfo"
     },
 
     filterRenderers: {
@@ -397,6 +466,12 @@ App.Views.SearchResultsView = Backbone.View.extend({
         this.collection.on("fetch", function() {
             view.showLoadingMessage();
         });
+    },
+
+    saveFlightInfo: function(e) {
+        var $link = e.target;
+        var fid = $link.getAttribute("data-flightid");
+        app.info.set("currentFlight", app.searchResults.getFlightById(fid));
     },
 
     updateFilterFields: function() {
@@ -455,8 +530,8 @@ App.Views.SearchResultsView = Backbone.View.extend({
             $.when(getAirport(segment.departure), 
                    getAirport(segment.arrival)).done( function (arg1, arg2) {
 
-                        marker1 = getMarker(arg1);
-                        marker2 = getMarker(arg2);
+                        var marker1 = getMarker(arg1);
+                        var marker2 = getMarker(arg2);
 
                         var flightPath = new google.maps.Polyline({
                             path: [ marker1.position, marker2.position ],

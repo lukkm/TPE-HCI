@@ -301,11 +301,24 @@ label .hint {
 }
 
 .average-score {
-    padding: 15px 0;
-    margin-top: 10px;
+    padding: 15px 0 10px 0;
+    margin-top: 20px;
     border-bottom: 1px solid #CCC;
     border-top: 1px solid #CCC;
     text-align: center;
+}
+
+#recommend-flight {
+    font-weight: bold;
+    padding-bottom: 15px;
+    margin-top: 18px;
+    border-bottom: 1px solid #CCC;
+    text-align: center;
+}
+
+#recommend-flight label {
+    margin-left: 15px;
+    margin-right: 3px;
 }
 
 .general-comments {
@@ -319,6 +332,10 @@ label .hint {
 
 #post-rec {
     margin-top: 30px;
+}
+
+.confirm-flight-data {
+    margin-left: 20px;
 }
 
 label {

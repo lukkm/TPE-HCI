@@ -162,11 +162,13 @@ var Widgets = function() {
             var select = $(this);
 
             var controlName = select.data("radio");
+            var controlNameParam = select.data("name");
+
             select.html("");
             var inner = "<td><label for='" + controlName + "'>" + controlName + "</label>";
 
-            for (i = 1; i <= 10; i++){
-                inner +=  "<td>" + i + "<input type='radio' data-selector='rating' name='" + controlName + "' value=" + i + "></td>"
+            for (i = 1; i <= 9; i++){
+                inner +=  "<td>" + i + "<input type='radio' data-selector='rating' name='" + controlNameParam + "' value=" + i + "></td>"
             }
 
             select.append(inner);
