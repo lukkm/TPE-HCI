@@ -321,6 +321,11 @@ label .hint {
     margin-right: 3px;
 }
 
+#recommend-form {
+    text-align: center;
+    margin-top: 20px;
+}
+
 .general-comments {
     margin-top: 30px;
 }

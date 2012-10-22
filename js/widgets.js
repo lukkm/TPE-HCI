@@ -213,6 +213,25 @@ var Widgets = function() {
 
     };
 
+    var initHomeSlider = function() {
+        API.Booking.getFlightDeals({from: "BUE"}, function(data){
+            var deals = _.first(data.deals, 5);
+
+            var urlList = _.map(deals, function(deal) {
+                var baseAdress = "http://maps.google.com/maps/api/staticmap?",
+                    params = { center: [deal.cityLatitude, deal.cityLongitude].join(","),
+                               zoom: 12,
+                               size: "567x284",
+                               sensor: false },
+                    url = baseAdress + _.map(params, function(value, key) { return key + "=" + value; }).join("&");
+
+                return url;
+            });
+        console.log(urlList);
+        });
+
+    };
+
     var initWidgets = function() {
 
         initSliders();
@@ -223,7 +242,7 @@ var Widgets = function() {
         initSelects();
         initCommentRadios();
         initFancyBox();
-
+        initHomeSlider();
     };
 
     return {

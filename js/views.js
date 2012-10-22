@@ -260,6 +260,7 @@ App.Views.ReviewsFormView = Backbone.View.extend({
                     _.forEach(route.segments, function(segment){
                         data.flightNumber = segment.flightNumber;
                         data.airlineId = segment.airlineId;
+                        console.log(data);
                         console.log(API.Review.reviewAirline(data));
                     });
                 });
@@ -277,7 +278,7 @@ App.Views.ReviewsFormView = Backbone.View.extend({
         }
 
         _.forEach(ratings , function(ratingRadio){
-            data[ratingRadio.getAttribute("name")] = ratingRadio.value;
+            data[ratingRadio.getAttribute("name")] = Number(ratingRadio.value);
         });
 
         var recommend = $(":checked[data-bool]");

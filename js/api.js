@@ -15,6 +15,12 @@
             options = options || {};
         }
 
+        if (options.type === 'POST') {
+            url += '?method=' + data.method;
+            delete data.method;
+            options.dataType = 'json';
+        };
+
         options.url      = url;
         options.data     = data;
         options.dataType = options.dataType || "jsonp";
@@ -157,6 +163,12 @@
         getRoundTripFlights: function(data, options) {
             data = data || {};
             data.method = "GetRoundTripFlights";
+            return call("Booking", data, options);
+        },
+
+        getFlightDeals: function(data, options) {
+            data = data || {};
+            data.method = "GetFlightDeals";
             return call("Booking", data, options);
         },
 
