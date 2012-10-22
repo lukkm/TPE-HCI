@@ -9,8 +9,10 @@ App.Models.Flight = Backbone.Model.extend();
 App.Models.Query = Backbone.Model.extend({
 
     validation: {
-        from: { required: true },
-        to: { required: true },
+        from: { required: true,
+                msg: "We need to know from where"},
+        to: { required: true,
+                msg: "We need to know where you are going"},
         repeat: { oneOf: ["one-way", "round-trip"] },
         dep_date: function(value) {
             try {
@@ -41,7 +43,7 @@ App.Models.Query = Backbone.Model.extend({
 
 
 App.Models.Buy = Backbone.Model.extend({
-    
+
     cardValidate: function(value, key, form) {
 		try {
 			var data = {},
@@ -49,7 +51,7 @@ App.Models.Buy = Backbone.Model.extend({
 			data.number = form.card_number;
 			data.exp_date = form.card_expire_date;
 			data.sec_code = card_security_code;
-				
+
 			var	valid = API.Booking.validateCreditCard(data, opt);
 
 			if (valid) { return; }
@@ -57,18 +59,19 @@ App.Models.Buy = Backbone.Model.extend({
 
 		return "Check the credit card information";
     },
-	
-			
+
 	validation: {
-		first_name: { required: true },
-        last_name: { required: true },
+		first_name: { required: true,
+                        msg: "Complete your name"},
+        last_name: { required: true,
+                    msg: "Complete your last name"},
         birth_date: { required: true },
-        card_number: this.cardValidate,
+        card_number: function() { this.cardValidate(arguments) },
         card_expire_date: this.cardValidate,
         card_security_code: this.cardValidate,
         card_holder: { required: true,
 						msg: "Card holder is required"},
-        card_document_number: { required: true, 
+        card_document_number: { required: true,
 								msg: "Document number of the card holder is required"},
         email: [{
 				required: true,
@@ -77,10 +80,10 @@ App.Models.Buy = Backbone.Model.extend({
 			  pattern: 'email',
 			  msg: "Please enter a valid email"
 		}],
-        phone_number: 
-        { 
+        phone_number:
+        {
 			required: true,
-			pattern:  /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/			
+			pattern:  /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
 		},
         email_confirm: [{
 				required: true,
