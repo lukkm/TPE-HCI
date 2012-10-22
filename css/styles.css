@@ -688,6 +688,7 @@ label {
     -webkit-box-shadow: 0 1px rgba(255, 255, 255, 0.5) inset;
     -webkit-transition: background 1s linear;
     background: -webkit-linear-gradient(top, #FAA454, #F17400);
+    background: -moz-linear-gradient(top, #FAA454, #F17400);
     border-radius: 3px;
     border: 1px solid #DD6B01;
     color: white;
