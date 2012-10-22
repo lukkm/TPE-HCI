@@ -834,15 +834,3 @@ label {
 	color: #EC5555;
 }
 
-.tooltip {
-    position: absolute; 
-    top: 0; 
-    left: 0; 
-    z-index: 3; 
-    display: none; 
-    background-color: red;
-    width: 250px;
-    text-decoration: none;
-    padding: 8px 10px;
-    border: 2px solid red;
-}
