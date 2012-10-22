@@ -98,6 +98,10 @@ p {
     background-image: url("../img/logo.png");
 }
 
+#nivo-slider img {
+    height: 246px;
+}
+
 .header-menu {
     float: right;
 }
