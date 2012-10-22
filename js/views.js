@@ -294,6 +294,16 @@ App.Views.FlightView = Backbone.View.extend({
 });
 
 App.Views.BuyFormView = Backbone.View.extend({
+	
+    initialize: function(options) {
+        _.extend(this, Backbone.events);
+
+        this.template = options.template;
+
+        this.on("validation", function(errors) {
+            this.updateErrors(errors);
+        });
+    },
     
     events: {
         "click button": "submitForm",
@@ -303,19 +313,57 @@ App.Views.BuyFormView = Backbone.View.extend({
     submitForm: function(e) {
         var flight = app.searchResults.getFlightById(app.info.get("flightId"));
         
-        var data = $("#buy-form").serializeArray();
+        var data = this.$el.serializeArray();
+		var form = App.Models.Buy.fromSerializedArray(data);
 
 
         _.forEach(data, function(input) {
             $("#confirm-" + input.name).html(input.value);
         });
-
-        app.router.navigate("confirm", { trigger: true });
+        
+        this.trigger("validation", form.validate());
+        
+        console.log(form.validate());
+        
+        if (form.isValid(true)) {
+			app.router.navigate("confirm", { trigger: true });
+		} else {
+			$("#buy-show-error").removeClass("hide");
+		}
         e.preventDefault();
     },
-
-    validateForm: function() {
     
+    updateErrors: function(errors) {
+
+        var $form = this.$el;
+        
+        $form.find("input").each(function() {
+            var name = $(this).attr("name");
+            
+            if (errors && errors[name]) {
+                $(this).add($("#" + name))
+                    .addClass("invalid");
+            } else {
+                $(this).removeClass("invalid");
+            }
+            
+        });
+
+    },
+
+    validateForm: function(e) {
+		
+		var data = this.$el.serializeArray(),
+			form = App.Models.Buy.fromSerializedArray(data),
+			changed = $(e.target),
+			errors = form.validate();
+		
+		if (errors && errors[changed.attr("name")]) {
+                changed.addClass("invalid");
+            } else {
+                changed.removeClass("invalid");
+            }
+		
     }
     
 });

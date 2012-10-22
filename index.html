@@ -429,13 +429,13 @@
                                             <!-- Nro de pasajero -->
                                         </td>
                                         <td>
-                                            <input type="text" data-validate="required" name="first-name" id="first-name" value="" />
+                                            <input type="text" name="first-name" id="first-name" value="" data-bind="first_name"/>
                                         </td>
                                         <td>
-                                            <input type="text" data-validate="required" name="last-name" id="last-name" value="" />
+                                            <input type="text" name="last-name" id="last-name" value="" data-bind="last_name"/>
                                         </td>
                                         <td>
-                                            <input type="text" name="birth-date" id="birth-date" value="" data-widget="datepicker-select" />                                            
+                                            <input type="text" name="birth-date" id="birth-date" value="" data-widget="datepicker-select" data-bind="birth_date"/>                                            
                                         </td>
                                     </tr>
                                 </table>
@@ -457,13 +457,13 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" data-validate="card-number" name="card-number" id="card-number" value="" />
+                                            <input type="text" name="card-number" id="card-number" data-bind="card_number" value="" />
                                         </td>
                                         <td>
-                                            <input type="text" data-validate="card-expire-date" name="card-expire-date" id="card-expire-date" value="" />
+                                            <input type="text" name="card-expire-date" id="card-expire-date" data-bind="card_expire_date" value="" />
                                         </td>
                                         <td>
-                                            <input type="text" data-validate="required" name="card-security-code" id="card-security-code" value="" />
+                                            <input type="text" name="card-security-code" id="card-security-code" data-bind="card_security_code" value="" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -476,10 +476,10 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" data-validate="required" name="card-holder" id="card-holder" value="" />
+                                            <input type="text" name="card-holder" id="card-holder" data-bind="card_holder" value="" />
                                         </td>
                                         <td>
-                                            <input type="text" data-validate="required" name="card-document-number" id="card-document-number" value="" />
+                                            <input type="text" name="card-document-number" id="card-document-number" data-bind="card_document_number" value="" />
                                         </td>
                                     </tr>
                                 </table>
@@ -493,21 +493,22 @@
                                             <label for="email">Email</label>
                                         </td>
                                         <td>
-                                            <label for="phone-number">Phone number</label>
-                                        </td>
-                                        <td>
                                             <label for="email-confirm">Confirm Email</label>
                                         </td>
+                                        <td>
+                                            <label for="phone-number">Phone number</label>
+                                        </td>
+                                        
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" name="email" id="email" value="" />
+                                            <input type="text" name="email" id="email" data-bind="email" value="" />
                                         </td>
                                         <td>
-                                            <input type="text" name="phone-number" id="phone-number" value="" />
+                                            <input type="text" name="email-confirm" id="email-confirm" data-bind="email_confirm" value="" />
                                         </td>
                                         <td>
-                                            <input type="text" name="email-confirm" id="email-confirm" value="" />
+                                            <input type="text" name="phone-number" id="phone-number" data-bind="phone_number" value="" />
                                         </td>
                                     </tr>                                    
                                 </table>
@@ -519,7 +520,7 @@
                             </div>
 
                             <button type="submit" class="button">Buy</button>
-
+                            <span class="hide error-color" id="buy-show-error">Check the information marked</span>
                         </form>
 
                     </div>

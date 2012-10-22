@@ -809,6 +809,14 @@ label {
     border: 1px solid red;
 }
 
+.hide {
+	display: none;
+}
+
+.error-color {
+	color: #EC5555;
+}
+
 .tooltip {
     position: absolute; 
     top: 0; 
