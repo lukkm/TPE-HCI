@@ -244,7 +244,7 @@ var Widgets = function() {
                 effect: 'sliceDown', // Specify sets like: 'fold,fade,sliceDown'
                 slices: 15, // For slice animations
                 animSpeed: 500, // Slide transition speed
-                pauseTime: 3000, // How long each slide will show
+                pauseTime: 6000, // How long each slide will show
                 directionNav: true, // Next & Prev navigation
                 controlNav: true, // 1,2,3... navigation
                 controlNavThumbs: false, // Use thumbnails for Control Nav
@@ -260,10 +260,16 @@ var Widgets = function() {
                         return img.getAttribute("src") ===  mainImg.attr("src");
                     });
                     $("#deal-title-text").html("Flights to " + currImg.getAttribute("data-slider") + " - From: " + currImg.getAttribute("data-price"));
-                }, // Triggers after a slide transition
+                }, 
                 slideshowEnd: function(){}, // Triggers after all slides have been shown
                 lastSlide: function(){}, // Triggers when last slide is shown
-                afterLoad: function(){} // Triggers when slider has loaded
+                afterLoad: function(){
+                    var mainImg = $(".nivo-main-image");
+                    var currImg = _.find($("[data-slider]"), function(img){
+                        return img.getAttribute("src") ===  mainImg.attr("src");
+                    });
+                    $("#deal-title-text").html("Flights to " + currImg.getAttribute("data-slider") + " - From: " + currImg.getAttribute("data-price"));
+                }
             });
 
         });
