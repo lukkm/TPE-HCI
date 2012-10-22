@@ -90,7 +90,6 @@ p {
 }
 
 .header-title a {
-    position: absolute;
     float: left;
     text-indent: -9999px;
     width: 250px;
@@ -482,6 +481,7 @@ label {
 /* =Deals */
 
 .deals {
+    position: relative;
     float: left;
     height: 283px;
     width: 563px;
