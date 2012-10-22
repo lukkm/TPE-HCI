@@ -27,7 +27,7 @@
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-media.js"></script>
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-thumbs.js"></script>
         <script type="text/javascript" src="js/libs/moment.js"></script>
-        <script type="text/javascript" src="js/libs/underscore.js"></script> 
+        <script type="text/javascript" src="js/libs/underscore.js"></script>
         <script type="text/javascript" src="js/libs/backbone.js"></script>
         <script type="text/javascript" src="js/libs/backbone-validation.js"></script>
         <script type="text/javascript" src="js/libs/handlebars.js"></script>
@@ -87,9 +87,9 @@
                         {{#inboundRoutes}}
                                 <tr>
                                     <td class="radio-col"><input type="radio" name="inbound-{{id}}"/></td>
-                                    <td class="text-col">{{{i18n "departs" }}}</td> 
+                                    <td class="text-col">{{{i18n "departs" }}}</td>
                                     <td class="datetime-col"><strong>{{departure.time}}</strong></td>
-                                    <td class="text-col">{{{i18n "arrives" }}}</td> 
+                                    <td class="text-col">{{{i18n "arrives" }}}</td>
                                     <td class="datetime-col"><strong>{{arrival.time}}</strong></td>
                                     <td class="text-col">{{{i18n "duration" }}}</td>
                                     <td class="datetime-col"><strong>{{duration}}</strong></td>
@@ -357,7 +357,7 @@
                     <label for="infants">{{{i18n "number_infants" }}} <span class="hint">{{{i18n "number_infants_hint" }}}</span></label>
                     <select name="infants" id="infants" data-range-start="0" data-range-end="9"></select>
                 </div>
-                <div class="submit"> 
+                <div class="submit">
                     <button type="submit" name="search-send" class="button">{{{i18n "search_button" }}}</button>
                 </div>
             </form>
@@ -367,7 +367,7 @@
 
         <div class="language-select"></div>
 
-        <div class="container"> 
+        <div class="container">
             <div class="wrap">
 
                 <div class="header"></div>
@@ -433,13 +433,13 @@
                                             <label for="passenger-number"></label>
                                         </td>
                                         <td>
-                                            <label for="first-name">First Name</label>
+                                            <label for="first_name">First Name</label>
                                         </td>
                                         <td>
-                                            <label for="last-name">Last Name</label>
+                                            <label for="last_name">Last Name</label>
                                         </td>
                                         <td>
-                                            <label for="birth-date">Birth Date</label>
+                                            <label for="birth_date">Birth Date</label>
                                         </td>
                                     </tr>
                                     <tr id="buy-single-passanger">
@@ -447,13 +447,13 @@
                                             <!-- Nro de pasajero -->
                                         </td>
                                         <td>
-                                            <input type="text" name="first-name" id="first-name" value="" data-bind="first_name"/>
+                                            <input type="text" name="first_name" id="first_name" value="" />
                                         </td>
                                         <td>
-                                            <input type="text" name="last-name" id="last-name" value="" data-bind="last_name"/>
+                                            <input type="text" name="last_name" id="last_name" value="" />
                                         </td>
                                         <td>
-                                            <input type="text" name="birth-date" id="birth-date" value="" data-widget="datepicker-select" data-bind="birth_date"/>                                            
+                                            <input type="text" name="birth_date" id="birth_date" value="" data-widget="datepicker-select" />
                                         </td>
                                     </tr>
                                 </table>
@@ -464,40 +464,40 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <label for="card-number">Card Number</label>
+                                            <label for="card_number">Card Number</label>
                                         </td>
                                         <td>
-                                            <label for="card-expire-date">Expire Date</label>
+                                            <label for="card_expire_date">Expire Date</label>
                                         </td>
                                         <td>
-                                            <label for="card-security-code">Security Code</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="card-number" id="card-number" data-bind="card_number" value="" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="card-expire-date" id="card-expire-date" data-bind="card_expire_date" value="" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="card-security-code" id="card-security-code" data-bind="card_security_code" value="" />
+                                            <label for="card_security_code">Security Code</label>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <label for="card-holder">Holder</label>
+                                            <input type="text" name="card_number" id="card_number" value="" />
                                         </td>
                                         <td>
-                                            <label for="card-document-number">Document Number</label>
+                                            <input type="text" name="card_expire_date" id="card_expire_date" value="" />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="card_security_code" id="card_security_code" value="" />
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" name="card-holder" id="card-holder" data-bind="card_holder" value="" />
+                                            <label for="card_holder">Holder</label>
                                         </td>
                                         <td>
-                                            <input type="text" name="card-document-number" id="card-document-number" data-bind="card_document_number" value="" />
+                                            <label for="card_document_number">Document Number</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="card_holder" id="card_holder" value="" />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="card_document_number" id="card_document_number" value="" />
                                         </td>
                                     </tr>
                                 </table>
@@ -511,24 +511,24 @@
                                             <label for="email">Email</label>
                                         </td>
                                         <td>
-                                            <label for="email-confirm">Confirm Email</label>
+                                            <label for="email_confirm">Confirm Email</label>
                                         </td>
                                         <td>
-                                            <label for="phone-number">Phone number</label>
+                                            <label for="phone_number">Phone number</label>
                                         </td>
-                                        
+
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="text" name="email" id="email" data-bind="email" value="" />
+                                            <input type="text" name="email" id="email" value="" />
                                         </td>
                                         <td>
-                                            <input type="text" name="email-confirm" id="email-confirm" data-bind="email_confirm" value="" />
+                                            <input type="text" name="email_confirm" id="email_confirm" value="" />
                                         </td>
                                         <td>
-                                            <input type="text" name="phone-number" id="phone-number" data-bind="phone_number" value="" />
+                                            <input type="text" name="phone_number" id="phone_number" value="" />
                                         </td>
-                                    </tr>                                    
+                                    </tr>
                                 </table>
                             </div>
 
@@ -636,7 +636,7 @@
                 <div class="page" id="page-publish-rec" data-title="Publish reviews">
                     <div class="form-section" id="rating-section">
                         <h2>Rate your flight</h2>
-                        
+
                         <form>
                             <table>
                                 <tr class="rating-section" data-radio="Kindness" data-name="friendlinessRating"></tr>
@@ -649,7 +649,7 @@
                                 <div class="average-score"><strong>Average score:</strong><label id="av-score">0.00</label></div>
                                 <input type="hidden" name="av-score" id="avg-score" value=""/>
                                 <div id="recommend-flight">
-                                    Recommend flight: 
+                                    Recommend flight:
                                         <label for="recommend">Yes</label><input type="radio" name="recommend" data-bool="true"/> 
                                         <label for="recommend">No</label><input type="radio" name="recommend" data-bool="false"/>
                                 </div>
@@ -663,7 +663,7 @@
                     <div class="form-section form-section-title">
                         <h2 id="reviews-title"></h2>
                         <div id="review-matches-found"></div>
-                        <div id="reviews"></div> 
+                        <div id="reviews"></div>
                     </div>
                 </div>
 

@@ -339,6 +339,8 @@ App.Views.SearchFormView = Backbone.View.extend({
 
         this.trigger("validation", query.validate());
 
+        console.log(query);
+
         if (query.isValid(true)) {
 
             var collection = app.searchResults;
@@ -369,9 +371,18 @@ App.Views.SearchFormView = Backbone.View.extend({
         $form.find("input").each(function() {
             var name = $(this).attr("name");
 
+                console.log(errors);
             if (errors && errors[name]) {
                 $(this).add($("[data-bind=" + name + "]"))
                     .addClass("invalid");
+                $($("[data-bind=" + name + "]")).qtip({
+					content: errors[name],
+					position: { corner:{target:'leftTop',tooltip:'bottomRight'},
+						adjust:{screen:true, resize:true}},
+					show: 'focus',
+					hide: 'blur',
+					style: app.errorTip
+					});
             } else {
                 $(this).removeClass("invalid");
             }
@@ -380,7 +391,7 @@ App.Views.SearchFormView = Backbone.View.extend({
     },
 
     render: function() {
-        
+
         this.$el.html(this.template());
 
     }
@@ -398,7 +409,7 @@ App.Views.FlightView = Backbone.View.extend({
 });
 
 App.Views.BuyFormView = Backbone.View.extend({
-	
+
     initialize: function(options) {
         _.extend(this, Backbone.events);
 
@@ -407,31 +418,16 @@ App.Views.BuyFormView = Backbone.View.extend({
         this.on("validation", function(errors) {
             this.updateErrors(errors);
         });
-        
-        $.fn.qtip.styles.errorTip = { 
-			width: 200,
-			
-			background: '#E73636',
-			color: 'white',
-			textAlign: 'center',
-			border: {
-				width: 1,
-				radius: 5,
-				color: '#E73636'
-			},
-			tip: 'bottomLeft',
-			
-		}
     },
-    
+
     events: {
         "click button": "submitForm",
-        "change input": "validateForm" 
+        "change input": "validateForm"
     },
-    
+
     submitForm: function(e) {
         var flight = app.info.get("currentFlight");
-        
+
         var data = this.$el.serializeArray();
 		var form = App.Models.Buy.fromSerializedArray(data);
 
@@ -439,11 +435,13 @@ App.Views.BuyFormView = Backbone.View.extend({
         _.forEach(data, function(input) {
             $("#confirm-" + input.name).html(input.value);
         });
-        
+
         this.trigger("validation", form.validate());
-        
+
+        console.log("asd    ");
+
         console.log(form.validate());
-        
+
         if (form.isValid(true)) {
 			 var dep = flight.attributes.departure, arr = flight.attributes.arrival;
 
@@ -463,42 +461,42 @@ App.Views.BuyFormView = Backbone.View.extend({
 
         e.preventDefault();
     },
-    
+
     updateErrors: function(errors) {
 
         var $form = this.$el;
-        
+
         $form.find("input").each(function() {
-            var name = $(this).attr("data-bind");
-            
+            var name = $(this).attr("name");
+
             if (errors && errors[name]) {
-                $(this).add($("#" + name))
-                    .addClass("invalid");
+                $(this).addClass("invalid");
                 $(this).qtip({
 					content: errors[name],
 					position: { corner:{target:'rightTop',tooltip:'bottomLeft'},
 						adjust:{screen:true, resize:true}},
 					show: 'focus',
 					hide: 'blur',
-					style: 'errorTip'
+					style: app.errorTip
 					});
             } else {
+                debugger;
                 $(this).removeClass("invalid");
             }
-            
+
         });
 
     },
 
     validateForm: function(e) {
-		
+
 		var data = this.$el.serializeArray(),
 			form = App.Models.Buy.fromSerializedArray(data),
 			changed = $(e.target),
 			errors = form.validate();
-		console.log(errors);	
-		
-		if (errors && errors[changed.attr("data-bind")]) {
+		console.log(errors);
+
+		if (errors && errors[changed.attr("name")]) {
                 changed.addClass("invalid");
             } else {
                 changed.removeClass("invalid");
