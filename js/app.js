@@ -40,7 +40,7 @@ App.init = function() {
     // intialize app key-value store
     app.info = new App.Info();
 
-    app.errorTip = { 
+    app.errorTip = {
         width: 200,
         background: '#E73636',
         color: 'white',
@@ -51,10 +51,10 @@ App.init = function() {
           color: '#E73636'
         },
         tip: 'bottomLeft',
-        
+
     }
 
 
     Backbone.history.start();
-    
+
 };

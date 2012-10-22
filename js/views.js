@@ -31,7 +31,7 @@ App.Views.AppView = Backbone.View.extend({
             el: $(".language-select"),
             template: app.templates["language-select"]
         });
-    
+
         this.subviews.searchForm = new App.Views.SearchFormView({
             el: $(".search-form"),
             template: app.templates["search-form"]
@@ -165,7 +165,7 @@ App.Views.Footer = Backbone.View.extend({
 });
 
 App.Views.LanguageSelect = Backbone.View.extend({
-    
+
     initialize: function(options) {
         this.template = options.template;
     },
@@ -310,18 +310,19 @@ App.Views.SearchFormView = Backbone.View.extend({
             this.updateErrors(errors);
         });
     },
-    
+
     events: {
         "click button": "submitForm",
         "focus input": "resetValidation",
         "click #one-way": "setOneWayRepeat",
-        "click #round-trip": "setRoundTripRepeat"
+        "click #round-trip": "setRoundTripRepeat",
+        "change #departure-date-user": "updateReturnDateBoundary"
     },
 
     setOneWayRepeat: function(e) {
 
         $("#return-date-user").parent("div").hide();
-    
+
     },
 
     setRoundTripRepeat: function(e) {
@@ -360,6 +361,14 @@ App.Views.SearchFormView = Backbone.View.extend({
 
         var $input = $(e.target);
         $input.removeClass("invalid");
+
+    },
+
+    updateReturnDateBoundary: function(e) {
+
+        var dep_date = $(e.target).datepicker("getDate");
+
+        $("#return-date-user").datepicker("option", "minDate", dep_date);
 
     },
 
@@ -437,10 +446,6 @@ App.Views.BuyFormView = Backbone.View.extend({
 
         this.trigger("validation", form.validate());
 
-        console.log("asd    ");
-
-        console.log(form.validate());
-
         if (form.isValid(true)) {
 			 var dep = flight.attributes.departure, arr = flight.attributes.arrival;
 
@@ -493,16 +498,13 @@ App.Views.BuyFormView = Backbone.View.extend({
 			form = App.Models.Buy.fromSerializedArray(data),
 			changed = $(e.target),
 			errors = form.validate();
-		console.log(errors);
 
 		if (errors && errors[changed.attr("name")]) {
                 changed.addClass("invalid");
             } else {
                 changed.removeClass("invalid");
             }
-		
     }
-    
 });
 
 App.Views.SearchResultsView = Backbone.View.extend({
@@ -557,7 +559,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
         var getAirport = function(travel) {
             return API.Geo.getAirportById ({ id: travel.airportId });
-        };     
+        };
 
         var getMarker = function (jqxhr) {
             var airportPosition = new google.maps.LatLng(jqxhr[0].airport.latitude, jqxhr[0].airport.longitude);
@@ -566,7 +568,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
                 title: jqxhr[0].airport.description
             });
 
-        };     
+        };
 
         var generateOptions = function(zoom, center) {
             return {
@@ -574,8 +576,8 @@ App.Views.SearchResultsView = Backbone.View.extend({
                 center: center,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
-        }  
-               
+        }
+
         var $link = $(e.target);
         var myFlightId = $link.data("flightid");
         var myId = $link.data("id");
@@ -585,7 +587,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
         var flight = app.searchResults.getFlightById(myFlightId);
 
         var route = _.find(flight.get(bound + "Routes"), function(route){
-            return route.id == myId; 
+            return route.id == myId;
         });
 
         var myOptions = generateOptions(4, new google.maps.LatLng(0,0));
@@ -596,7 +598,7 @@ App.Views.SearchResultsView = Backbone.View.extend({
 
         _.forEach(route.segments, function(segment){
 
-            $.when(getAirport(segment.departure), 
+            $.when(getAirport(segment.departure),
                    getAirport(segment.arrival)).done( function (arg1, arg2) {
 
                         var marker1 = getMarker(arg1);
@@ -720,7 +722,7 @@ App.Views.NewsletterView = Backbone.View.extend({
 
     initialize: function() {
 
-        this.subscribed = false; 
+        this.subscribed = false;
 
         var view = this;
         this.on("change", function() {
@@ -738,7 +740,7 @@ App.Views.NewsletterView = Backbone.View.extend({
         var form = this.$el.find("form"),
             input = form.find("input[name=email]"),
             email = input.val();
-        
+
         if (email !== "") {
             // @TODO: validate email using a simple regex (do not try an
             // exhaustive validation. It's a slippery slope from there.

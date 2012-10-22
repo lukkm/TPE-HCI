@@ -10,7 +10,7 @@ App.Models.Query = Backbone.Model.extend({
 
     validation: {
         from: { required: true,
-                msg: "We need to know from where"},
+                msg: "We need to know from where you depart"},
         to: { required: true,
                 msg: "We need to know where you are going"},
         repeat: { oneOf: ["one-way", "round-trip"] },
@@ -23,7 +23,7 @@ App.Models.Query = Backbone.Model.extend({
                 if (valid) { return; }
             } catch(e) {}
 
-            return "Invalid return date";
+            return "Invalid departure date";
         },
         ret_date: function(value, key, form) {
             try {
