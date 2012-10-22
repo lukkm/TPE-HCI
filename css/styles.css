@@ -435,7 +435,7 @@ label {
     float: left;
     height: 284px;
     width: 567px;
-    background-image: url('../img/panama.jpg');
+    /*background-image: url('../img/panama.jpg');*/
 }
 
 .deal-title {

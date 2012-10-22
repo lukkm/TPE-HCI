@@ -9,11 +9,13 @@
         <link rel="stylesheet" type="text/css" href="js/libs/fancybox/jquery.fancybox.css" media="screen"/>
         <link rel="stylesheet" href="js/libs/fancybox/helpers/jquery.fancybox-buttons.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="js/libs/fancybox/helpers/jquery.fancybox-thumbs.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="css/skins/skin.css" />
         <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
         <script type="text/javascript" src="js/libs/jquery.js"></script>
         <script type="text/javascript" src="js/libs/jquery-ui.js"></script>
         <script type="text/javascript" src="js/libs/jquery.ui.datepicker-es.js"></script>
         <script type="text/javascript" src="js/libs/jquery.qtip.js"></script>
+        <script type="text/javascript" src="js/libs/jquery.jcarousel.js"></script>
         <script type="text/javascript" src="js/libs/fancybox/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-buttons.js"></script>
         <script type="text/javascript" src="js/libs/fancybox/helpers/jquery.fancybox-media.js"></script>
@@ -298,17 +300,18 @@
                                 </div>
                             </form>
                         </div>
-
-                        <div class="deals">
-                            <div class="deal-title">
-                                <div class="deal-title-container">
-                                </div>
-                                <div class="deal-text">
-                                    <h2>Tickets to Panama</h2>
-                                    <p>From US$ 2,400</p>
-                                </div>
-                            </div>
-                        </div>
+                        
+                        <script type="text/x-handlebars-template" id="deal">
+							<div class="deals">							
+									<div class="deal-title">
+										<div class="deal-title-container"></div>
+										<div class="deal-text">
+											<h2>Tickets to {{}}</h2>
+											<p>From US$ {{}}</p>
+										</div>
+									</div>
+							</div>            
+						</script>	
 
                         <div class="newsletter-subscribe">
                             <p>Subscribe to our newsletter:</p>

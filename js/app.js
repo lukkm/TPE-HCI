@@ -701,6 +701,12 @@ App.Views.NewsletterView = Backbone.View.extend({
 
 });
 
+App.Views.DealsView = Backbone.View.extend({
+	
+	var deal = 
+	
+});
+
 App.Info = function() {
 
     this.dictionary = {};
