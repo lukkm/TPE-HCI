@@ -119,7 +119,7 @@ var Widgets = function() {
             $("select[name|=birth]").each(function(select) {
                 $(this).change(function() {
                     var inputContent =  $("select[name=birth-day]").val() + "/" + $("select[name=birth-month]").val() + "/" + $("select[name=birth-year]").val();
-                    $("input[name=birth-date]").val(inputContent);
+                    $("input[name=birth_date]").val(inputContent);
                 });
             }).first().trigger("change");
 
