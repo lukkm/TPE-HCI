@@ -199,11 +199,10 @@ App.Views.SearchRecommendationsForm = Backbone.View.extend({
 
     findRecommendations: function(e) {
 
-        var airline = $("#airline").val();
+        var airline = $("#get-airline-review").val();
+        var airlineName = $("#airline").val();
 
         API.Review.getAirlineReviews({ airline_id: airline }, function(e){
-
-            console.log(e)
 
             var cantReviews = e.reviews.length;
 
@@ -213,7 +212,15 @@ App.Views.SearchRecommendationsForm = Backbone.View.extend({
                 cantReviews += " matches found";
             }
 
-            $("#reviews-title").html("Reviews for " + airline);
+            _.forEach(e.reviews, function(review){
+                if (review.yesRecommend === 1){
+                    review.yesRecommend = "Yes";
+                } else {
+                    review.yesRecommend = "No";
+                }
+            });
+
+            $("#reviews-title").html("Reviews for " + airlineName);
             $("#review-matches-found").html(cantReviews)
             $("#reviews").html(Handlebars.compile($("#airline-review").html())(e));
         });
@@ -285,6 +292,8 @@ App.Views.ReviewsFormView = Backbone.View.extend({
 
         callApi(flight.attributes.outboundRoutes);
         callApi(flight.attributes.inboundRoutes);
+
+        app.router.navigate("rec-posted", { trigger:true });
     }
 
 

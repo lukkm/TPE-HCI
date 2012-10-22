@@ -51,6 +51,15 @@ var Widgets = function() {
                     }), 10);
                     callback(list);
                 });
+            },
+
+            airlines: function(request, callback) {
+                API.Misc.getAirlinesByName( { name: request.term } , function(data){
+                    var list = _.first(_.map(data.airlines, function(airline) {
+                        return { _value: airline.airlineId, label: airline.name };
+                    }), 10);
+                    callback(list);
+                });
             }
         };
 
