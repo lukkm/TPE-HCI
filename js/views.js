@@ -485,7 +485,6 @@ App.Views.BuyFormView = Backbone.View.extend({
 					style: app.errorTip
 					});
             } else {
-                debugger;
                 $(this).removeClass("invalid");
             }
 
@@ -502,6 +501,14 @@ App.Views.BuyFormView = Backbone.View.extend({
 
 		if (errors && errors[changed.attr("name")]) {
                 changed.addClass("invalid");
+                changed.qtip({
+					content: errors[changed.attr("name")],
+					position: { corner:{target:'rightTop',tooltip:'bottomLeft'},
+						adjust:{screen:true, resize:true}},
+					show: 'focus',
+					hide: 'blur',
+					style: app.errorTip
+					});
             } else {
                 changed.removeClass("invalid");
             }

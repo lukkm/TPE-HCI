@@ -71,8 +71,9 @@ App.Models.Buy = Backbone.Model.extend({
         card_security_code: this.cardValidate,
         card_holder: { required: true,
 						msg: "Card holder is required"},
-        card_document_number: { required: true,
-								msg: "Document number of the card holder is required"},
+        card_document_number:[{ required: true, msg: "The document number is required" },
+                                { pattern: 'number',
+								msg: "The document number of the card holder has to be numerical"}],
         email: [{
 				required: true,
 				msg: "Please enter an email address"
@@ -83,7 +84,8 @@ App.Models.Buy = Backbone.Model.extend({
         phone_number:
         {
 			required: true,
-			pattern:  /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+			pattern:  /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
+            msg: "The phone number should have only numbers"
 		},
         email_confirm: [{
 				required: true,
