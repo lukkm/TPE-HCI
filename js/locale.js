@@ -28,7 +28,7 @@ var i18n = (function() {
             "children"                               : "Children",
             "choose_flight"                          : "Choose other flight",
             "city"                                   : "City",
-            "confirm_button"                         : "Confirm"
+            "confirm_button"                         : "Confirm",
             "confirm_purchase"                       : "Confirm Purchase",
             "contact_info"                           : "Contact Information",
             "country"                                : "Country",
@@ -56,7 +56,7 @@ var i18n = (function() {
             "infants"                                : "Infants",
             "last_name"                              : "Last Name",
             "newsletter_subscribe_button"            : "Subscribe",
-            "newsletter_subscribe_label"             : "Subscribe to our newsletter                 : ",
+            "newsletter_subscribe_label"             : "Subscribe to our newsletter: ",
             "newsletter_thanks"                      : "Thanks for subscribing to our newsletter.",
             "number_adults"                          : "Number of adults",
             "number_children"                        : "Number of children",
@@ -106,7 +106,7 @@ var i18n = (function() {
             "total"                                  : "Total",
             "total_asc"                              : "Total - Low to High",
             "total_desc"                             : "Total - Hight to Low",
-            "total_duration"                         : "Total duration",
+            "total_duration"                         : "Total duration"
         },
         "es": {
             "about"                                  : "Acerca de",
@@ -132,7 +132,7 @@ var i18n = (function() {
             "children"                               : "Niños",
             "choose_flight"                          : "Elegir otro vuelo",
             "city"                                   : "Ciudad",
-            "confirm_button"                         : "Confirmar"
+            "confirm_button"                         : "Confirmar",
             "confirm_purchase"                       : "Confirmar compra",
             "contact_info"                           : "Informacion de contacto",
             "country"                                : "Pais",
@@ -160,7 +160,7 @@ var i18n = (function() {
             "infants"                                : "Infantes",
             "last_name"                              : "Apellido",
             "newsletter_subscribe_button"            : "Suscribirme",
-            "newsletter_subscribe_label"             : "Suscríbete al newsletter                        : ",
+            "newsletter_subscribe_label"             : "Suscríbete al newsletter: ",
             "newsletter_thanks"                      : "Gracias por suscribirte a nuestro newsletter.",
             "number_adults"                          : "Número de adultos",
             "number_children"                        : "Número de niños",
@@ -210,7 +210,7 @@ var i18n = (function() {
             "total"                                  : "Total",
             "total_asc"                              : "Total - Menor a mayor",
             "total_desc"                             : "Total - Mayor a menor",
-            "total_duration"                         : "Duración total",
+            "total_duration"                         : "Duración total"
         }
     };
 

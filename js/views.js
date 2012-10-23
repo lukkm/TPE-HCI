@@ -42,7 +42,7 @@ App.Views.AppView = Backbone.View.extend({
         });
 
         this.subviews.buyForm = new App.Views.BuyFormView({
-            el: $("#buy-form"),
+            el: $("#page-buy"),
             template: app.templates["order"]
         });
 
@@ -469,7 +469,7 @@ App.Views.BuyFormView = Backbone.View.extend({
     submitForm: function(e) {
         var flight = app.info.get("currentFlight");
 
-        var data = this.$el.serializeArray();
+        var data = this.$el.find("#buy-form").serializeArray();
 		var order= App.Models.Buy.fromSerializedArray(data);
 
 
@@ -501,7 +501,7 @@ App.Views.BuyFormView = Backbone.View.extend({
 
     updateErrors: function(errors) {
 
-        var $order = this.$el;
+        var $order = this.$el.find("#buy-form");
 
         $order.find("input").each(function() {
             var name = $(this).attr("name");
@@ -526,7 +526,7 @@ App.Views.BuyFormView = Backbone.View.extend({
 
     validateForm: function(e) {
 
-		var data = this.$el.serializeArray(),
+		var data = this.$el.find("#buy-form").serializeArray(),
 			order = App.Models.Buy.fromSerializedArray(data),
 			changed = $(e.target),
 			errors = order.validate();
@@ -546,8 +546,8 @@ App.Views.BuyFormView = Backbone.View.extend({
             }
     },
 
-    render: function(){
-        $("#page-buy").html(this.template());
+    render: function() {
+        this.$el.html(this.template());
     }
 });
 
