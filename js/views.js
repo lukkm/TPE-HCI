@@ -52,7 +52,8 @@ App.Views.AppView = Backbone.View.extend({
         });
 
         this.subviews.thanksForm = new App.Views.ThanksFormView({
-            el: $("#recommend-form")
+            el: $("#page-thanks"),
+            template: app.templates["template-thanks"]
         });
 
         this.subviews.reviewsForm = new App.Views.ReviewsFormView({
@@ -253,7 +254,11 @@ App.Views.SearchRecommendationsForm = Backbone.View.extend({
 
 App.Views.ThanksFormView = Backbone.View.extend({
 
-    events:{
+    initialize: function(options) {
+        this.template = options.template;
+    },
+
+    events: {
         "click #publish-rec" : "publishRecommendation"
     },
 
@@ -261,6 +266,10 @@ App.Views.ThanksFormView = Backbone.View.extend({
         app.router.navigate("publish-rec", { trigger: true });
 
         e.preventDefault();
+    },
+
+    render: function() {
+        this.$el.html(this.template());
     }
 
 });
@@ -417,7 +426,7 @@ App.Views.SearchFormView = Backbone.View.extend({
                 $(this).add($("[data-bind=" + name + "]"))
                     .addClass("invalid");
                 $($("[data-bind=" + name + "]")).qtip({
-					content: errors[name],
+					content: i18n.translate(errors[name]),
 					position: { corner:{target:'leftTop',tooltip:'bottomRight'},
 						adjust:{screen:true, resize:true}},
 					show: 'focus',
@@ -509,7 +518,7 @@ App.Views.BuyFormView = Backbone.View.extend({
             if (errors && errors[name]) {
                 $(this).addClass("invalid");
                 $(this).qtip({
-					content: errors[name],
+					content: i18n.translate(errors[name]),
 					position: { corner:{target:'rightTop',tooltip:'bottomLeft'},
 						adjust:{screen:true, resize:true}},
 					show: 'focus',
@@ -534,7 +543,7 @@ App.Views.BuyFormView = Backbone.View.extend({
 		if (errors && errors[changed.attr("name")]) {
                 changed.addClass("invalid");
                 changed.qtip({
-					content: errors[changed.attr("name")],
+					content: i18n.translate(errors[changed.attr("name")]),
 					position: { corner:{target:'rightTop',tooltip:'bottomLeft'},
 						adjust:{screen:true, resize:true}},
 					show: 'focus',
