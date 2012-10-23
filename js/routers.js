@@ -50,8 +50,8 @@ App.Routers.Router = Backbone.Router.extend({
         }
         this.switchPage("buy");
         var $button = $("#back-purchase"),
-            template = $($button.data("href-template")),
-            hbTemplate = template.replace("<%", "{{").replace("%>","}}");
+            template = $button.data("href-template"),
+            hbTemplate = template.replace("{%", "{{").replace("%}","}}");
 
         $button.attr("href", Handlebars.compile(hbTemplate)(
                     { flightId: id }));
