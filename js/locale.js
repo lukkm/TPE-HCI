@@ -107,7 +107,7 @@ var i18n = (function() {
             "total_desc"                             : "Total - Hight to Low",
             "total_duration"                         : "Total duration",
             "complete_name"     : "Complete your name",
-            "translate-depart" : "We need to know from where you depart",
+            "translate_depart" : "We need to know from where you depart",
             "year": "Year",
             "month": "Month",
             "day": "Day"
@@ -216,7 +216,7 @@ var i18n = (function() {
             "total_desc"                             : "Total - Mayor a menor",
             "total_duration"                         : "Duración total",
             "complete_name"     : "Completa tu nombre",
-            "translate-depart" : "Necesitamos saber de donde salis",
+            "translate_depart" : "Necesitamos saber de donde salis",
             "year": "Año",
             "month": "Mes",
             "day": "Día"

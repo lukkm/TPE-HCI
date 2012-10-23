@@ -10,7 +10,7 @@ App.Models.Query = Backbone.Model.extend({
 
     validation: {
         from: { required: true,
-                msg: "We need to know from where you depart"},
+                msg: i18n.translate("translate_depart")},
         to: { required: true,
                 msg: "We need to know where you are going"},
         repeat: { oneOf: ["one-way", "round-trip"] },
@@ -62,7 +62,7 @@ App.Models.Buy = Backbone.Model.extend({
 
 	validation: {
 		first_name: { required: true,
-                        msg: "Complete your name"},
+                        msg: i18n.translate("complete_name")},
         last_name: { required: true,
                     msg: "Complete your last name"},
         birth_date: { required: true },
