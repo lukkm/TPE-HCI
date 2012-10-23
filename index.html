@@ -366,6 +366,204 @@
                 </div>
             </form>
         </script>
+        <script type="text/x-handlebars-template" id="order">
+            <div class="sheet">
+                <div class="nav">
+                    <a href="#search" class="button">&larr;{{{i18n "choose_flight"}}}</a>
+                </div>
+                <h1>{{{i18n "confirm_purchase"}}}</h1>
+                <form action="." method="post" id="buy-form">
+
+                    <h3>{{{i18n "passengers"}}}</h3>
+                    <div class="form-section">
+                        <table>
+                            <tr>
+                                <td id="buy-passengers">
+                                    <label for="passenger-number"></label>
+                                </td>
+                                <td>
+                                    <label for="first_name">{{{i18n "first_name"}}}</label>
+                                </td>
+                                <td>
+                                    <label for="last_name">{{{i18n "last_name"}}}</label>
+                                </td>
+                                <td>
+                                    <label for="birth_date">{{{i18n "birth"}}}</label>
+                                </td>
+                            </tr>
+                            <tr id="buy-single-passanger">
+                                <td id="buy-passengers">
+                                    <!-- Nro de pasajero -->
+                                </td>
+                                <td>
+                                    <input type="text" name="first_name" id="first_name" value="" />
+                                </td>
+                                <td>
+                                    <input type="text" name="last_name" id="last_name" value="" />
+                                </td>
+                                <td>
+                                    <input type="text" name="birth_date" id="birth_date" value="" data-widget="datepicker-select" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3>{{i18n "billing"}}</h3>
+                    <div class="form-section">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="card_number">{{{i18n "card_number"}}}</label>
+                                </td>
+                                <td>
+                                    <label for="card_expire_date">{{{i18n "card_expire"}}}</label>
+                                </td>
+                                <td>
+                                    <label for="card_security_code">{{{i18n "card_security_code"}}}</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name="card_number" id="card_number" value="" />
+                                </td>
+                                <td>
+                                    <input type="text" name="card_expire_date" id="card_expire_date" value="" />
+                                </td>
+                                <td>
+                                    <input type="text" name="card_security_code" id="card_security_code" value="" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="card_holder">{{{i18n "card_holder"}}}</label>
+                                </td>
+                                <td>
+                                    <label for="card_document_number">{{{i18n "card_document_number"}}}</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name="card_holder" id="card_holder" value="" />
+                                </td>
+                                <td>
+                                    <input type="text" name="card_document_number" id="card_document_number" value="" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h3>{{{i18n "contact_info"}}}</h3>
+                    <div class="form-section">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label for="email">{{{i18n "email"}}}</label>
+                                </td>
+                                <td>
+                                    <label for="email_confirm">{{{i18n "email_confirm"}}}</label>
+                                </td>
+                                <td>
+                                    <label for="phone_number">{{{i18n "phone_number"}}}</label>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" name="email" id="email" value="" />
+                                </td>
+                                <td>
+                                    <input type="text" name="email_confirm" id="email_confirm" value="" />
+                                </td>
+                                <td>
+                                    <input type="text" name="phone_number" id="phone_number" value="" />
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="form-terms">
+                        <input type="checkbox" name="terms" id="terms" value="true" />
+                        <label for="terms" class="inline-block-label">{{{i18n "terms"}}}<a href="#tos">{{{i18n "terms_link"}}}</a>.</label>
+                    </div>
+
+                    <button type="submit" class="button">{{{i18n "buy_button"}}}</button>
+                    <span class="hide error-color" id="buy-show-error">{{{i18n "buy_show_error"}}}</span>
+                </form>
+
+            </div>
+        </script>
+        <script type="text/x-handlebars-template" id="confirmation">
+            <div class="sheet">
+                <h1>{{{i18n "please_confirm"}}}</h1>
+
+                <div class="nav">
+                    <a data-href-template="#buy/<% flightId %>" href="#" class="button" id="back-purchase">&larr;{{{i18n "back_to_purchase"}}}</a>
+                </div>
+
+                <h3>{{{i18n "flight"}}}</h3>
+                <div class="form-section" id="buy-flight-information">
+                    <h4>{{{i18n "from_label"}}}</h4>
+                    <dl class="confirm-flight-data">
+                        <dt>{{{i18n "airport"}}}</dt>
+                        <dd id="confirm-flight-from-airport"></dd>
+                        <dt>{{{i18n "city"}}}</dt>
+                        <dd id="confirm-flight-from-city"></dd>
+                        <dt>{{{i18n "country"}}}</dt>
+                        <dd id="confirm-flight-from-country"></dd>
+                    </dl>
+                    <h4>{{{i18n "to_label"}}}</h4>
+                    <dl class="confirm-flight-data">
+                        <dt>{{{i18n "airport"}}}</dt>
+                        <dd id="confirm-flight-to-airport"></dd>
+                        <dt>{{{i18n "city"}}}</dt>
+                        <dd id="confirm-flight-to-city"></dd>
+                        <dt>{{{i18n "country"}}}</dt>
+                        <dd id="confirm-flight-to-country"></dd>
+                    </dl>
+                </div>
+
+                <h3>{{{i18n "passengers"}}}</h3>
+                <div class="form-section">
+                    <dl id="confirm-information">
+                        <dt>{{{i18n "first_name"}}}</dt>
+                        <dd id="confirm-first_name"></dd>
+                        <dt>{{{i18n "last_name"}}}</dt>
+                        <dd id="confirm-last_name"></dd>
+                        <dt>{{{i18n "birth"}}}</dt>
+                        <dd id="confirm-birth_date"></dd>
+                    </dl>
+                </div>
+
+                <h3>{{{i18n "billing"}}}</h3>
+                <div class="form-section">
+                    <dl>
+                        <dt>{{{i18n "card_number"}}}</dt>
+                        <dd id="confirm-card_number"></dd>
+                        <dt>{{{i18n "card_expire"}}}</dt>
+                        <dd id="confirm-card_expire_date"></dd>
+                        <dt>{{{i18n "card_security_code"}}}</dt>
+                        <dd id="confirm-card_security_code"></dd>
+                        <dt>{{{i18n "card_holder"}}}</dt>
+                        <dd id="confirm-card_holder"></dd>
+                        <dt>{{{i18n "card_document_number"}}}</dt>
+                        <dd id="confirm-card_document_number"></dd>
+                    </dl>
+                </div>
+
+                <h3>{{{i18n "contact_info"}}}</h3>
+                <div class="form-section">
+                    <dl>
+                        <dt>{{{i18n "email"}}}</dt>
+                        <dd id="confirm_email"></dd>
+                        <dt>{{{i18n "phone_number"}}}</dt>
+                        <dd id="confirm_phone_number"></dd>
+                    </dl>
+                </div>
+                <div class="nav">
+                    <a href="#thanks" class="button">{{{i18n "confirm_button"}}}</a>
+                </div>
+            </div>
+        </script>
     </head>
     <body data-title-base="Travel.ly" data-title-separator=" | ">
 
@@ -415,215 +613,21 @@
                     </div>
                 </div>
 
-                <div class="page" id="page-buy" data-title="Confirm Purchase">
-                    <div class="sheet">
-                        <div class="nav">
-                            <a href="#search" class="button">&larr; Choose other flight</a>
-                        </div>
-                        <h1>Confirm purchase</h1>
-                        <form action="." method="post" id="buy-form">
 
-                            <h3>Passengers</h3>
-                            <div class="form-section">
-                                <table>
-                                    <tr>
-                                        <td id="buy-passengers">
-                                            <label for="passenger-number"></label>
-                                        </td>
-                                        <td>
-                                            <label for="first_name">First Name</label>
-                                        </td>
-                                        <td>
-                                            <label for="last_name">Last Name</label>
-                                        </td>
-                                        <td>
-                                            <label for="birth_date">Birth Date</label>
-                                        </td>
-                                    </tr>
-                                    <tr id="buy-single-passanger">
-                                        <td id="buy-passengers">
-                                            <!-- Nro de pasajero -->
-                                        </td>
-                                        <td>
-                                            <input type="text" name="first_name" id="first_name" value="" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="last_name" id="last_name" value="" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="birth_date" id="birth_date" value="" data-widget="datepicker-select" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
+                <div class="page" id="page-buy" data-title="Confirm Purchase"></div>
 
-                            <h3>Billing</h3>
-                            <div class="form-section">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label for="card_number">Card Number</label>
-                                        </td>
-                                        <td>
-                                            <label for="card_expire_date">Expire Date</label>
-                                        </td>
-                                        <td>
-                                            <label for="card_security_code">Security Code</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="card_number" id="card_number" value="" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="card_expire_date" id="card_expire_date" value="" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="card_security_code" id="card_security_code" value="" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <label for="card_holder">Holder</label>
-                                        </td>
-                                        <td>
-                                            <label for="card_document_number">Document Number</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="card_holder" id="card_holder" value="" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="card_document_number" id="card_document_number" value="" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
 
-                            <h3>Contact Information</h3>
-                            <div class="form-section">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <label for="email">Email</label>
-                                        </td>
-                                        <td>
-                                            <label for="email_confirm">Confirm Email</label>
-                                        </td>
-                                        <td>
-                                            <label for="phone_number">Phone number</label>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="text" name="email" id="email" value="" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="email_confirm" id="email_confirm" value="" />
-                                        </td>
-                                        <td>
-                                            <input type="text" name="phone_number" id="phone_number" value="" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-
-                            <div class="form-terms">
-                                <input type="checkbox" name="terms" id="terms" value="true" />
-                                <label for="terms" class="inline-block-label">I have read and accept the <a href="#tos">terms and conditions</a>.</label>
-                            </div>
-
-                            <button type="submit" class="button">Buy</button>
-                            <span class="hide error-color" id="buy-show-error">Check the information marked</span>
-                        </form>
-
-                    </div>
-                </div>
-
-                <div class="page" id="page-confirm" data-title="Confirmation">
-                    <div class="sheet">
-                        <h1>Please confirm the information</h1>
-
-                        <div class="nav">
-                            <a data-href-template="#buy/{{flightId}}" href="#" class="button" id="back-purchase">&larr; Back to purchase</a>
-                        </div>
-
-                        <h3>Flight</h3>
-                        <div class="form-section" id="buy-flight-information">
-                            <h4>From</h4>
-                            <dl class="confirm-flight-data">
-                                <dt>Airport</dt>
-                                <dd id="confirm-flight-from-airport"></dd>
-                                <dt>City</dt>
-                                <dd id="confirm-flight-from-city"></dd>
-                                <dt>Country</dt>
-                                <dd id="confirm-flight-from-country"></dd>
-                            </dl>
-                            <h4>To</h4>
-                            <dl class="confirm-flight-data">
-                                <dt>Airport</dt>
-                                <dd id="confirm-flight-to-airport"></dd>
-                                <dt>City</dt>
-                                <dd id="confirm-flight-to-city"></dd>
-                                <dt>Country</dt>
-                                <dd id="confirm-flight-to-country"></dd>
-                            </dl>
-                        </div>
-
-                        <h3>Passenger</h3>
-                        <div class="form-section">
-                            <dl id="confirm-information">
-                                <dt>First Name</dt>
-                                <dd id="confirm-first_name"></dd>
-                                <dt>Last Name</dt>
-                                <dd id="confirm-last_name"></dd>
-                                <dt>Birth Date</dt>
-                                <dd id="confirm-birth_date"></dd>
-                            </dl>
-                        </div>
-
-                        <h3>Billing</h3>
-                        <div class="form-section">
-                            <dl>
-                                <dt>Card Number</dt>
-                                <dd id="confirm-card_number"></dd>
-                                <dt>Expire Date</dt>
-                                <dd id="confirm-card_expire_date"></dd>
-                                <dt>Security Code</dt>
-                                <dd id="confirm-card_security_code"></dd>
-                                <dt>Holder</dt>
-                                <dd id="confirm-card_holder"></dd>
-                                <dt>Document Number</dt>
-                                <dd id="confirm-card_document_number"></dd>
-                            </dl>
-                        </div>
-
-                        <h3>Contact Information</h3>
-                        <div class="form-section">
-                            <dl>
-                                <dt>Email</dt>
-                                <dd id="confirm_email"></dd>
-                                <dt>Phone Number</dt>
-                                <dd id="confirm_phone_number"></dd>
-                            </dl>
-                        </div>
-                        <div class="nav">
-                            <a href="#thanks" class="button">Confirm</a>
-                        </div>
-                    </div>
-                </div>
+                <div class="page" id="page-confirm" data-title="Confirmation"></div>
 
                 <div class="page" id="page-thanks" data-title="Thank you">
                     <div class="sheet">
                         <div class="form-section">
-                            <h1>Thank you for buying with Travel.ly</h1>
+                            <h1>{{{i18n "thanks"}}}Travel.ly</h1>
                             <div class="nav-home">
-                                <a href="#" class="button">Back to Home</a>
+                                <a href="#" class="button">{{{i18n "back_home"}}}</a>
                             </div>
                             <div id="recommend-form">
-                                <button class="button" id="publish-rec">Rate your flight</button>
+                                <button class="button" id="publish-rec">{{{i18n "rate_flight"}}}</button>
                             </div>
                         </div>
                     </div>
