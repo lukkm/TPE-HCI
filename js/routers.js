@@ -104,7 +104,7 @@ App.Routers.Router = Backbone.Router.extend({
     },
 
     updateTitle: function() {
-        var pageTitle = $(".page.current").data("title"),
+        var pageTitle = i18n.translate($(".page.current").data("title")),
             baseTitle = $("body").data("title-base"),
             separator = $("body").data("title-separator");
 

@@ -366,6 +366,31 @@
                 </div>
             </form>
         </script>
+        <script type="text/x-handlebars-template" id="review-form">
+            <div class="form-section" id="rating-section">
+                    <h2>{{{i18n "rate_flight_title" }}}</h2>
+
+                    <form>
+                        <table>
+                            <tr class="rating-section" data-radio="{{{i18n "rate_flight_kindness" }}}" data-name="friendlinessRating"></tr>
+                            <tr class="rating-section" data-radio="{{{i18n "rate_flight_food" }}}" data-name="foodRating"></tr>
+                            <tr class="rating-section" data-radio="{{{i18n "rate_flight_punctuality" }}}" data-name="punctualityRating"></tr>
+                            <tr class="rating-section" data-radio="{{{i18n "rate_flight_frecuent_travelers_program" }}}" data-name="mileageProgramRating"></tr>
+                            <tr class="rating-section" data-radio="{{{i18n "rate_flight_comfort" }}}" data-name="comfortRating"></tr>
+                            <tr class="rating-section" data-radio="{{{i18n "rate_flight_quality_price" }}}" data-name="qualityPriceRating"></tr>
+                        </table>
+                            <div class="average-score"><strong>{{{i18n "rate_flight_avg_score" }}}</strong><label id="av-score">0.00</label></div>
+                            <input type="hidden" name="av-score" id="avg-score" value=""/>
+                            <div id="recommend-flight">
+                                {{{i18n "rate_flight_rec_flight" }}}
+                                    <label for="recommend">{{{i18n "rate_flight_yes" }}}</label><input type="radio" name="recommend" data-bool="true"/> 
+                                    <label for="recommend">{{{i18n "rate_flight_no" }}}</label><input type="radio" name="recommend" data-bool="false"/>
+                            </div>
+                            <div class="general-comments"><strong>{{{i18n "rate_flight_comments" }}}</strong><textarea name="general-comments" id="general-comments" rows="4" cols="125"></textarea></div>
+                    </form>
+                    <button type="submit" class="button small-button" id="post-rec">{{{i18n "rate_flight_button" }}}</button>
+                </div>
+        </script>
     </head>
     <body data-title-base="Travel.ly" data-title-separator=" | ">
 
@@ -391,12 +416,12 @@
                     </div>
                 </div>
 
-                <div class="page" id="page-search" data-title="Search Results">
+                <div class="page" id="page-search" data-title="search_results">
                     <div class="search-filters"> </div>
                     <div class="search-wrap"> </div>
                 </div>
 
-                <div class="page" id="page-about" data-title="About">
+                <div class="page" id="page-about" data-title="about">
                     <div class="sheet">
                         <h1>About travel.ly</h1>
                         <p>travel.ly is the leading site in online flight sales. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus.</p>
@@ -406,7 +431,7 @@
                     </div>
                 </div>
 
-                <div class="page" id="page-tos" data-title="Terms of Service">
+                <div class="page" id="page-tos" data-title="terms_of_service">
                     <div class="sheet">
                         <h1>Terms of service</h1>
                         <p>Hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse.</p>
@@ -615,7 +640,7 @@
                     </div>
                 </div>
 
-                <div class="page" id="page-thanks" data-title="Thank you">
+                <div class="page" id="page-thanks" data-title="thank_you">
                     <div class="sheet">
                         <div class="form-section">
                             <h1>Thank you for buying with Travel.ly</h1>
@@ -629,33 +654,23 @@
                     </div>
                 </div>
 
-                <div class="page" id="page-publish-rec" data-title="Publish reviews">
-                    <div class="form-section" id="rating-section">
-                        <h2>Rate your flight</h2>
 
-                        <form>
-                            <table>
-                                <tr class="rating-section" data-radio="Kindness" data-name="friendlinessRating"></tr>
-                                <tr class="rating-section" data-radio="Food" data-name="foodRating"></tr>
-                                <tr class="rating-section" data-radio="Punctuality" data-name="punctualityRating"></tr>
-                                <tr class="rating-section" data-radio="Frecuent travelers program" data-name="mileageProgramRating"></tr>
-                                <tr class="rating-section" data-radio="Comfort" data-name="comfortRating"></tr>
-                                <tr class="rating-section" data-radio="Price-Quality Relation" data-name="qualityPriceRating"></tr>
-                            </table>
-                                <div class="average-score"><strong>Average score:</strong><label id="av-score">0.00</label></div>
-                                <input type="hidden" name="av-score" id="avg-score" value=""/>
-                                <div id="recommend-flight">
-                                    Recommend flight:
-                                        <label for="recommend">Yes</label><input type="radio" name="recommend" data-bool="true"/> 
-                                        <label for="recommend">No</label><input type="radio" name="recommend" data-bool="false"/>
-                                </div>
-                                <div class="general-comments"><strong>Comments:</strong><textarea name="general-comments" id="general-comments" rows="4" cols="125"></textarea></div>
-                        </form>
-                        <button type="submit" class="button small-button" id="post-rec">Post recommendation</button>
-                    </div>
+
+
+
+
+
+                <div class="page" id="page-publish-rec" data-title="publish_reviews">
+                    
                 </div>
 
-                <div class="page" id="page-find-rec" data-title="Find reviews">
+
+
+
+
+
+
+                <div class="page" id="page-find-rec" data-title="find_reviews">
                     <div class="form-section form-section-title">
                         <h2 id="reviews-title">Searching...</h2>
                         <div id="review-matches-found"></div>
@@ -663,7 +678,7 @@
                     </div>
                 </div>
 
-                <div class="page" id="page-rec-posted" data-title="Review uploaded">
+                <div class="page" id="page-rec-posted" data-title="review_uploaded">
                     <div class="sheet">
                         <div class="form-section">
                             <h1>Your review has been uploaded</h1>

@@ -50,7 +50,8 @@ App.Views.AppView = Backbone.View.extend({
         });
 
         this.subviews.reviewsForm = new App.Views.ReviewsFormView({
-            el: $("#rating-section")
+            el: $("#page-publish-rec"),
+            template: app.templates["review-form"]
         });
 
 
@@ -247,8 +248,13 @@ App.Views.ThanksFormView = Backbone.View.extend({
 });
 
 App.Views.ReviewsFormView = Backbone.View.extend({
-    events:{
+
+    events: {
         "click #post-rec": "postRecommendation"
+    },
+
+    initialize: function(options) {
+        this.template = options.template;
     },
 
 
@@ -260,7 +266,6 @@ App.Views.ReviewsFormView = Backbone.View.extend({
                     _.forEach(route.segments, function(segment){
                         data.flightNumber = segment.flightNumber;
                         data.airlineId = segment.airlineId;
-                        console.log(data);
                         console.log(API.Review.reviewAirline(data));
                     });
                 });
@@ -271,9 +276,15 @@ App.Views.ReviewsFormView = Backbone.View.extend({
 
         var flight = app.info.get("currentFlight");
 
+        if (typeof flight === 'undefined') {
+            app.router.navigate("#", { trigger: true });
+            return false;
+        }
+
         var ratings = $(":checked[data-selector]");
 
         if (ratings.length < 6){
+            alert("Unable to rate flight");
             return false;
         }
 
@@ -284,6 +295,7 @@ App.Views.ReviewsFormView = Backbone.View.extend({
         var recommend = $(":checked[data-bool]");
 
         if (recommend.length < 1){
+            alert("Unable to rate flight");
             return false;
         }
 
@@ -295,6 +307,11 @@ App.Views.ReviewsFormView = Backbone.View.extend({
         callApi(flight.attributes.inboundRoutes);
 
         app.router.navigate("rec-posted", { trigger:true });
+    },
+
+    render: function() {
+        debugger;
+        this.$el.html(this.template());
     }
 
 
@@ -378,7 +395,6 @@ App.Views.SearchFormView = Backbone.View.extend({
         $form.find("input").each(function() {
             var name = $(this).attr("name");
 
-                console.log(errors);
             if (errors && errors[name]) {
                 $(this).add($("[data-bind=" + name + "]"))
                     .addClass("invalid");
