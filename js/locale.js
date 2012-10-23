@@ -5,7 +5,6 @@ var i18n = (function() {
     var locales = {
         "en": {
             "about"                                  : "About",
-            "about"                                  : "About",
             "adults"                                 : "Adults",
             "airline_asc"                            : "Airline - A to Z",
             "airline_desc"                           : "Airline - Z to A",
@@ -106,7 +105,10 @@ var i18n = (function() {
             "total"                                  : "Total",
             "total_asc"                              : "Total - Low to High",
             "total_desc"                             : "Total - Hight to Low",
-            "total_duration"                         : "Total duration"
+            "total_duration"                         : "Total duration",
+            "year": "Year",
+            "month": "Month",
+            "day": "Day"
         },
         "es": {
             "about"                                  : "Acerca de",
@@ -124,10 +126,10 @@ var i18n = (function() {
             "buy_button"                             : "Comprar",
             "buy_show_error"                         : "Revisa la informacion marcada",
             "card_document_number"                   : "Numero de documento del titular",
-            "card_expire"                            : "Fecha de Expiracion",
+            "card_expire"                            : "Fecha de Expiración",
             "card_holder"                            : "Titular de la tarjeta",
-            "card_number"                            : "Numero de tarjeta",
-            "card_security_code"                     : "Codigo de seguridad",
+            "card_number"                            : "Número de tarjeta",
+            "card_security_code"                     : "Código de seguridad",
             "charges"                                : "Tasas",
             "children"                               : "Niños",
             "choose_flight"                          : "Elegir otro vuelo",
@@ -169,7 +171,7 @@ var i18n = (function() {
             "number_infants_hint"                    : "(0-2 años)",
             "one_way"                                : "Sólo ida",
             "passengers"                             : "Pasajeros",
-            "phone_number"                           : "Numero de telefono",
+            "phone_number"                           : "Número de telefono",
             "please_confirm"                         : "Por favor confirme su compra",
             "price"                                  : "Precio",
             "privacy"                                : "Política de privacidad",
@@ -210,7 +212,10 @@ var i18n = (function() {
             "total"                                  : "Total",
             "total_asc"                              : "Total - Menor a mayor",
             "total_desc"                             : "Total - Mayor a menor",
-            "total_duration"                         : "Duración total"
+            "total_duration"                         : "Duración total",
+            "year": "Año",
+            "month": "Mes",
+            "day": "Día"
         }
     };
 
