@@ -416,20 +416,54 @@
                                     <label for="birth_date">{{{i18n "birth"}}}</label>
                                 </td>
                             </tr>
-                            <tr id="buy-single-passanger">
-                                <td id="buy-passengers">
-                                    <!-- Nro de pasajero -->
-                                </td>
-                                <td>
-                                    <input type="text" name="first_name" id="first_name" value="" />
-                                </td>
-                                <td>
-                                    <input type="text" name="last_name" id="last_name" value="" />
-                                </td>
-                                <td>
-                                    <input type="text" name="birth_date" id="birth_date" value="" data-widget="datepicker-select" />
-                                </td>
-                            </tr>
+                            {{#each adultsRange}}
+                                <tr id="buy-single-passanger">
+                                    <td id="buy-passengers">
+                                        <!-- Nro de pasajero -->
+                                    </td>
+                                    <td>
+                                        <input type="text" name="first_name" id="first_name" value="" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="last_name" id="last_name" value="" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="birth_date" id="birth_date" value="" data-widget="datepicker-select" />
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            {{#each childrenRange}}
+                                <tr id="buy-single-passanger">
+                                    <td id="buy-passengers">
+                                        <!-- Nro de pasajero -->
+                                    </td>
+                                    <td>
+                                        <input type="text" name="first_name" id="first_name" value="" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="last_name" id="last_name" value="" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="birth_date" id="birth_date" value="" data-widget="datepicker-select" />
+                                    </td>
+                                </tr>
+                            {{/each}}
+                            {{#each infantsRange}}
+                                <tr id="buy-single-passanger">
+                                    <td id="buy-passengers">
+                                        <!-- Nro de pasajero -->
+                                    </td>
+                                    <td>
+                                        <input type="text" name="first_name" id="first_name" value="" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="last_name" id="last_name" value="" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="birth_date" id="birth_date" value="" data-widget="datepicker-select" />
+                                    </td>
+                                </tr>
+                            {{/each}}
                         </table>
                     </div>
 

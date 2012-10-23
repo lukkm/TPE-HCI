@@ -546,8 +546,20 @@ App.Views.BuyFormView = Backbone.View.extend({
             }
     },
 
+    getContext: function() {
+        var query = app.searchResults.query.toJSON();
+        query.adultsRange = _.range(query.adults);
+        query.childrenRange = _.range(query.children);
+        query.infantsRange = _.range(query.infants);
+
+        return query;
+    },
+
     render: function() {
-        this.$el.html(this.template());
+        if (app.searchResults.hasQuery()) {
+            this.$el.html(this.template(this.getContext()));
+        }
+        Widgets.init();
     }
 });
 

@@ -43,11 +43,11 @@ App.Routers.Router = Backbone.Router.extend({
     },
 
     buy: function(id) {
-        debugger;
         if (!app.info.get("currentFlight")) {
             this.navigate("", { trigger: true});
             return;
         }
+        app.appView.subviews.buyForm.render();
         this.switchPage("buy");
         var $button = $("#back-purchase"),
             template = $button.data("href-template"),
