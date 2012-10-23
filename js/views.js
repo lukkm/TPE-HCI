@@ -42,7 +42,13 @@ App.Views.AppView = Backbone.View.extend({
         });
 
         this.subviews.buyForm = new App.Views.BuyFormView({
-            el: $("#buy-form")
+            el: $("#buy-form"),
+            template: app.templates["order"]
+        });
+
+        this.subviews.confirmForm = new App.Views.ConfirmFormView({
+            el: $("#page-confirm"),
+            template: app.templates["confirmation"]
         });
 
         this.subviews.thanksForm = new App.Views.ThanksFormView({
@@ -184,6 +190,18 @@ App.Views.LanguageSelect = Backbone.View.extend({
         window.location.reload();
 
         e.preventDefault();
+    },
+
+    render: function() {
+        this.$el.html(this.template());
+    }
+
+});
+
+App.Views.ConfirmFormView = Backbone.View.extend({
+
+    initialize: function(options) {
+        this.template = options.template;
     },
 
     render: function() {
@@ -526,6 +544,10 @@ App.Views.BuyFormView = Backbone.View.extend({
             } else {
                 changed.removeClass("invalid");
             }
+    },
+
+    render: function(){
+        $("#page-buy").html(this.template());
     }
 });
 
