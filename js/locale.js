@@ -106,7 +106,9 @@ var i18n = (function() {
             "total"                                  : "Total",
             "total_asc"                              : "Total - Low to High",
             "total_desc"                             : "Total - Hight to Low",
-            "total_duration"                         : "Total duration"
+            "total_duration"                         : "Total duration",
+            "complete_name"     : "Complete your name",
+            "translate-depart" : "We need to know from where you depart"
         },
         "es": {
             "about"                                  : "Acerca de",
@@ -210,7 +212,9 @@ var i18n = (function() {
             "total"                                  : "Total",
             "total_asc"                              : "Total - Menor a mayor",
             "total_desc"                             : "Total - Mayor a menor",
-            "total_duration"                         : "Duración total"
+            "total_duration"                         : "Duración total",
+            "complete_name"     : "Completa tu nombre",
+            "translate-depart" : "Necesitamos saber de donde salis"
         }
     };
 
