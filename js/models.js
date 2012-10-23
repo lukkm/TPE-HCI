@@ -10,9 +10,9 @@ App.Models.Query = Backbone.Model.extend({
 
     validation: {
         from: { required: true,
-                msg: "We need to know from where you depart"},
+                msg: "translate_depart"},
         to: { required: true,
-                msg: "We need to know where you are going"},
+                msg: "translate_arrive"},
         repeat: { oneOf: ["one-way", "round-trip"] },
         dep_date: function(value) {
             try {
@@ -62,37 +62,37 @@ App.Models.Buy = Backbone.Model.extend({
 
 	validation: {
 		first_name: { required: true,
-                        msg: "Complete your name"},
+                        msg: "complete_name"},
         last_name: { required: true,
-                    msg: "Complete your last name"},
+                    msg: "complete_last_name"},
         birth_date: { required: true },
         card_number: function() { this.cardValidate(arguments) },
         card_expire_date: this.cardValidate,
         card_security_code: this.cardValidate,
         card_holder: { required: true,
-						msg: "Card holder is required"},
-        card_document_number:[{ required: true, msg: "The document number is required" },
+						msg: "complete_card_holder"},
+        card_document_number:[{ required: true, msg: "required_document_number" },
                                 { pattern: 'number',
-								msg: "The document number of the card holder has to be numerical"}],
+								msg: "card_holder_numerical"}],
         email: [{
 				required: true,
-				msg: "Please enter an email address"
+				msg: "enter_email"
 			},{
 			  pattern: 'email',
-			  msg: "Please enter a valid email"
+			  msg: "valid_email"
 		}],
         phone_number:
         {
 			required: true,
 			pattern:  /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/,
-            msg: "The phone number should have only numbers"
+            msg: "numbers_phone_number"
 		},
         email_confirm: [{
 				required: true,
-				msg: "Please enter an email address"
+				msg: "enter_email"
 			},{
 			  equalTo: 'email',
-			  msg: "The email address has to be the same"
+			  msg: "same_email"
 		}],
         terms: { acceptance: true },
 	}

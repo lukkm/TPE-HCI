@@ -613,13 +613,26 @@
                 <div class="form-section">
                     <dl>
                         <dt>{{{i18n "email"}}}</dt>
-                        <dd id="confirm_email"></dd>
+                        <dd id="confirm-email"></dd>
                         <dt>{{{i18n "phone_number"}}}</dt>
-                        <dd id="confirm_phone_number"></dd>
+                        <dd id="confirm-phone_number"></dd>
                     </dl>
                 </div>
                 <div class="nav">
                     <a href="#thanks" class="button">{{{i18n "confirm_button"}}}</a>
+                </div>
+            </div>
+        </script>
+        <script type="text/x-handlebars-template" id="template-thanks">
+            <div class="sheet">
+                <div class="form-section">
+                    <h1>{{{i18n "thanks"}}}Travel.ly</h1>
+                    <div class="nav-home">
+                        <a href="#" class="button">{{{i18n "back_home"}}}</a>
+                    </div>
+                    <div id="recommend-form">
+                        <button class="button" id="publish-rec">{{{i18n "rate_flight"}}}</button>
+                    </div>
                 </div>
             </div>
         </script>
@@ -678,19 +691,13 @@
 
                 <div class="page" id="page-confirm" data-title="Confirmation"></div>
 
-                <div class="page" id="page-thanks" data-title="thank_you">
-                    <div class="sheet">
-                        <div class="form-section">
-                            <h1>{{{i18n "thanks"}}}Travel.ly</h1>
-                            <div class="nav-home">
-                                <a href="#" class="button">{{{i18n "back_home"}}}</a>
-                            </div>
-                            <div id="recommend-form">
-                                <button class="button" id="publish-rec">{{{i18n "rate_flight"}}}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
+
+
+
+
+                <div class="page" id="page-thanks" data-title="thank_you"></div>
 
 
 

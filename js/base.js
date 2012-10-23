@@ -1,6 +1,6 @@
-$(function() {
+i18n.init();
 
-    i18n.init();
+$(function() {
 
     App.init();
 

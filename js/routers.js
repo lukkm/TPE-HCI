@@ -62,7 +62,11 @@ App.Routers.Router = Backbone.Router.extend({
     },
 
     publishRec: function(id){
-        this.switchPage("publish-rec");
+        if (!app.info.get("currentFlight")) {
+            app.router.navigate("", {trigger:true});
+        } else {
+            this.switchPage("publish-rec");
+        }
     },
 
     recPosted: function(id) {
