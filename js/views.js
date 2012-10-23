@@ -337,7 +337,6 @@ App.Views.ReviewsFormView = Backbone.View.extend({
     },
 
     render: function() {
-        debugger;
         this.$el.html(this.template());
     }
 
