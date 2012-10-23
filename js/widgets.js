@@ -96,19 +96,22 @@ var Widgets = function() {
 
             $el.data("has-widget", true);
             
-            var content = '<label for="birth-day" class="select-label">Day</label> <select name="birth-day">';
+            var content = '<label for="birth-day" class="select-label">' + i18n.translate("day") + 
+                          '</label> <select name="birth-day">';
             for (var i = 1; i <= 31; i++) {
                 content += '<option value=' + i + '>' + i + '</option>'; 
             }
             content += '</select>';
 
-            content += '<label for="birth-month" class="select-label">Month</label> <select name="birth-month">';
+            content += '<label for="birth-month" class="select-label">' + i18n.translate("month") + 
+                       '</label> <select name="birth-month">';
             for (i = 1; i <= 12; i++) {
                 content += '<option value=' + i + '>' + i + '</option>'; 
             }
             content += '</select>';
 
-            content += '<label for="birth-year" class="select-label">Year</label> <select name="birth-year">';
+            content += '<label for="birth-year" class="select-label">' + i18n.translate("year") +
+                       '</label> <select name="birth-year">';
             for (i = new Date().getFullYear(); i >= 1900; i--) {
                 content += '<option value=' + i + '>' + i + '</option>'; 
             }
